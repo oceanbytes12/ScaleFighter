@@ -1,8 +1,8 @@
 [gd_scene load_steps=20 format=3 uid="uid://gwrj27qy6rdu"]
 
-[ext_resource type="Texture2D" uid="uid://7kbltkubv6yq" path="res://Geko/Player-Sheet.png" id="1_1a360"]
+[ext_resource type="Texture2D" uid="uid://b1bes2kmy6jdv" path="res://Geko/Player-Sheet.png" id="1_1a360"]
 [ext_resource type="Script" path="res://Geko/player.gd" id="1_ig3ne"]
-[ext_resource type="Texture2D" uid="uid://jnyfau63t2fa" path="res://Geko/flyingGek-Sheet.png" id="2_v6q32"]
+[ext_resource type="Texture2D" uid="uid://440narpp3d4u" path="res://Geko/flyingGek-Sheet.png" id="2_v6q32"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t7rdd"]
 atlas = ExtResource("1_1a360")
