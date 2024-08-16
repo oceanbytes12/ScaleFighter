@@ -37,7 +37,8 @@ func _physics_process(delta):
 
 	if Input.is_action_just_pressed("ui_accept"):
 		saved_jump_time_handler()
-	
+	if Input.is_action_just_pressed("Grow"):
+		grow()
 	# Handle jumping and gliding
 	# Is on the ground or in coyote time
 	if saved_jump and (is_on_floor() or coyote_save =="open"):
@@ -91,7 +92,15 @@ func _physics_process(delta):
 		state = handle_state_change(state, "jumping")
 	elif not is_on_floor():
 		state = handle_state_change(state, "falling")
-	
+var tween
+func grow():
+	if(tween and tween.is_running()):
+		tween.kill()
+	tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BOUNCE)
+	var start_scale = scale
+	var target_scale = Vector2(scale.x+0.5, scale.y+0.5)  # Scale to twice the original size
+	tween.tween_property(self, "scale", target_scale, 1).from(start_scale)  # Easing out for a smooth finish
+
 func handle_state_change(old_state, new_state):
 	var was_grounded = (old_state == "idle" or old_state == "walking")
 	var is_grounded = (new_state == "idle" or new_state == "walking")
