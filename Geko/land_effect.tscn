@@ -1,0 +1,86 @@
+[gd_scene load_steps=13 format=3 uid="uid://bk8ok4abxmy5p"]
+
+[ext_resource type="Texture2D" uid="uid://cj3pyp18pv8mj" path="res://Geko/LandEffect-Sheet.png" id="1_j0nqx"]
+[ext_resource type="Script" path="res://Geko/land_effect.gd" id="2_7u108"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ap2w4"]
+atlas = ExtResource("1_j0nqx")
+region = Rect2(0, 0, 26, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_li21i"]
+atlas = ExtResource("1_j0nqx")
+region = Rect2(26, 0, 26, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_orgvs"]
+atlas = ExtResource("1_j0nqx")
+region = Rect2(52, 0, 26, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5q4k1"]
+atlas = ExtResource("1_j0nqx")
+region = Rect2(104, 0, 26, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2nqac"]
+atlas = ExtResource("1_j0nqx")
+region = Rect2(78, 0, 26, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xajvo"]
+atlas = ExtResource("1_j0nqx")
+region = Rect2(130, 0, 26, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c1u3y"]
+atlas = ExtResource("1_j0nqx")
+region = Rect2(156, 0, 26, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hk6xr"]
+atlas = ExtResource("1_j0nqx")
+region = Rect2(182, 0, 26, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fj0j4"]
+atlas = ExtResource("1_j0nqx")
+region = Rect2(208, 0, 26, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ks2bn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ap2w4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_li21i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_orgvs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5q4k1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2nqac")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xajvo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c1u3y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hk6xr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fj0j4")
+}],
+"loop": false,
+"name": &"Land",
+"speed": 16.0
+}]
+
+[node name="LandEffect" type="AnimatedSprite2D"]
+z_index = 10
+position = Vector2(150.79, 209.127)
+sprite_frames = SubResource("SpriteFrames_ks2bn")
+animation = &"Land"
+frame = 1
+frame_progress = 0.904336
+script = ExtResource("2_7u108")
+
+[connection signal="animation_finished" from="." to="." method="_on_animation_finished"]

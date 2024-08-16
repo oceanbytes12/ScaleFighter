@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://3ujwxkn2jj8v"]
+
+[ext_resource type="PackedScene" uid="uid://gwrj27qy6rdu" path="res://GekoDemo/player.tscn" id="1_qxywk"]
+[ext_resource type="Texture2D" uid="uid://7kbltkubv6yq" path="res://GekoDemo/Player-Sheet.png" id="2_vx1pl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ulv0b"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gl3my"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_qxywk")]
+position = Vector2(224, 0)
+movement_speed = null
+jump_power = null
+coyote_time = null
+jump_time = null
+glide_gravity = null
+glide_boost = null
+glide_time = null
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(222, 181)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+scale = Vector2(10, 5)
+shape = SubResource("RectangleShape2D_ulv0b")
+
+[node name="Ground" type="Area2D" parent="."]
+position = Vector2(222, 181)
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+scale = Vector2(5, 5)
+shape = SubResource("RectangleShape2D_gl3my")
+
+[node name="Sprite2D" type="Sprite2D" parent="Ground"]
+texture = ExtResource("2_vx1pl")
+metadata/_edit_group_ = true
