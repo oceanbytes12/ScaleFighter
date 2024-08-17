@@ -1,6 +1,6 @@
 [gd_scene load_steps=43 format=3 uid="uid://gwrj27qy6rdu"]
 
-[ext_resource type="Script" path="res://Geko/player.gd" id="1_ig3ne"]
+[ext_resource type="Script" path="res://Scripts/other/old_player.gd" id="1_ig3ne"]
 [ext_resource type="Texture2D" uid="uid://m1v10b585sus" path="res://Geko/BaseFighter-Sheet.png" id="2_fqpu1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_inj24"]
@@ -330,7 +330,7 @@ script = ExtResource("1_ig3ne")
 texture_filter = 1
 position = Vector2(0, -9)
 sprite_frames = SubResource("SpriteFrames_xnuxu")
-animation = &"SlamComplete"
+animation = &"JumpAttack"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false

@@ -1,0 +1,222 @@
+[gd_scene load_steps=19 format=3 uid="uid://cujkhawkt2egg"]
+
+[ext_resource type="Script" path="res://Scripts/new_player/player.gd" id="1_akjv1"]
+[ext_resource type="Texture2D" uid="uid://m1v10b585sus" path="res://Geko/BaseFighter-Sheet.png" id="2_4usyc"]
+[ext_resource type="Script" path="res://Scripts/new_player/state_machine.gd" id="3_8x3ha"]
+[ext_resource type="Script" path="res://Scripts/new_player/Idle.gd" id="4_y8r0u"]
+[ext_resource type="Script" path="res://Scripts/new_player/running.gd" id="5_n18e4"]
+[ext_resource type="Script" path="res://Scripts/new_player/jumping.gd" id="6_cu6ay"]
+[ext_resource type="Script" path="res://Scripts/new_player/falling.gd" id="6_jw3ow"]
+[ext_resource type="Script" path="res://Scripts/new_player/gliding.gd" id="7_u00mm"]
+[ext_resource type="Script" path="res://punching.gd" id="9_eutij"]
+[ext_resource type="Script" path="res://airpunching.gd" id="10_mpoop"]
+[ext_resource type="Script" path="res://HitBox.gd" id="11_ej357"]
+
+[sub_resource type="Animation" id="Animation_ifa3g"]
+resource_name = "Idle"
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+
+[sub_resource type="Animation" id="Animation_smlwr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Area2D/CollisionShape2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(4, 3)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Area2D/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_y38k3"]
+resource_name = "Punch"
+length = 0.35
+loop_mode = 1
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.08, 0.16, 0.24, 0.32),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [8, 9, 10, 11, 12]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StateMachine/Punching")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.01, 0.32),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"start"
+}, {
+"args": [],
+"method": &"end"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Area2D/CollisionShape2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.09, 0.22),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(4, 3), Vector2(10, 3)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Area2D/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.05, 0.24),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_v8lk0"]
+resource_name = "AirPunch"
+length = 0.35
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [44, 45, 46, 47]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4d6ly"]
+_data = {
+"AirPunch": SubResource("Animation_v8lk0"),
+"Idle": SubResource("Animation_ifa3g"),
+"Punch": SubResource("Animation_y38k3"),
+"RESET": SubResource("Animation_smlwr")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n3n25"]
+radius = 3.0
+height = 12.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gjiiv"]
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_akjv1")
+speed = 250.0
+gravity = 2000.0
+jump_impulse = 900.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_4usyc")
+hframes = 8
+vframes = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_4d6ly")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_n3n25")
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("3_8x3ha")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("4_y8r0u")
+
+[node name="Running" type="Node" parent="StateMachine"]
+script = ExtResource("5_n18e4")
+
+[node name="Jumping" type="Node" parent="StateMachine"]
+script = ExtResource("6_cu6ay")
+
+[node name="Falling" type="Node" parent="StateMachine"]
+script = ExtResource("6_jw3ow")
+
+[node name="Gliding" type="Node" parent="StateMachine"]
+script = ExtResource("7_u00mm")
+
+[node name="Punching" type="Node" parent="StateMachine"]
+script = ExtResource("9_eutij")
+
+[node name="AirPunching" type="Node" parent="StateMachine"]
+script = ExtResource("10_mpoop")
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -15.0
+offset_top = -36.0
+offset_right = 14.0
+offset_bottom = -13.0
+grow_horizontal = 2
+
+[node name="Area2D" type="Area2D" parent="."]
+script = ExtResource("11_ej357")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(4, 3)
+scale = Vector2(0.4, 0.4)
+shape = SubResource("CircleShape2D_gjiiv")
+
+[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]

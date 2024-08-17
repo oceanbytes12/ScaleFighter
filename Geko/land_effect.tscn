@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://bk8ok4abxmy5p"]
 
-[ext_resource type="Texture2D" uid="uid://cj3pyp18pv8mj" path="res://Geko/LandEffect-Sheet.png" id="1_j0nqx"]
-[ext_resource type="Script" path="res://Geko/land_effect.gd" id="2_7u108"]
+[ext_resource type="Texture2D" uid="uid://dir3s1hytlkur" path="res://Geko/LandEffect-Sheet.png" id="1_j0nqx"]
+[ext_resource type="Script" path="res://Scripts/other/land_effect.gd" id="2_7u108"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ap2w4"]
 atlas = ExtResource("1_j0nqx")

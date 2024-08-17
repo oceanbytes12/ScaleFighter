@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://d3ofwhr7pv1u4"]
 
-[ext_resource type="Texture2D" uid="uid://bc1kuw22juhjx" path="res://Geko/JumpEffect-Sheet.png" id="1_4lw7h"]
-[ext_resource type="Script" path="res://Geko/JumpEffect.gd" id="2_uycdi"]
+[ext_resource type="Texture2D" uid="uid://qf47gddgwmp8" path="res://Geko/JumpEffect-Sheet.png" id="1_4lw7h"]
+[ext_resource type="Script" path="res://Scripts/other/JumpEffect.gd" id="2_uycdi"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g3xtt"]
 atlas = ExtResource("1_4lw7h")
