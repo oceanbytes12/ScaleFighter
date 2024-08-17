@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dlh2vlug8qltd" path="res://UI/progress_bar.tscn" id="6_jw27a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ulv0b"]
+size = Vector2(20, 20.2)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_e6gtr"]
 shader = ExtResource("3_8jvan")
@@ -15,6 +16,7 @@ shader_parameter/flash_opacity = 1.0
 shader_parameter/flash_color = Color(1, 1, 1, 1)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pchxo"]
+height = 46.0
 
 [sub_resource type="Animation" id="Animation_hj0kt"]
 length = 0.001
@@ -78,6 +80,7 @@ position = Vector2(155, 245)
 scale = Vector2(2, 2)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, -0.5)
 scale = Vector2(10, 5)
 shape = SubResource("RectangleShape2D_ulv0b")
 
@@ -140,10 +143,10 @@ libraries = {
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -180.0
-offset_top = 5.0
-offset_right = -10.0
-offset_bottom = 32.0
+offset_left = -170.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = 35.0
 grow_horizontal = 0
 
 [connection signal="take_damage" from="Dummy" to="CanvasLayer/DummyBar" method="_on_damage_received"]
