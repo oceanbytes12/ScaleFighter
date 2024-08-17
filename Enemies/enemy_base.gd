@@ -1,5 +1,9 @@
 extends CharacterBody2D
 
+class_name Boss
+
+signal DamageTaken
+
 @export var SPEED = 100.0
 @export var TARGET := CharacterBody2D
 @export var MIN_DISTANCE = .8
@@ -9,7 +13,6 @@ extends CharacterBody2D
 var gravity = 10000
 
 @onready var cooldown_timer = $CooldownTimer
-#@onready var attackEffect = preload("res://Enemies/attack_effect.tscn")
 
 var isPlayerInRange = false # Is player in range for attack? 
 var isCoolingDown = false #Are we still cooling down?
@@ -18,8 +21,6 @@ var isAttacking = false # Are we currently playing an attack animation?
 func _ready():
 	if TARGET == null:
 		push_error("ERROR: Enemy does not have a valid TARGET set")
-	# Not in use right now
-	#$AttackEffects/AttackEffect.visible = false
 	
 
 func _process(delta):
@@ -87,20 +88,6 @@ func DoAttackAnimation():
 	cooldown_timer.start()
 	isCoolingDown = true
 	
-	## Below keeps causing error. For now am manually adding Attack_Effect to node tree
-	#var newNode = attackEffect.instantiate()
-	#add_child(newNode)
-	#newNode.global_position = global_position
-	##var AnimSprite2D = newNode.get_parent() 
-	##print(AnimSprite2D)
-	##AnimSprite2D._on_animation_finished.connect(_on_attack_anim_finished)
-	#newNode._on_animation_finished.connect(_on_attack_anim_finished)
-	
-	## Having issues with this version too
-	## Version that uses effect tscns that are part of the tree
-	#$AttackEffects/AttackEffect.visible = true
-	#$AttackEffects/AttackEffect.play()
-	
 	# Temporary:
 	isAttacking = false # LATER: Have a signal at the end of the animation that sets this back to false
 
@@ -126,3 +113,7 @@ func _on_attack_effect_animation_finished():
 	print("Animation finished")
 	$AttackEffects/AttackEffect.visible = false
 	isAttacking = false
+
+
+func DamageReceived(amount):
+	DamageTaken.emit(amount) # Hook this up to an HP Bar
