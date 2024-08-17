@@ -4,8 +4,9 @@ class_name Boss
 
 signal take_damage
 
+@export var DAMAGE = 5
 @export var SPEED = 100.0
-@export var TARGET := CharacterBody2D
+@export var TARGET : Player
 @export var MIN_DISTANCE = .8
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -89,6 +90,7 @@ func DoAttackAnimation():
 	isAttacking = true
 	cooldown_timer.start()
 	isCoolingDown = true
+	TARGET.take_hit(global_position, DAMAGE)
 	
 	# Temporary:
 	isAttacking = false # LATER: Have a signal at the end of the animation that sets this back to false
@@ -113,7 +115,6 @@ func _on_cooldown_timer_timeout():
 
 func _on_attack_effect_animation_finished():
 	print("Animation finished")
-	$AttackEffects/AttackEffect.visible = false
 	isAttacking = false
 
 
