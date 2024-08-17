@@ -123,5 +123,3 @@ texture = ExtResource("3_tkqkg")
 [node name="Enemy_Base" parent="." node_paths=PackedStringArray("TARGET") instance=ExtResource("7_hfqw1")]
 position = Vector2(159, 99)
 TARGET = NodePath("../Player")
-
-[connection signal="DamageTaken" from="Enemy_Base" to="Player/PlayerCamera/UI/BossHPBar" method="_on_damage_received"]

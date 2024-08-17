@@ -1,19 +1,16 @@
-[gd_scene load_steps=11 format=3 uid="uid://bgf5mn0tdpky1"]
+[gd_scene load_steps=10 format=3 uid="uid://bjkqj1n7h5s8j"]
 
-[ext_resource type="Script" path="res://Enemies/enemy_base.gd" id="1_omne7"]
-[ext_resource type="Shader" path="res://hitEffect.gdshader" id="2_8x62w"]
-[ext_resource type="Texture2D" uid="uid://cg6ubjm7oml8t" path="res://combatDummy.png" id="3_8xv41"]
+[ext_resource type="Script" path="res://Dummy.gd" id="1_ykpw2"]
+[ext_resource type="Shader" path="res://hitEffect.gdshader" id="2_ayvjp"]
+[ext_resource type="Texture2D" uid="uid://cg6ubjm7oml8t" path="res://combatDummy.png" id="3_7wvvr"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_je0ey"]
-shader = ExtResource("2_8x62w")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e6gtr"]
+shader = ExtResource("2_ayvjp")
 shader_parameter/flash_opacity = 1.0
 shader_parameter/flash_color = Color(1, 1, 1, 1)
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3v36j"]
-height = 35.97
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_sgu66"]
-radius = 32.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pchxo"]
+height = 46.0
 
 [sub_resource type="Animation" id="Animation_hj0kt"]
 length = 0.001
@@ -70,30 +67,19 @@ _data = {
 "idle": SubResource("Animation_8u388")
 }
 
-[node name="Enemy_Base" type="CharacterBody2D"]
-script = ExtResource("1_omne7")
+[node name="Dummy" type="CharacterBody2D"]
+position = Vector2(284, 128)
+script = ExtResource("1_ykpw2")
+metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-material = SubResource("ShaderMaterial_je0ey")
-texture = ExtResource("3_8xv41")
+material = SubResource("ShaderMaterial_e6gtr")
+texture = ExtResource("3_7wvvr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -0.985)
-shape = SubResource("CapsuleShape2D_3v36j")
-
-[node name="AttackRange" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRange"]
-shape = SubResource("CircleShape2D_sgu66")
-
-[node name="CooldownTimer" type="Timer" parent="."]
-wait_time = 3.0
+shape = SubResource("CapsuleShape2D_pchxo")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_vwa3k")
 }
-
-[connection signal="body_entered" from="AttackRange" to="." method="_on_attack_range_body_entered"]
-[connection signal="body_exited" from="AttackRange" to="." method="_on_attack_range_body_exited"]
-[connection signal="timeout" from="CooldownTimer" to="." method="_on_cooldown_timer_timeout"]

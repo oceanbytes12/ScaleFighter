@@ -1,0 +1,102 @@
+[gd_scene load_steps=9 format=3 uid="uid://v7xhr4rmnds3"]
+
+[ext_resource type="Texture2D" uid="uid://dpcm4tpe8gu2p" path="res://icon.svg" id="1_4wfvy"]
+[ext_resource type="Script" path="res://Levels/Level_Base.gd" id="1_csyey"]
+[ext_resource type="PackedScene" uid="uid://cujkhawkt2egg" path="res://player.tscn" id="2_kde84"]
+[ext_resource type="Script" path="res://UI/ProgressBar.gd" id="4_w047y"]
+[ext_resource type="PackedScene" uid="uid://dlh2vlug8qltd" path="res://UI/progress_bar.tscn" id="6_smir8"]
+[ext_resource type="PackedScene" uid="uid://bgf5mn0tdpky1" path="res://Enemies/enemy_base.tscn" id="7_1pmof"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ulv0b"]
+size = Vector2(20, 20.2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rd2u5"]
+bg_color = Color(0.207843, 0.729412, 0.952941, 1)
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_csyey")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(155, 245)
+scale = Vector2(2, 2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, -0.5)
+scale = Vector2(10, 5)
+shape = SubResource("RectangleShape2D_ulv0b")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+scale = Vector2(1.5, 0.8)
+texture = ExtResource("1_4wfvy")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(355, -97)
+scale = Vector2(0.240002, 8.92)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+scale = Vector2(10, 5)
+shape = SubResource("RectangleShape2D_ulv0b")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D2"]
+scale = Vector2(1.5, 0.8)
+texture = ExtResource("1_4wfvy")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="."]
+position = Vector2(-36, -94)
+scale = Vector2(0.240002, 8.92)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
+scale = Vector2(10, 5)
+shape = SubResource("RectangleShape2D_ulv0b")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D3"]
+scale = Vector2(1.5, 0.8)
+texture = ExtResource("1_4wfvy")
+
+[node name="Player" parent="." instance=ExtResource("2_kde84")]
+position = Vector2(216, 1)
+jump_impulse = 600.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(159, 91)
+zoom = Vector2(0.9, 0.9)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Player_HPBar" parent="CanvasLayer" instance=ExtResource("6_smir8")]
+offset_top = 10.0
+offset_right = 150.0
+offset_bottom = 20.0
+
+[node name="Boss_HPBar" parent="CanvasLayer" instance=ExtResource("6_smir8")]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -150.0
+offset_top = 10.0
+offset_right = 0.0
+offset_bottom = 20.0
+grow_horizontal = 0
+
+[node name="GrowBar" type="ProgressBar" parent="CanvasLayer"]
+offset_left = 10.0
+offset_top = 27.0
+offset_right = 315.0
+offset_bottom = 37.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_rd2u5")
+step = 1.0
+value = 50.0
+rounded = true
+show_percentage = false
+script = ExtResource("4_w047y")
+isHealedOnHit = true
+
+[node name="Enemy_Base" parent="." node_paths=PackedStringArray("TARGET") instance=ExtResource("7_1pmof")]
+position = Vector2(69, 115)
+TARGET = NodePath("../Player")
+
+[connection signal="BarEmpty" from="CanvasLayer/Player_HPBar" to="." method="_on_player_hp_bar_empty"]
+[connection signal="BarEmpty" from="CanvasLayer/Boss_HPBar" to="." method="_on_boss_hp_bar_empty"]
+[connection signal="BarFull" from="CanvasLayer/GrowBar" to="." method="_on_grow_bar_full"]
+[connection signal="take_damage" from="Enemy_Base" to="CanvasLayer/Boss_HPBar" method="_on_damage_received"]
+[connection signal="take_damage" from="Enemy_Base" to="CanvasLayer/GrowBar" method="_on_damage_received"]

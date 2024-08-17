@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 class_name Boss
 
-signal DamageTaken
+signal take_damage
 
 @export var SPEED = 100.0
 @export var TARGET := CharacterBody2D
@@ -18,7 +18,9 @@ var isPlayerInRange = false # Is player in range for attack?
 var isCoolingDown = false #Are we still cooling down?
 var isAttacking = false # Are we currently playing an attack animation?
 
+
 func _ready():
+	$AnimationPlayer.play("idle")
 	if TARGET == null:
 		push_error("ERROR: Enemy does not have a valid TARGET set")
 	
@@ -26,9 +28,9 @@ func _ready():
 func _process(delta):
 	var target_vector = TARGET.global_position - global_position
 	if target_vector.x < 0:
-		$Art/Sprite2D.flip_h = true
+		$Sprite2D.flip_h = false
 	elif target_vector.x > 0:
-		$Art/Sprite2D.flip_h = false
+		$Sprite2D.flip_h = true
 
 
 func _physics_process(delta):
@@ -115,5 +117,9 @@ func _on_attack_effect_animation_finished():
 	isAttacking = false
 
 
-func DamageReceived(amount):
-	DamageTaken.emit(amount) # Hook this up to an HP Bar
+# Hook this up to an HP Bar
+func take_hit(hit_position, damage):
+	var direction = (global_position-hit_position).normalized()
+	velocity = direction * 100
+	$AnimationPlayer.play("hit")
+	take_damage.emit(damage)
