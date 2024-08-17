@@ -9,6 +9,8 @@ const FALLING = "Falling"
 const GLIDING = "Gliding"
 const PUNCHING = "Punching"
 const AIRPUNCH = "AirPunching"
+const SLAM = "Slamming"
+const SLAMFINISH = "SlamFinish"
 var player: Player
 
 

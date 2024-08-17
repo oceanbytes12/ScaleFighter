@@ -1,7 +1,7 @@
 extends Area2D
 
 var our_body
-var damage = 5
+@export var damage = 5
 @onready var collision := $CollisionShape2D
 
 func _ready():

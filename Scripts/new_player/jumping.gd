@@ -15,9 +15,9 @@ func physics_update(delta: float) -> void:
 	player.velocity.y += player.gravity * delta
 	player.move_and_slide()
 
-	if Input.is_action_just_pressed("Attack"):
+	if Input.is_action_just_pressed("Down"):
+		finished.emit(SLAM)
+	elif Input.is_action_just_pressed("Attack"):
 		finished.emit(AIRPUNCH)
-	elif Input.is_action_just_pressed("glide"):
-		finished.emit(GLIDING)
 	elif player.velocity.y >= 0:
 		finished.emit(FALLING)
