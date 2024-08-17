@@ -19,7 +19,7 @@ func _ready():
 		#parentObject.DamageTaken.connect(_on_damage_received) # Invalid get index in CharacterBody2D
 
 	
-func _on_damage_received(amount):
+func _on_damage_received(amount : int):
 	if canBeChanged:
 		if isHealedOnHit:
 			# Restore progressBar by "amount"

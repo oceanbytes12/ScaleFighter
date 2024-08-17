@@ -1,7 +1,7 @@
 extends Area2D
 
 var our_body
-var damage = 1
+var damage = 5
 @onready var animator := $AnimationPlayer
 @onready var collision := $CollisionShape2D
 

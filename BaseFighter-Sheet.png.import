@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://m1v10b585sus"
-path="res://.godot/imported/BaseFighter-Sheet.png-30efad58d25757e11cbc90d57582c626.ctex"
+path="res://.godot/imported/BaseFighter-Sheet.png-4bc9a2cb4cd8725d6bfdbff56b02d32d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Geko/BaseFighter-Sheet.png"
-dest_files=["res://.godot/imported/BaseFighter-Sheet.png-30efad58d25757e11cbc90d57582c626.ctex"]
+source_file="res://BaseFighter-Sheet.png"
+dest_files=["res://.godot/imported/BaseFighter-Sheet.png-4bc9a2cb4cd8725d6bfdbff56b02d32d.ctex"]
 
 [params]
 

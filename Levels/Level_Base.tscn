@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://ckxik3f5ust4n"]
 
 [ext_resource type="PackedScene" uid="uid://gwrj27qy6rdu" path="res://Geko/player.tscn" id="1_8h12n"]
-[ext_resource type="Script" path="res://Geko/PlayerCamera.gd" id="2_m85qx"]
+[ext_resource type="Script" path="res://Scripts/other/PlayerCamera.gd" id="2_m85qx"]
 [ext_resource type="PackedScene" uid="uid://dlh2vlug8qltd" path="res://UI/progress_bar.tscn" id="3_4ft20"]
 [ext_resource type="Texture2D" uid="uid://dpcm4tpe8gu2p" path="res://icon.svg" id="3_tkqkg"]
 [ext_resource type="Script" path="res://UI/ProgressBar.gd" id="4_8j86x"]
@@ -124,5 +124,4 @@ texture = ExtResource("3_tkqkg")
 position = Vector2(159, 99)
 TARGET = NodePath("../Player")
 
-[connection signal="on_land" from="Player" to="Player/PlayerCamera" method="shake_with_power"]
 [connection signal="DamageTaken" from="Enemy_Base" to="Player/PlayerCamera/UI/BossHPBar" method="_on_damage_received"]

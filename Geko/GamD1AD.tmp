@@ -1,11 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://uytrg5cafssc"]
+[gd_scene load_steps=13 format=3 uid="uid://uytrg5cafssc"]
 
 [ext_resource type="Texture2D" uid="uid://dpcm4tpe8gu2p" path="res://icon.svg" id="2_jp6el"]
 [ext_resource type="PackedScene" uid="uid://cujkhawkt2egg" path="res://player.tscn" id="3_6r0ji"]
 [ext_resource type="Shader" path="res://hitEffect.gdshader" id="3_8jvan"]
 [ext_resource type="Script" path="res://Dummy.gd" id="4_px5tc"]
 [ext_resource type="Texture2D" uid="uid://cg6ubjm7oml8t" path="res://combatDummy.png" id="5_t3nxd"]
-[ext_resource type="PackedScene" uid="uid://dlh2vlug8qltd" path="res://UI/progress_bar.tscn" id="6_jw27a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ulv0b"]
 
@@ -136,14 +135,8 @@ libraries = {
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="DummyBar" parent="CanvasLayer" instance=ExtResource("6_jw27a")]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -180.0
-offset_top = 5.0
-offset_right = -10.0
-offset_bottom = 32.0
-grow_horizontal = 0
-
-[connection signal="take_damage" from="Dummy" to="CanvasLayer/DummyBar" method="_on_damage_received"]
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+offset_right = 128.0
+offset_bottom = 128.0
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_jp6el")
