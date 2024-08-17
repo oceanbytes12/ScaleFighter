@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://uytrg5cafssc"]
+[gd_scene load_steps=15 format=3 uid="uid://uytrg5cafssc"]
 
 [ext_resource type="Texture2D" uid="uid://dpcm4tpe8gu2p" path="res://icon.svg" id="2_jp6el"]
 [ext_resource type="PackedScene" uid="uid://cujkhawkt2egg" path="res://player.tscn" id="3_6r0ji"]
 [ext_resource type="Shader" path="res://hitEffect.gdshader" id="3_8jvan"]
+[ext_resource type="Script" path="res://Scripts/other/PlayerCamera.gd" id="3_bk7cn"]
 [ext_resource type="Script" path="res://Dummy.gd" id="4_px5tc"]
 [ext_resource type="Texture2D" uid="uid://cg6ubjm7oml8t" path="res://combatDummy.png" id="5_t3nxd"]
 [ext_resource type="PackedScene" uid="uid://dlh2vlug8qltd" path="res://UI/progress_bar.tscn" id="6_jw27a"]
@@ -119,6 +120,7 @@ jump_impulse = 600.0
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(159, 91)
 zoom = Vector2(0.9, 0.9)
+script = ExtResource("3_bk7cn")
 
 [node name="Dummy" type="CharacterBody2D" parent="."]
 position = Vector2(284, 128)

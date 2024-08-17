@@ -11,6 +11,8 @@ var _last_offset = Vector2(0, 0)
 
 func _ready():
 	set_process(true)
+	EventBus.connect("on_slam_finish", shake_with_power)
+	#EventBus.on_slam_finish.connect("shake_with_power")
 
 # Shake with decreasing intensity while there's time remaining.
 func _process(delta):
@@ -42,8 +44,7 @@ func _process(delta):
 		set_offset(get_offset() - _last_offset)
 
 func shake_with_power(power):
-	if(power>1):
-		shake(0.5, 100*power, 1*power)
+	shake(0.5, 100*power, 1*power)
 
 func shake(duration, frequency, amplitude):
 	if frequency == 0: return
