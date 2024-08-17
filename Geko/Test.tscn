@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://3ujwxkn2jj8v"]
 
 [ext_resource type="PackedScene" uid="uid://gwrj27qy6rdu" path="res://Geko/player.tscn" id="1_qxywk"]
-[ext_resource type="Texture2D" uid="uid://7kbltkubv6yq" path="res://Geko/Player-Sheet.png" id="2_vx1pl"]
+[ext_resource type="Texture2D" uid="uid://b1bes2kmy6jdv" path="res://Geko/Player-Sheet.png" id="2_vx1pl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ulv0b"]
 

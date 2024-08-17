@@ -54,6 +54,9 @@ shader_parameter/flash_color = Color(1, 1, 1, 1)
 [node name="Player" parent="." instance=ExtResource("1_fhndo")]
 position = Vector2(224, 0)
 
+[node name="PlayerCamera" type="Camera2D" parent="Player"]
+script = ExtResource("4_131s7")
+
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(222, 181)
 
@@ -80,7 +83,4 @@ material = SubResource("ShaderMaterial_mtyuq")
 position = Vector2(387, 60)
 texture = ExtResource("2_jp6el")
 
-[node name="PlayerCamera" type="Camera2D" parent="."]
-script = ExtResource("4_131s7")
-
-[connection signal="on_land" from="Player" to="PlayerCamera" method="shake_with_power"]
+[connection signal="on_land" from="Player" to="Player/PlayerCamera" method="shake_with_power"]
