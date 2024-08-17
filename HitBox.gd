@@ -1,7 +1,7 @@
 extends Area2D
 
 var our_body
-@export var damage = 5
+@export var damage = 1
 @onready var collision := $CollisionShape2D
 
 func _ready():
@@ -12,5 +12,10 @@ func _on_body_entered(body):
 	if body != our_body:
 		print("hit a body", body.name)
 		if body.has_method("take_hit"):
-			body.take_hit(global_position, damage)
+			
+			if(LevelBase.character_scale>1):
+				body.take_hit(global_position, damage * 30)
+			else:
+				body.take_hit(global_position, damage)
+				
 			collision.call_deferred("set_disabled", true)

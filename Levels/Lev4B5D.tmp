@@ -1,9 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://v7xhr4rmnds3"]
+[gd_scene load_steps=10 format=3 uid="uid://v7xhr4rmnds3"]
 
 [ext_resource type="Texture2D" uid="uid://dpcm4tpe8gu2p" path="res://icon.svg" id="1_4wfvy"]
 [ext_resource type="Script" path="res://Levels/Level_Base.gd" id="1_csyey"]
 [ext_resource type="PackedScene" uid="uid://cujkhawkt2egg" path="res://player.tscn" id="2_kde84"]
-[ext_resource type="Script" path="res://Scripts/other/PlayerCamera.gd" id="4_s5n7y"]
 [ext_resource type="Script" path="res://UI/ProgressBar.gd" id="4_w047y"]
 [ext_resource type="PackedScene" uid="uid://dlh2vlug8qltd" path="res://UI/progress_bar.tscn" id="6_smir8"]
 [ext_resource type="PackedScene" uid="uid://bgf5mn0tdpky1" path="res://Enemies/enemy_base.tscn" id="7_1pmof"]
@@ -16,9 +15,8 @@ bg_color = Color(0.207843, 0.729412, 0.952941, 1)
 
 [sub_resource type="Theme" id="Theme_4tts6"]
 
-[node name="Game" type="Node2D" node_paths=PackedStringArray("grow_text")]
+[node name="Game" type="Node2D"]
 script = ExtResource("1_csyey")
-grow_text = NodePath("CanvasLayer/GrowBar/GrowText")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(155, 245)
@@ -64,7 +62,6 @@ jump_impulse = 600.0
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(159, 91)
 zoom = Vector2(0.9, 0.9)
-script = ExtResource("4_s5n7y")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -98,7 +95,6 @@ isHealedOnHit = true
 
 [node name="GrowText" type="RichTextLabel" parent="CanvasLayer/GrowBar"]
 visible = false
-layout_mode = 0
 offset_left = 1.0
 offset_top = 10.0
 offset_right = 305.0

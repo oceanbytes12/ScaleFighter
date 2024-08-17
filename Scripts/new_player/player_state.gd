@@ -11,6 +11,7 @@ const PUNCHING = "Punching"
 const AIRPUNCH = "AirPunching"
 const SLAM = "Slamming"
 const SLAMFINISH = "SlamFinish"
+
 var player: Player
 
 

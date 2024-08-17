@@ -54,6 +54,22 @@ tracks/2/keys = {
 "values": [false, true]
 }
 
+[sub_resource type="Animation" id="Animation_2f5mp"]
+resource_name = "AirSlam"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [16, 17, 18]
+}
+
 [sub_resource type="Animation" id="Animation_ifa3g"]
 resource_name = "Idle"
 loop_mode = 1
@@ -181,22 +197,6 @@ tracks/3/keys = {
 "values": [false]
 }
 
-[sub_resource type="Animation" id="Animation_2f5mp"]
-resource_name = "AirSlam"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [16, 17, 18]
-}
-
 [sub_resource type="Animation" id="Animation_dxywu"]
 resource_name = "SlamFinish"
 length = 0.2
@@ -254,7 +254,7 @@ _data = {
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n3n25"]
 radius = 3.0
-height = 12.0
+height = 16.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gjiiv"]
 
@@ -278,6 +278,7 @@ libraries = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3)
 shape = SubResource("CapsuleShape2D_n3n25")
 
 [node name="StateMachine" type="Node" parent="."]
@@ -327,7 +328,7 @@ shape = SubResource("CircleShape2D_gjiiv")
 
 [node name="SlamHitbox" type="Area2D" parent="."]
 script = ExtResource("11_ej357")
-damage = 30
+damage = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SlamHitbox"]
 position = Vector2(-1.19209e-07, 10.5)
