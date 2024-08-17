@@ -20,6 +20,9 @@ var saved_jump = false
 var coyote_save = "ground"
 var can_glide = false
 var facing = 1
+var tween
+
+signal on_land(power)
 
 func _physics_process(delta):
 	var above_something = false
@@ -92,7 +95,7 @@ func _physics_process(delta):
 		state = handle_state_change(state, "jumping")
 	elif not is_on_floor():
 		state = handle_state_change(state, "falling")
-var tween
+
 func grow():
 	if(tween and tween.is_running()):
 		tween.kill()
@@ -110,6 +113,8 @@ func handle_state_change(old_state, new_state):
 		play_effect(jump_effect)
 	if is_grounded and was_in_air:
 		play_effect(land_effect)
+		emit_signal("on_land", scale.x)
+		
 	if new_state == "falling":
 		$AnimatedSprite2D.play("Fall")
 	if new_state == "idle":

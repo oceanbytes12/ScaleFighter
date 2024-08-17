@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://uytrg5cafssc"]
+[gd_scene load_steps=10 format=3 uid="uid://uytrg5cafssc"]
 
 [ext_resource type="PackedScene" uid="uid://gwrj27qy6rdu" path="res://Geko/player.tscn" id="1_fhndo"]
 [ext_resource type="Texture2D" uid="uid://dpcm4tpe8gu2p" path="res://icon.svg" id="2_jp6el"]
 [ext_resource type="Shader" path="res://hitEffect.gdshader" id="3_8jvan"]
+[ext_resource type="Script" path="res://Geko/PlayerCamera.gd" id="4_131s7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ulv0b"]
 
@@ -78,3 +79,8 @@ libraries = {
 material = SubResource("ShaderMaterial_mtyuq")
 position = Vector2(387, 60)
 texture = ExtResource("2_jp6el")
+
+[node name="PlayerCamera" type="Camera2D" parent="."]
+script = ExtResource("4_131s7")
+
+[connection signal="on_land" from="Player" to="PlayerCamera" method="shake_with_power"]
