@@ -9,10 +9,10 @@
 [node name="Game" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_6snkd")]
-position = Vector2(224, 0)
+position = Vector2(231, 156)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(222, 181)
+position = Vector2(222, 300)
 scale = Vector2(2.1, 2.1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
@@ -24,5 +24,5 @@ scale = Vector2(1.5, 0.8)
 texture = ExtResource("2_5j3dk")
 
 [node name="Enemy_Base" parent="." node_paths=PackedStringArray("TARGET") instance=ExtResource("3_00we5")]
-position = Vector2(107, -5)
+position = Vector2(115, 157)
 TARGET = NodePath("../Player")

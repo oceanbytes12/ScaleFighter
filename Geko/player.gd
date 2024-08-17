@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+class_name Player
+
 @onready var land_effect = preload("res://Geko/land_effect.tscn")
 @onready var jump_effect = preload("res://Geko/JumpEffect.tscn")
 
