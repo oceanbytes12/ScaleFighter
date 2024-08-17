@@ -21,27 +21,31 @@ var coyote_save = "ground"
 var can_glide = false
 var facing = 1
 var tween
+var is_on_ground
+var attack_pressed = false
+var down_pressed = false
 
 signal on_land(power)
 
 func _physics_process(delta):
-	var above_something = false
+	
+	is_on_ground = false
 	#print("Physics")
 	for body in $Area2D.get_overlapping_bodies():
-		print("Grounded")
 		if body.name == "Ground":
-			print("Grounded2")
-			above_something = true
+			is_on_ground = true
 	
 	if is_on_floor():
 		coyote_save = "ground"
 	elif coyote_save == "ground":
 		coyote_time_handler()
 
-	if Input.is_action_just_pressed("ui_accept"):
+	if Input.is_action_just_pressed("Jump"):
 		saved_jump_time_handler()
-	if Input.is_action_just_pressed("Grow"):
-		grow()
+		
+	attack_pressed = Input.is_action_pressed("Attack")
+	down_pressed = Input.is_action_pressed("Down")
+			
 	# Handle jumping and gliding
 	# Is on the ground or in coyote time
 	if saved_jump and (is_on_floor() or coyote_save =="open"):
@@ -49,7 +53,7 @@ func _physics_process(delta):
 		saved_jump = false
 		coyote_save = "closed"
 	# In the air 
-	elif saved_jump and can_glide and not above_something:
+	elif (saved_jump and can_glide and not is_on_ground):
 		velocity.y = 0
 		gravity = glide_gravity
 		x_boost = glide_boost
@@ -68,7 +72,12 @@ func _physics_process(delta):
 		velocity.y += gravity * delta
 
 	# Left/Right movement
-	var direction = Input.get_axis("ui_left", "ui_right")
+	var direction = Input.get_axis("Left", "Right")
+	
+	#Attacking on the ground slows movement
+	if(state=="Punch"):
+		direction = direction*0.1
+		
 	if direction != 0:
 		facing = direction
 	if direction:
@@ -76,6 +85,7 @@ func _physics_process(delta):
 	else:
 		velocity.x = lerp(velocity.x, 0.0, 0.2)+ x_boost*facing
 		
+
 	move_and_slide()
 	
 	# Set image facing
@@ -83,18 +93,27 @@ func _physics_process(delta):
 		$AnimatedSprite2D.flip_h = false
 	elif velocity.x < 0:
 		$AnimatedSprite2D.flip_h = true
-	
-	# Set state
-	if direction == 0 and is_on_floor():
+		
+	if(down_pressed and not is_on_floor()):
+		state = handle_state_change(state, "Slam")
+	elif(attack_pressed and is_on_floor()):
+		state = handle_state_change(state, "Punch")
+	#If we aren't moving and on the floor
+	elif direction == 0 and is_on_floor():
 		state = handle_state_change(state, "idle")
+	#We are on the floor and moving
 	elif is_on_floor():
 		state = handle_state_change(state, "walking")
+	#We are gliding
 	elif not is_on_floor() and gravity < default_gravity:
 		state = handle_state_change(state, "gliding")
+	#We are jumping up
 	elif not is_on_floor() and velocity.y < 0:
 		state = handle_state_change(state, "jumping")
+	#We are falling down
 	elif not is_on_floor():
 		state = handle_state_change(state, "falling")
+		
 
 func grow():
 	if(tween and tween.is_running()):
@@ -108,9 +127,21 @@ func handle_state_change(old_state, new_state):
 	var was_grounded = (old_state == "idle" or old_state == "walking")
 	var is_grounded = (new_state == "idle" or new_state == "walking")
 	var was_in_air = (old_state == "falling" or old_state=="gliding")
+	
+	if(old_state == "Slam"):
+		if(new_state == "Slam"):
+			$AnimatedSprite2D.play("SlamFall")
+		else:
+			$AnimatedSprite2D.play("SlamComplete")
+			return
+	
+	if(new_state == "Punch"):
+		$AnimatedSprite2D.play("Punch")
+	
 	if was_grounded and new_state == "jumping":
 		$AnimatedSprite2D.play("Jump")
 		play_effect(jump_effect)
+		
 	if is_grounded and was_in_air:
 		play_effect(land_effect)
 		emit_signal("on_land", scale.x)
@@ -122,7 +153,7 @@ func handle_state_change(old_state, new_state):
 	if new_state == "walking":
 		$AnimatedSprite2D.play("Walking")
 	if new_state == "gliding":
-		$AnimatedSprite2D.play("Glide")
+		$AnimatedSprite2D.play("JumpAttack")
 	return new_state
 
 func play_effect(effect):

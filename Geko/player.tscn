@@ -99,6 +99,14 @@ region = Rect2(64, 32, 32, 32)
 atlas = ExtResource("2_fqpu1")
 region = Rect2(96, 32, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_y1117"]
+atlas = ExtResource("2_fqpu1")
+region = Rect2(96, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p7mqp"]
+atlas = ExtResource("2_fqpu1")
+region = Rect2(128, 64, 32, 32)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_fq3k8"]
 atlas = ExtResource("2_fqpu1")
 region = Rect2(0, 64, 32, 32)
@@ -110,14 +118,6 @@ region = Rect2(32, 64, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_rljee"]
 atlas = ExtResource("2_fqpu1")
 region = Rect2(64, 64, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_y1117"]
-atlas = ExtResource("2_fqpu1")
-region = Rect2(96, 64, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_p7mqp"]
-atlas = ExtResource("2_fqpu1")
-region = Rect2(128, 64, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4ulrt"]
 atlas = ExtResource("2_fqpu1")
@@ -262,6 +262,17 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_y1117")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p7mqp")
+}],
+"loop": true,
+"name": &"SlamComplete",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_fq3k8")
 }, {
 "duration": 1.0,
@@ -269,15 +280,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_rljee")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_y1117")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_p7mqp")
 }],
 "loop": true,
-"name": &"Slam",
+"name": &"SlamFall",
 "speed": 8.0
 }, {
 "frames": [{
@@ -325,9 +330,7 @@ script = ExtResource("1_ig3ne")
 texture_filter = 1
 position = Vector2(0, -9)
 sprite_frames = SubResource("SpriteFrames_xnuxu")
-animation = &"JumpAttack"
-frame = 2
-frame_progress = 0.478812
+animation = &"SlamComplete"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
