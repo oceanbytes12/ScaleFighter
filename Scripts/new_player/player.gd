@@ -14,17 +14,21 @@ var grow_amount = 1
 var grow_time = 0.5
 @onready var fsm := $StateMachine
 @onready var label := $Label
-@onready var animator := $AnimationPlayer
-@onready var punch_hitbox := $PunchHitbox
-@onready var slam_hitbox := $SlamHitbox
-
+@onready var animator := $Flipped/AnimationPlayer
+@onready var punch_hitbox := $Flipped/PunchHitbox
+@onready var slam_hitbox := $Flipped/SlamHitbox
+@onready var Flipped := $Flipped
 signal on_take_damage(damageamount)
 
 var tween
+var isright
+
+var power = 1
+
+static var mainPlayer : Player
 
 func _ready():
-	punch_hitbox.our_body = self
-	slam_hitbox.our_body = self
+	mainPlayer = self
 	pass
 
 func _process(_delta: float) -> void:
@@ -32,12 +36,23 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("Grow"): #and LevelBase.can_grow:
 		EventBus.on_player_grow.emit()
 		grow()
-
+	
+	var input_direction_x = Input.get_axis("Left", "Right")
+	if input_direction_x < 0:
+		Flipped.scale.x = -1
+	elif(input_direction_x > 0):
+		Flipped.scale.x = 1
+		
 func animate(animationname):
 	animator.play(animationname)
 
-func take_hit(global_position, damage):
+func take_hit(position, damage, knockback):
+	var knockback_velocity = (self.global_position-position).normalized() * knockback
+	knockback_velocity.y = min(knockback_velocity.y, -200)
+	velocity = knockback_velocity
 	on_take_damage.emit(damage)
+	fsm.state.finished.emit("Hurt")
+	EventBus.on_player_take_damage.emit(damage)
 
 func grow():
 	if(tween and tween.is_running()):
@@ -54,4 +69,4 @@ func grow():
 	
 	await tween.finished
 	
-	LevelBase.character_scale = scale.x
+	power = scale.x*10

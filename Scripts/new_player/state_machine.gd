@@ -28,7 +28,6 @@ func _ready() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	state.handle_input(event)
 
-
 func _process(delta: float) -> void:
 	state.update(delta)
 
@@ -37,7 +36,6 @@ func _physics_process(delta: float) -> void:
 
 func _transition_to_next_state(target_state_path: String, data: Dictionary = {}) -> void:
 	if not has_node(target_state_path):
-		printerr(owner.name + ": Trying to transition to state " + target_state_path + " but it does not exist.")
 		return
 
 	var previous_state_path := state.name

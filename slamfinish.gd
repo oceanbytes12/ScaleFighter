@@ -4,7 +4,7 @@ var attacking = false
 
 func enter(previous_state_path: String, data := {}) -> void:
 	owner.animate("SlamFinish")
-	EventBus.on_slam_finish.emit(LevelBase.character_scale)
+	EventBus.on_slam_finish.emit(owner.power)
 	
 func start():
 	attacking = true

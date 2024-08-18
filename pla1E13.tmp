@@ -1,10 +1,10 @@
-[gd_scene load_steps=29 format=3 uid="uid://cujkhawkt2egg"]
+[gd_scene load_steps=23 format=3 uid="uid://cujkhawkt2egg"]
 
 [ext_resource type="Script" path="res://Scripts/new_player/player.gd" id="1_akjv1"]
 [ext_resource type="Texture2D" uid="uid://m1v10b585sus" path="res://BaseFighter-Sheet.png" id="2_4usyc"]
-[ext_resource type="Shader" path="res://hitEffect.gdshader" id="2_07hnp"]
 [ext_resource type="Script" path="res://Scripts/new_player/state_machine.gd" id="3_8x3ha"]
 [ext_resource type="Animation" uid="uid://2qjbe73y56cw" path="res://Animations/Idle.res" id="3_egu5v"]
+[ext_resource type="Animation" uid="uid://o4rsdts5xnsq" path="res://Animations/Punch.res" id="4_s68f4"]
 [ext_resource type="Script" path="res://Scripts/new_player/Idle.gd" id="4_y8r0u"]
 [ext_resource type="Script" path="res://Scripts/new_player/running.gd" id="5_n18e4"]
 [ext_resource type="Script" path="res://Scripts/new_player/jumping.gd" id="6_cu6ay"]
@@ -14,49 +14,6 @@
 [ext_resource type="Script" path="res://slamming.gd" id="10_vagg6"]
 [ext_resource type="Script" path="res://slamfinish.gd" id="11_bjrbt"]
 [ext_resource type="Script" path="res://HitBox.gd" id="11_ej357"]
-[ext_resource type="Script" path="res://playerhurt.gd" id="14_vsy3m"]
-
-[sub_resource type="Animation" id="Animation_7vw1e"]
-resource_name = "Blink"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Flipped/Sprite2D:material:shader_parameter/flash_opacity")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.3, 0.5, 0.6, 0.8),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [1.0, 0.0, 1.0, 0.0, 1.0, 0.0]
-}
-
-[sub_resource type="Animation" id="Animation_ysna4"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Flipped/Sprite2D:material:shader_parameter/flash_opacity")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_1qrgb"]
-_data = {
-"Blink": SubResource("Animation_7vw1e"),
-"RESET": SubResource("Animation_ysna4")
-}
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_lhf6u"]
-resource_local_to_scene = true
-shader = ExtResource("2_07hnp")
-shader_parameter/flash_opacity = 0.0
-shader_parameter/flash_color = Color(1, 1, 1, 1)
 
 [sub_resource type="Animation" id="Animation_v8lk0"]
 resource_name = "AirPunch"
@@ -211,71 +168,12 @@ tracks/2/keys = {
 "values": [false, true]
 }
 
-[sub_resource type="Animation" id="Animation_r0mer"]
-resource_name = "Punch"
-length = 0.3
-loop_mode = 1
-step = 0.01
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Flipped/Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.06, 0.12, 0.18, 0.24),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [8, 9, 10, 11, 12]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("StateMachine/Punching")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.01, 0.25),
-"transitions": PackedFloat32Array(1, 1),
-"values": [{
-"args": [],
-"method": &"start"
-}, {
-"args": [],
-"method": &"end"
-}]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Flipped/PunchHitbox/CollisionShape2D:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.25),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(4, 3), Vector2(10, 3)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Flipped/PunchHitbox/CollisionShape2D:disabled")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.25),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4d6ly"]
 _data = {
 "AirPunch": SubResource("Animation_v8lk0"),
 "AirSlam": SubResource("Animation_2f5mp"),
 "Idle": ExtResource("3_egu5v"),
-"Punch": SubResource("Animation_r0mer"),
+"Punch": ExtResource("4_s68f4"),
 "RESET": SubResource("Animation_smlwr"),
 "SlamFinish": SubResource("Animation_dxywu")
 }
@@ -290,22 +188,14 @@ radius = 3.0
 height = 16.0
 
 [node name="Player" type="CharacterBody2D"]
-scale = Vector2(2, 2)
 script = ExtResource("1_akjv1")
 speed = 250.0
 gravity = 2000.0
 jump_impulse = 900.0
 
-[node name="Blink" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_1qrgb")
-}
-
 [node name="Flipped" type="Node2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="Flipped"]
-material = SubResource("ShaderMaterial_lhf6u")
-position = Vector2(-0.5, 0)
 texture = ExtResource("2_4usyc")
 hframes = 8
 vframes = 6
@@ -318,8 +208,7 @@ libraries = {
 
 [node name="PunchHitbox" type="Area2D" parent="Flipped"]
 script = ExtResource("11_ej357")
-damage = 3
-knockback = 3
+knockback = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Flipped/PunchHitbox"]
 position = Vector2(4, 3)
@@ -366,10 +255,6 @@ script = ExtResource("10_vagg6")
 
 [node name="SlamFinish" type="Node" parent="StateMachine"]
 script = ExtResource("11_bjrbt")
-
-[node name="Hurt" type="Node" parent="StateMachine" node_paths=PackedStringArray("blinkAnimator")]
-script = ExtResource("14_vsy3m")
-blinkAnimator = NodePath("../../Blink")
 
 [node name="Label" type="Label" parent="."]
 anchors_preset = 5

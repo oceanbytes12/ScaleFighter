@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://v7xhr4rmnds3"]
+[gd_scene load_steps=12 format=3 uid="uid://v7xhr4rmnds3"]
 
 [ext_resource type="Texture2D" uid="uid://dpcm4tpe8gu2p" path="res://icon.svg" id="1_4wfvy"]
 [ext_resource type="Script" path="res://Levels/Level_Base.gd" id="1_csyey"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://Scripts/other/PlayerCamera.gd" id="4_s5n7y"]
 [ext_resource type="Script" path="res://UI/ProgressBar.gd" id="4_w047y"]
 [ext_resource type="PackedScene" uid="uid://dlh2vlug8qltd" path="res://UI/progress_bar.tscn" id="6_smir8"]
+[ext_resource type="PackedScene" uid="uid://bgf5mn0tdpky1" path="res://Enemies/enemy_base.tscn" id="7_1pmof"]
 [ext_resource type="PackedScene" uid="uid://bcp0tupxne6ai" path="res://Enemies/enemy_with_states.tscn" id="7_gyen3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ulv0b"]
@@ -60,7 +61,7 @@ scale = Vector2(1.5, 0.8)
 texture = ExtResource("1_4wfvy")
 
 [node name="Player" parent="." instance=ExtResource("2_kde84")]
-position = Vector2(300, 86)
+position = Vector2(216, 1)
 jump_impulse = 600.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -138,7 +139,11 @@ text = "[center]YOU DEFEATED![/center]"
 
 [node name="State_Enemy" parent="." instance=ExtResource("7_gyen3")]
 position = Vector2(70, 77)
-SPEED = 100
+
+[node name="Enemy_Base" parent="." node_paths=PackedStringArray("TARGET") instance=ExtResource("7_1pmof")]
+visible = false
+position = Vector2(69, 115)
+TARGET = NodePath("../Player")
 
 [connection signal="on_take_damage" from="Player" to="CanvasLayer/Player_HPBar" method="_on_damage_received"]
 [connection signal="BarEmpty" from="CanvasLayer/Player_HPBar" to="." method="_on_player_hp_bar_empty"]
@@ -146,3 +151,5 @@ SPEED = 100
 [connection signal="BarFull" from="CanvasLayer/GrowBar" to="." method="_on_grow_bar_full"]
 [connection signal="take_damage" from="State_Enemy" to="CanvasLayer/Boss_HPBar" method="_on_damage_received"]
 [connection signal="take_damage" from="State_Enemy" to="CanvasLayer/GrowBar" method="_on_damage_received"]
+[connection signal="take_damage" from="Enemy_Base" to="CanvasLayer/Boss_HPBar" method="_on_damage_received"]
+[connection signal="take_damage" from="Enemy_Base" to="CanvasLayer/GrowBar" method="_on_damage_received"]

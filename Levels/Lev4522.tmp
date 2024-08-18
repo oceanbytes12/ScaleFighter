@@ -61,7 +61,13 @@ texture = ExtResource("1_4wfvy")
 
 [node name="Player" parent="." instance=ExtResource("2_kde84")]
 position = Vector2(300, 86)
+slam_speed = 100
+max_slam_speed = 300
 jump_impulse = 600.0
+glide_max_speed = 1000.0
+glide_acceleration = 1000.0
+glide_gravity = 400.0
+glide_jump_impulse = 800.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(159, 91)

@@ -138,7 +138,6 @@ text = "[center]YOU DEFEATED![/center]"
 
 [node name="State_Enemy" parent="." instance=ExtResource("7_gyen3")]
 position = Vector2(70, 77)
-SPEED = 100
 
 [connection signal="on_take_damage" from="Player" to="CanvasLayer/Player_HPBar" method="_on_damage_received"]
 [connection signal="BarEmpty" from="CanvasLayer/Player_HPBar" to="." method="_on_player_hp_bar_empty"]
