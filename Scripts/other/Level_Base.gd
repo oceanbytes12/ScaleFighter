@@ -3,6 +3,7 @@ class_name LevelBase extends Node2D
 @export var grow_text : RichTextLabel
 @export var gameover_text : RichTextLabel
 @export var win_text : RichTextLabel
+@export var right_wall_collider : CollisionShape2D
 static var can_grow = false
 
 
@@ -37,4 +38,22 @@ func _on_grow_bar_full():
 
 func _on_boss_hp_bar_empty():
 	# Level Complete
+	# Disable right wall
+	right_wall_collider.set_deferred("disabled", true)
+	# Display new power text	
 	win_text.visible = true
+
+
+
+func _on_exit_level_trigger_body_entered(body):
+	if body is Player:
+		# Load next level
+		#Show temp text so we know it's not frozen?
+		print("Player exited level.")
+		#get_tree().paused = true
+		load_level()
+
+
+func load_level():
+	# For now, just reload the current level
+	get_tree().call_deferred("reload_current_scene")
