@@ -3,12 +3,14 @@ extends ProgressBar
 signal BarFull
 signal BarEmpty
 
+@export var maxHP = 100
 @export var canBeChanged = true # On level start, boss will have this set to false
 @export var isHealedOnHit = false # Power up bar will have this set to true
 #@export var parentObject := CharacterBody2D  # This did not work
 
 
 func _ready():
+	max_value = maxHP
 	if isHealedOnHit:
 		value = 1 
 	else:
