@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://dnf6aw4ce5jha"]
 
-[ext_resource type="Script" path="res://Enemies/EnemyJump.gd" id="1_nypqx"]
+[ext_resource type="Script" path="res://Enemies/EnemyJump_nonState.gd" id="1_nypqx"]
 [ext_resource type="Shader" path="res://Visual/Shaders/hitEffect.gdshader" id="2_5ua6d"]
 [ext_resource type="Texture2D" uid="uid://cg6ubjm7oml8t" path="res://Visual/Sprites/combatDummy.png" id="3_h74tr"]
 [ext_resource type="Texture2D" uid="uid://dpcm4tpe8gu2p" path="res://Visual/Sprites/icon.svg" id="4_p35oy"]

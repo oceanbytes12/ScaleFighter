@@ -5,6 +5,7 @@ class_name EnemyState extends State
 const IDLE = "EnemyIdle"
 const CHASE = "EnemyChase"
 const PUNCH = "EnemyPunch"
+const JUMP = "EnemyJump"
 
 var player: StateEnemy
 

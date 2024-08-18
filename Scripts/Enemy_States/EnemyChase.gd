@@ -1,5 +1,8 @@
 extends EnemyState
 
+#@export var CanJump = false
+#@export var CanSlam = false # Not implemented yet
+
 var TARGET : CharacterBody2D
 
 var inrange = false
@@ -28,7 +31,11 @@ func physics_update(delta: float) -> void:
 	if (not inrange):
 		owner.velocity = target_vector * owner.SPEED
 	else:
-		finished.emit(PUNCH)
+		finished.emit(JUMP)
+		#if CanJump:
+			#finished.emit(JUMP)
+		#else: # Temp, later make a ChooseAttack func
+			#finished.emit(PUNCH)
 	if not owner.is_on_floor():
 		owner.velocity.y += owner.GRAVITY * delta
 
