@@ -13,11 +13,11 @@ config_version=5
 config/name="ScaleFighter"
 run/main_scene="res://Geko/Game.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://Visual/Sprites/icon.svg"
 
 [autoload]
 
-EventBus="*res://event_bus.gd"
+EventBus="*res://Scripts/other/event_bus.gd"
 
 [display]
 

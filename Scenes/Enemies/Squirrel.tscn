@@ -1,0 +1,217 @@
+[gd_scene load_steps=24 format=3 uid="uid://bcp0tupxne6ai"]
+
+[ext_resource type="Script" path="res://Scripts/other/StateEnemy.gd" id="1_buy47"]
+[ext_resource type="Animation" uid="uid://o4rsdts5xnsq" path="res://Visual/Animations/Punch.res" id="2_p2nk6"]
+[ext_resource type="Shader" path="res://Visual/Shaders/hitEffect.gdshader" id="2_rit0p"]
+[ext_resource type="Texture2D" uid="uid://m1v10b585sus" path="res://Visual/Sprites/BaseFighter-Sheet.png" id="4_r0fxt"]
+[ext_resource type="Script" path="res://Scripts/other/HitBox.gd" id="5_jjw23"]
+[ext_resource type="Script" path="res://Scripts/Enemy_States/EnemyIdle.gd" id="5_rva3f"]
+[ext_resource type="Script" path="res://Scripts/State/state_machine.gd" id="6_56f0l"]
+[ext_resource type="Script" path="res://Scripts/Enemy_States/EnemyChase.gd" id="6_oogn5"]
+[ext_resource type="Script" path="res://Scripts/Enemy_States/EnemyPunch.gd" id="7_av5gr"]
+[ext_resource type="Script" path="res://Scripts/Enemy_States/EnemyHurt.gd" id="10_qq6i4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_je0ey"]
+resource_local_to_scene = true
+shader = ExtResource("2_rit0p")
+shader_parameter/flash_opacity = 0.0
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+
+[sub_resource type="Animation" id="Animation_0v2qs"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Flipped/Sprite2D:material:shader_parameter/flash_opacity")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_ie111"]
+resource_name = "hit"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Flipped/Sprite2D:material:shader_parameter/flash_opacity")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fcnkw"]
+_data = {
+"RESET": SubResource("Animation_0v2qs"),
+"hit": SubResource("Animation_ie111")
+}
+
+[sub_resource type="Animation" id="Animation_mx6cn"]
+resource_name = "Chase"
+
+[sub_resource type="Animation" id="Animation_33kg0"]
+resource_name = "Idle"
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Flipped/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+
+[sub_resource type="Animation" id="Animation_hj0kt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Flipped/Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_msrev"]
+resource_name = "Walk"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Flipped/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [24, 25, 26, 27, 28, 29, 30, 31]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vwa3k"]
+_data = {
+"Chase": SubResource("Animation_mx6cn"),
+"Idle": SubResource("Animation_33kg0"),
+"Punch": ExtResource("2_p2nk6"),
+"RESET": SubResource("Animation_hj0kt"),
+"Walk": SubResource("Animation_msrev")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_unv2e"]
+radius = 15.0231
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sxuq3"]
+size = Vector2(80, 22.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ufdj5"]
+size = Vector2(10, 18.5)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xr2jt"]
+radius = 14.3333
+
+[node name="State_Enemy" type="CharacterBody2D"]
+scale = Vector2(3, 3)
+script = ExtResource("1_buy47")
+metadata/_edit_group_ = true
+
+[node name="Flipped" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Flipped"]
+material = SubResource("ShaderMaterial_je0ey")
+position = Vector2(-1, 0)
+texture = ExtResource("4_r0fxt")
+hframes = 8
+vframes = 6
+frame = 24
+
+[node name="HitAnimationPlayer" type="AnimationPlayer" parent="Flipped"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_fcnkw")
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Flipped"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_vwa3k")
+}
+
+[node name="PunchHitbox" type="Area2D" parent="Flipped"]
+script = ExtResource("5_jjw23")
+damage = 15
+knockback = 300
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Flipped/PunchHitbox"]
+position = Vector2(8.54839, 3)
+scale = Vector2(0.4, 0.4)
+shape = SubResource("CircleShape2D_unv2e")
+
+[node name="SlamHitbox" type="Area2D" parent="Flipped"]
+script = ExtResource("5_jjw23")
+damage = 6
+knockback = 10
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Flipped/SlamHitbox"]
+position = Vector2(-1.19209e-07, 10.5)
+scale = Vector2(0.4, 0.4)
+shape = SubResource("RectangleShape2D_sxuq3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 1.66667)
+shape = SubResource("RectangleShape2D_ufdj5")
+
+[node name="AttackRange" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRange"]
+shape = SubResource("CircleShape2D_xr2jt")
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("6_56f0l")
+
+[node name="EnemyIdle" type="Node" parent="StateMachine"]
+script = ExtResource("5_rva3f")
+
+[node name="EnemyChase" type="Node" parent="StateMachine"]
+script = ExtResource("6_oogn5")
+
+[node name="EnemyPunch" type="Node" parent="StateMachine"]
+script = ExtResource("7_av5gr")
+
+[node name="EnemyHurt" type="Node" parent="StateMachine"]
+script = ExtResource("10_qq6i4")
+
+[node name="CooldownTimer" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="Label" type="Label" parent="."]
+custom_minimum_size = Vector2(10, 10)
+offset_left = -8.0
+offset_top = -30.0
+offset_right = 8.0
+offset_bottom = -7.0
+size_flags_stretch_ratio = 0.5
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+
+[connection signal="body_entered" from="Flipped/PunchHitbox" to="Flipped/PunchHitbox" method="_on_body_entered"]
+[connection signal="body_entered" from="Flipped/SlamHitbox" to="Flipped/SlamHitbox" method="_on_body_entered"]
+[connection signal="body_entered" from="AttackRange" to="StateMachine/EnemyChase" method="_on_attack_range_body_entered"]
+[connection signal="body_exited" from="AttackRange" to="StateMachine/EnemyChase" method="_on_attack_range_body_exited"]
+[connection signal="timeout" from="CooldownTimer" to="." method="_on_cooldown_timer_timeout"]
