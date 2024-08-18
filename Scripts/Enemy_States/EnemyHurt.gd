@@ -2,7 +2,7 @@ extends EnemyState
 
 
 func enter(previous_state_path: String, data := {}) -> void:
-	owner.animate("Idle")
+	owner.animate("Stun")
 	await get_tree().create_timer(5).timeout
 	finished.emit(IDLE)
 

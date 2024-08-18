@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/other/StateEnemy.gd" id="1_buy47"]
 [ext_resource type="Animation" uid="uid://o4rsdts5xnsq" path="res://Visual/Animations/Punch.res" id="2_p2nk6"]
 [ext_resource type="Shader" path="res://Visual/Shaders/hitEffect.gdshader" id="2_rit0p"]
-[ext_resource type="Texture2D" uid="uid://m1v10b585sus" path="res://Visual/Sprites/BaseFighter-Sheet.png" id="4_r0fxt"]
+[ext_resource type="Texture2D" uid="uid://bs8aginxbhwpj" path="res://Visual/Sprites/SquirrelFighter-Sheet.png" id="3_22wam"]
 [ext_resource type="Script" path="res://Scripts/other/HitBox.gd" id="5_jjw23"]
 [ext_resource type="Script" path="res://Scripts/Enemy_States/EnemyIdle.gd" id="5_rva3f"]
 [ext_resource type="Script" path="res://Scripts/State/state_machine.gd" id="6_56f0l"]
@@ -54,9 +54,6 @@ _data = {
 "hit": SubResource("Animation_ie111")
 }
 
-[sub_resource type="Animation" id="Animation_mx6cn"]
-resource_name = "Chase"
-
 [sub_resource type="Animation" id="Animation_33kg0"]
 resource_name = "Idle"
 loop_mode = 1
@@ -68,10 +65,10 @@ tracks/0/path = NodePath("Flipped/Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3, 4]
+"values": [0, 1, 2, 3]
 }
 
 [sub_resource type="Animation" id="Animation_hj0kt"]
@@ -88,10 +85,34 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector2(-1, 0)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Flipped/Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-3.17891e-07, 2.167)]
+}
 
-[sub_resource type="Animation" id="Animation_msrev"]
+[sub_resource type="Animation" id="Animation_p4wan"]
 resource_name = "Walk"
-length = 0.8
+length = 0.4
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -100,19 +121,35 @@ tracks/0/path = NodePath("Flipped/Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [24, 25, 26, 27, 28, 29, 30, 31]
+"values": [8, 9, 10, 11]
+}
+
+[sub_resource type="Animation" id="Animation_2q1ib"]
+resource_name = "Stun"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Flipped/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [20, 21, 22, 23]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vwa3k"]
 _data = {
-"Chase": SubResource("Animation_mx6cn"),
 "Idle": SubResource("Animation_33kg0"),
 "Punch": ExtResource("2_p2nk6"),
 "RESET": SubResource("Animation_hj0kt"),
-"Walk": SubResource("Animation_msrev")
+"Stun": SubResource("Animation_2q1ib"),
+"Walk": SubResource("Animation_p4wan")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_unv2e"]
@@ -122,12 +159,12 @@ radius = 15.0231
 size = Vector2(80, 22.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ufdj5"]
-size = Vector2(10, 18.5)
+size = Vector2(14.6667, 15.6667)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xr2jt"]
 radius = 14.3333
 
-[node name="PurpleEnemy" type="CharacterBody2D"]
+[node name="Squirrel" type="CharacterBody2D"]
 scale = Vector2(3, 3)
 script = ExtResource("1_buy47")
 metadata/_edit_group_ = true
@@ -137,10 +174,10 @@ metadata/_edit_group_ = true
 [node name="Sprite2D" type="Sprite2D" parent="Flipped"]
 material = SubResource("ShaderMaterial_je0ey")
 position = Vector2(-1, 0)
-texture = ExtResource("4_r0fxt")
-hframes = 8
+texture = ExtResource("3_22wam")
+hframes = 4
 vframes = 6
-frame = 8
+frame = 5
 
 [node name="HitAnimationPlayer" type="AnimationPlayer" parent="Flipped"]
 root_node = NodePath("../..")
@@ -160,9 +197,10 @@ damage = 15
 knockback = 300
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Flipped/PunchHitbox"]
-position = Vector2(8.54839, 3)
+position = Vector2(13.608, 3)
 scale = Vector2(0.4, 0.4)
 shape = SubResource("CircleShape2D_unv2e")
+disabled = true
 
 [node name="SlamHitbox" type="Area2D" parent="Flipped"]
 script = ExtResource("5_jjw23")
@@ -175,7 +213,7 @@ scale = Vector2(0.4, 0.4)
 shape = SubResource("RectangleShape2D_sxuq3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, 1.66667)
+position = Vector2(-3.17891e-07, 2.167)
 shape = SubResource("RectangleShape2D_ufdj5")
 
 [node name="AttackRange" type="Area2D" parent="."]
