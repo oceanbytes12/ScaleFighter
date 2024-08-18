@@ -1,0 +1,138 @@
+[gd_scene load_steps=11 format=3 uid="uid://5c4vgkb0px60"]
+
+[ext_resource type="Texture2D" uid="uid://06x3cxd605xx" path="res://Visual/Sprites/gmtk_bg_big_street.png" id="1_0m8vh"]
+[ext_resource type="Script" path="res://Scenes/Title.gd" id="1_2nhra"]
+[ext_resource type="FontFile" uid="uid://bawienkaqsabo" path="res://Visual/Super Carnival.ttf" id="2_wvyu7"]
+[ext_resource type="Shader" path="res://Visual/Shaders/LoaderShader.gdshader" id="5_hc86l"]
+[ext_resource type="Texture2D" uid="uid://bu5mt783frc2i" path="res://Visual/Sprites/Loader.png" id="6_t17ks"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mrlh2"]
+resource_local_to_scene = true
+shader = ExtResource("5_hc86l")
+shader_parameter/scale = 0.0
+shader_parameter/mask = ExtResource("6_t17ks")
+
+[sub_resource type="Animation" id="Animation_m5kjo"]
+resource_name = "FadeIn"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.9)
+}
+
+[sub_resource type="Animation" id="Animation_acd6w"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_lruy7"]
+resource_name = "FadeOut"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.9)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f02lr"]
+_data = {
+"FadeIn": SubResource("Animation_m5kjo"),
+"FadeOut": SubResource("Animation_lruy7"),
+"RESET": SubResource("Animation_acd6w")
+}
+
+[node name="Title" type="Node2D"]
+script = ExtResource("1_2nhra")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_0m8vh")
+expand_mode = 2
+
+[node name="Title" type="RichTextLabel" parent="CanvasLayer/Control"]
+clip_contents = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 19.0
+offset_bottom = -118.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 0, 0, 0.396078)
+theme_override_constants/shadow_outline_size = 0
+theme_override_constants/outline_size = 5
+theme_override_fonts/normal_font = ExtResource("2_wvyu7")
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "[center][tornado radius=2
+.0 freq=8 connected=1]Scale Fighter"
+
+[node name="PressSpace" type="RichTextLabel" parent="CanvasLayer/Control"]
+clip_contents = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 112.0
+offset_bottom = -25.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 0, 0, 0.396078)
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/normal_font = ExtResource("2_wvyu7")
+theme_override_font_sizes/normal_font_size = 10
+bbcode_enabled = true
+text = "[pulse freq=1.0 color=#ffffff40 ease=-2.0][center]Press Space"
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_mrlh2")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/ColorRect"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_f02lr")
+}

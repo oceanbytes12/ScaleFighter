@@ -4,6 +4,7 @@ signal on_slam_finish(amount)
 signal on_player_grow
 signal on_player_take_damage(amount)
 signal on_enemy_take_damage(amount)
+signal on_game_ready
 
 const IDLE = "Idle"
 const RUNNING = "Running"

@@ -3,6 +3,8 @@ class_name LevelBase extends Node2D
 @export var grow_text : RichTextLabel
 @export var gameover_text : RichTextLabel
 @export var win_text : RichTextLabel
+@onready var animator := $CanvasLayer/ColorRect/AnimationPlayer
+
 static var can_grow = false
 
 
@@ -10,6 +12,10 @@ func _ready():
 	EventBus.on_player_grow.connect(TurnOffUI)
 	EventBus.on_player_take_damage.connect(HandleTakeDamage)
 	EventBus.on_enemy_take_damage.connect(HandleTakeDamage)
+	
+	animator.play("FadeIn")
+	await get_tree().create_timer(1).timeout
+	EventBus.on_game_ready.emit()
 
 
 func TurnOffUI():

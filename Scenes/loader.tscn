@@ -1,0 +1,75 @@
+[gd_scene load_steps=8 format=3 uid="uid://bpe4ad2ujx7sk"]
+
+[ext_resource type="Shader" path="res://Visual/Shaders/LoaderShader.gdshader" id="1_quge6"]
+[ext_resource type="Texture2D" uid="uid://bu5mt783frc2i" path="res://Visual/Sprites/Loader.png" id="2_8atuk"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m12f0"]
+resource_local_to_scene = true
+shader = ExtResource("1_quge6")
+shader_parameter/scale = 0.0
+shader_parameter/mask = ExtResource("2_8atuk")
+
+[sub_resource type="Animation" id="Animation_m5kjo"]
+resource_name = "FadeIn"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.9)
+}
+
+[sub_resource type="Animation" id="Animation_lruy7"]
+resource_name = "FadeToBlack"
+loop_mode = 1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.9)
+}
+
+[sub_resource type="Animation" id="Animation_acd6w"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f02lr"]
+_data = {
+"FadeIn": SubResource("Animation_m5kjo"),
+"FadeToBlack": SubResource("Animation_lruy7"),
+"RESET": SubResource("Animation_acd6w")
+}
+
+[node name="ColorRect" type="ColorRect"]
+material = SubResource("ShaderMaterial_m12f0")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_f02lr")
+}

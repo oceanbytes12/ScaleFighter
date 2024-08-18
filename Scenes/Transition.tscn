@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://ckv2pu38du084"]
+
+[ext_resource type="Shader" path="res://Visual/Shaders/LoaderShader.gdshader" id="1_871e0"]
+[ext_resource type="PackedScene" uid="uid://cejt7jxxq8pws" path="res://Scenes/Loader.tscn" id="1_c48e7"]
+[ext_resource type="Texture2D" uid="uid://bu5mt783frc2i" path="res://Visual/Sprites/Loader.png" id="2_wou1y"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6h7r1"]
+resource_local_to_scene = true
+shader = ExtResource("1_871e0")
+shader_parameter/scale = 0.0
+shader_parameter/mask = ExtResource("2_wou1y")
+
+[node name="Transition" type="Node2D"]
+
+[node name="ColorRect" parent="." instance=ExtResource("1_c48e7")]
+material = SubResource("ShaderMaterial_6h7r1")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
