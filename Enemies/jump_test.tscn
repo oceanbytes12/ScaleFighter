@@ -1,0 +1,113 @@
+[gd_scene load_steps=13 format=3 uid="uid://dnf6aw4ce5jha"]
+
+[ext_resource type="Script" path="res://Enemies/EnemyJump.gd" id="1_nypqx"]
+[ext_resource type="Shader" path="res://hitEffect.gdshader" id="2_5ua6d"]
+[ext_resource type="Texture2D" uid="uid://cg6ubjm7oml8t" path="res://combatDummy.png" id="3_h74tr"]
+[ext_resource type="Texture2D" uid="uid://dpcm4tpe8gu2p" path="res://icon.svg" id="4_p35oy"]
+[ext_resource type="PackedScene" uid="uid://cujkhawkt2egg" path="res://player.tscn" id="5_bixde"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e6gtr"]
+shader = ExtResource("2_5ua6d")
+shader_parameter/flash_opacity = 1.0
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pchxo"]
+height = 46.0
+
+[sub_resource type="Animation" id="Animation_hj0kt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:material:shader_parameter/flash_opacity")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="Animation" id="Animation_k0akd"]
+resource_name = "hit"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:material:shader_parameter/flash_opacity")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_8u388"]
+resource_name = "idle"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:material:shader_parameter/flash_opacity")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vwa3k"]
+_data = {
+"RESET": SubResource("Animation_hj0kt"),
+"hit": SubResource("Animation_k0akd"),
+"idle": SubResource("Animation_8u388")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ksaaq"]
+size = Vector2(20, 20.2)
+
+[node name="JumpTest" type="Node2D"]
+
+[node name="JumpingDummy" type="CharacterBody2D" parent="." node_paths=PackedStringArray("TARGET")]
+position = Vector2(258, 126)
+script = ExtResource("1_nypqx")
+TARGET = NodePath("../Player")
+
+[node name="Sprite2D" type="Sprite2D" parent="JumpingDummy"]
+material = SubResource("ShaderMaterial_e6gtr")
+texture = ExtResource("3_h74tr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="JumpingDummy"]
+shape = SubResource("CapsuleShape2D_pchxo")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="JumpingDummy"]
+libraries = {
+"": SubResource("AnimationLibrary_vwa3k")
+}
+
+[node name="CooldownTimer" type="Timer" parent="JumpingDummy"]
+wait_time = 3.0
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(155, 272)
+scale = Vector2(2, 2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, -0.5)
+scale = Vector2(10, 5)
+shape = SubResource("RectangleShape2D_ksaaq")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+scale = Vector2(1.5, 0.8)
+texture = ExtResource("4_p35oy")
+
+[node name="Player" parent="." instance=ExtResource("5_bixde")]
+position = Vector2(72, 151)
+
+[connection signal="timeout" from="JumpingDummy/CooldownTimer" to="JumpingDummy" method="_on_cooldown_timer_timeout"]
