@@ -1,13 +1,13 @@
-[gd_scene load_steps=13 format=3 uid="uid://dnf6aw4ce5jha"]
+[gd_scene load_steps=13 format=3 uid="uid://dhbjxlc5q330g"]
 
-[ext_resource type="Script" path="res://Enemies/EnemyJump.gd" id="1_nypqx"]
-[ext_resource type="Shader" path="res://hitEffect.gdshader" id="2_5ua6d"]
-[ext_resource type="Texture2D" uid="uid://cg6ubjm7oml8t" path="res://combatDummy.png" id="3_h74tr"]
-[ext_resource type="Texture2D" uid="uid://dpcm4tpe8gu2p" path="res://icon.svg" id="4_p35oy"]
-[ext_resource type="PackedScene" uid="uid://cujkhawkt2egg" path="res://player.tscn" id="5_bixde"]
+[ext_resource type="Shader" path="res://hitEffect.gdshader" id="2_unn2j"]
+[ext_resource type="Texture2D" uid="uid://cg6ubjm7oml8t" path="res://Visual/Sprites/combatDummy.png" id="3_w5ugv"]
+[ext_resource type="Script" path="res://Enemies/EnemySlam.gd" id="4_rw4x1"]
+[ext_resource type="Texture2D" uid="uid://dpcm4tpe8gu2p" path="res://Visual/Sprites/icon.svg" id="5_c4elv"]
+[ext_resource type="PackedScene" uid="uid://cujkhawkt2egg" path="res://Scenes/Player/player.tscn" id="6_v3na2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_e6gtr"]
-shader = ExtResource("2_5ua6d")
+shader = ExtResource("2_unn2j")
 shader_parameter/flash_opacity = 1.0
 shader_parameter/flash_color = Color(1, 1, 1, 1)
 
@@ -74,24 +74,25 @@ size = Vector2(20, 20.2)
 
 [node name="JumpTest" type="Node2D"]
 
-[node name="JumpingDummy" type="CharacterBody2D" parent="." node_paths=PackedStringArray("TARGET")]
-position = Vector2(258, 126)
-script = ExtResource("1_nypqx")
+[node name="SlamDummy" type="CharacterBody2D" parent="." node_paths=PackedStringArray("TARGET")]
+position = Vector2(272, 142)
+script = ExtResource("4_rw4x1")
 TARGET = NodePath("../Player")
+SPEED = 300.0
 
-[node name="Sprite2D" type="Sprite2D" parent="JumpingDummy"]
+[node name="Sprite2D" type="Sprite2D" parent="SlamDummy"]
 material = SubResource("ShaderMaterial_e6gtr")
-texture = ExtResource("3_h74tr")
+texture = ExtResource("3_w5ugv")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="JumpingDummy"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SlamDummy"]
 shape = SubResource("CapsuleShape2D_pchxo")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="JumpingDummy"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SlamDummy"]
 libraries = {
 "": SubResource("AnimationLibrary_vwa3k")
 }
 
-[node name="CooldownTimer" type="Timer" parent="JumpingDummy"]
+[node name="CooldownTimer" type="Timer" parent="SlamDummy"]
 wait_time = 3.0
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
@@ -105,9 +106,9 @@ shape = SubResource("RectangleShape2D_ksaaq")
 
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
 scale = Vector2(1.5, 0.8)
-texture = ExtResource("4_p35oy")
+texture = ExtResource("5_c4elv")
 
-[node name="Player" parent="." instance=ExtResource("5_bixde")]
+[node name="Player" parent="." instance=ExtResource("6_v3na2")]
 position = Vector2(72, 151)
 
-[connection signal="timeout" from="JumpingDummy/CooldownTimer" to="JumpingDummy" method="_on_cooldown_timer_timeout"]
+[connection signal="timeout" from="SlamDummy/CooldownTimer" to="SlamDummy" method="_on_cooldown_timer_timeout"]

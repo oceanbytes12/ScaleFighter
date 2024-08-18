@@ -1,6 +1,6 @@
 extends PlayerState
 
-@onready var land_effect = preload("res://scenes/land_effect.tscn")
+@onready var land_effect = preload("res://scenes/Player/land_effect.tscn")
 
 func play_effect(effect):
 	var new_effect = effect.instantiate()

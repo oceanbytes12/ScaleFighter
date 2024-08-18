@@ -1,9 +1,9 @@
 [gd_scene load_steps=11 format=3 uid="uid://b6e2daejvjv0y"]
 
 [ext_resource type="Script" path="res://Scripts/other/Level_Base.gd" id="1_c4rpu"]
-[ext_resource type="PackedScene" uid="uid://cujkhawkt2egg" path="res://Scenes/player.tscn" id="3_j6x1p"]
+[ext_resource type="PackedScene" uid="uid://cujkhawkt2egg" path="res://Scenes/Player/player.tscn" id="3_j6x1p"]
 [ext_resource type="Script" path="res://Scripts/other/PlayerCamera.gd" id="4_shjsq"]
-[ext_resource type="PackedScene" uid="uid://dlh2vlug8qltd" path="res://Scenes/progress_bar.tscn" id="5_p8b2s"]
+[ext_resource type="PackedScene" uid="uid://dlh2vlug8qltd" path="res://Scenes/Other/progress_bar.tscn" id="5_p8b2s"]
 [ext_resource type="Script" path="res://Scripts/other/ProgressBar.gd" id="6_wptig"]
 [ext_resource type="PackedScene" uid="uid://bcp0tupxne6ai" path="res://Scenes/Enemies/Squirrel.tscn" id="7_4c1f8"]
 [ext_resource type="Texture2D" uid="uid://06x3cxd605xx" path="res://Visual/Sprites/gmtk_bg_big_street.png" id="7_q4pwo"]
