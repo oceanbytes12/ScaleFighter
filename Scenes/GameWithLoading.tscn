@@ -7,7 +7,7 @@
 [ext_resource type="Shader" path="res://Visual/Shaders/LoaderShader.gdshader" id="5_x2sn8"]
 [ext_resource type="Texture2D" uid="uid://bu5mt783frc2i" path="res://Visual/Sprites/Loader.png" id="6_kllib"]
 [ext_resource type="PackedScene" uid="uid://cujkhawkt2egg" path="res://Scenes/Player/player.tscn" id="7_lhjwd"]
-[ext_resource type="PackedScene" uid="uid://bcp0tupxne6ai" path="res://Scenes/Enemies/Squirrel.tscn" id="8_xur22"]
+[ext_resource type="PackedScene" uid="uid://bcp0tupxne6ai" path="res://Scenes/Enemies/PurpleEnemy.tscn" id="8_xur22"]
 [ext_resource type="Script" path="res://Scripts/other/PlayerCamera.gd" id="9_vdty7"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rd2u5"]
@@ -35,20 +35,6 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.8)
 }
 
-[sub_resource type="Animation" id="Animation_ywmkn"]
-length = 0.001
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:material:shader_parameter/scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-
 [sub_resource type="Animation" id="Animation_bmkxe"]
 resource_name = "FadeOut"
 tracks/0/type = "bezier"
@@ -61,6 +47,20 @@ tracks/0/keys = {
 "handle_modes": PackedInt32Array(0, 0),
 "points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0, 0.8)
+}
+
+[sub_resource type="Animation" id="Animation_ywmkn"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1t5nq"]

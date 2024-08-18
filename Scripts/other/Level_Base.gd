@@ -14,8 +14,8 @@ func _ready():
 	EventBus.on_player_grow.connect(TurnOffUI)
 	EventBus.on_player_take_damage.connect(HandleTakeDamage)
 	EventBus.on_enemy_take_damage.connect(HandleTakeDamage)
-	
-	animator.play("FadeIn")
+	if(animator):
+		animator.play("FadeIn")
 	await get_tree().create_timer(1).timeout
 	EventBus.on_game_ready.emit()
 

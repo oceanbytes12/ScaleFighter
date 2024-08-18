@@ -375,6 +375,7 @@ script = ExtResource("15_nb2ow")
 blinkAnimator = NodePath("../../Blink")
 
 [node name="Label" type="Label" parent="."]
+visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5

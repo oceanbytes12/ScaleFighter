@@ -1,19 +1,19 @@
-[gd_scene load_steps=24 format=3 uid="uid://05ukpwn07wnq"]
+[gd_scene load_steps=24 format=3 uid="uid://bcp0tupxne6ai"]
 
-[ext_resource type="Script" path="res://Scripts/other/StateEnemy.gd" id="1_buy47"]
-[ext_resource type="Animation" uid="uid://o4rsdts5xnsq" path="res://Visual/Animations/Punch.res" id="2_p2nk6"]
-[ext_resource type="Shader" path="res://Visual/Shaders/hitEffect.gdshader" id="2_rit0p"]
-[ext_resource type="Texture2D" uid="uid://m1v10b585sus" path="res://Visual/Sprites/BaseFighter-Sheet.png" id="4_r0fxt"]
-[ext_resource type="Script" path="res://Scripts/other/HitBox.gd" id="5_jjw23"]
-[ext_resource type="Script" path="res://Scripts/Enemy_States/EnemyIdle.gd" id="5_rva3f"]
-[ext_resource type="Script" path="res://Scripts/State/state_machine.gd" id="6_56f0l"]
-[ext_resource type="Script" path="res://Scripts/Enemy_States/EnemyChase.gd" id="6_oogn5"]
-[ext_resource type="Script" path="res://Scripts/Enemy_States/EnemyPunch.gd" id="7_av5gr"]
-[ext_resource type="Script" path="res://Scripts/Enemy_States/EnemyHurt.gd" id="10_qq6i4"]
+[ext_resource type="Script" path="res://Scripts/other/StateEnemy.gd" id="1_x625n"]
+[ext_resource type="Shader" path="res://Visual/Shaders/hitEffect.gdshader" id="2_nffil"]
+[ext_resource type="Texture2D" uid="uid://m1v10b585sus" path="res://Visual/Sprites/BaseFighter-Sheet.png" id="3_q1t7b"]
+[ext_resource type="Animation" uid="uid://o4rsdts5xnsq" path="res://Visual/Animations/Punch.res" id="4_2msxp"]
+[ext_resource type="Script" path="res://Scripts/other/HitBox.gd" id="5_31d43"]
+[ext_resource type="Script" path="res://Scripts/State/state_machine.gd" id="6_88vil"]
+[ext_resource type="Script" path="res://Scripts/Enemy_States/EnemyIdle.gd" id="7_2rv0l"]
+[ext_resource type="Script" path="res://Scripts/Enemy_States/EnemyChase.gd" id="8_wyats"]
+[ext_resource type="Script" path="res://Scripts/Enemy_States/EnemyPunch.gd" id="9_dtmk6"]
+[ext_resource type="Script" path="res://Scripts/Enemy_States/EnemyHurt.gd" id="10_w01m7"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_je0ey"]
 resource_local_to_scene = true
-shader = ExtResource("2_rit0p")
+shader = ExtResource("2_nffil")
 shader_parameter/flash_opacity = 0.0
 shader_parameter/flash_color = Color(1, 1, 1, 1)
 
@@ -110,7 +110,7 @@ tracks/0/keys = {
 _data = {
 "Chase": SubResource("Animation_mx6cn"),
 "Idle": SubResource("Animation_33kg0"),
-"Punch": ExtResource("2_p2nk6"),
+"Punch": ExtResource("4_2msxp"),
 "RESET": SubResource("Animation_hj0kt"),
 "Walk": SubResource("Animation_msrev")
 }
@@ -129,7 +129,7 @@ radius = 14.3333
 
 [node name="PurpleEnemy" type="CharacterBody2D"]
 scale = Vector2(3, 3)
-script = ExtResource("1_buy47")
+script = ExtResource("1_x625n")
 metadata/_edit_group_ = true
 
 [node name="Flipped" type="Node2D" parent="."]
@@ -137,7 +137,7 @@ metadata/_edit_group_ = true
 [node name="Sprite2D" type="Sprite2D" parent="Flipped"]
 material = SubResource("ShaderMaterial_je0ey")
 position = Vector2(-1, 0)
-texture = ExtResource("4_r0fxt")
+texture = ExtResource("3_q1t7b")
 hframes = 8
 vframes = 6
 frame = 8
@@ -155,7 +155,7 @@ libraries = {
 }
 
 [node name="PunchHitbox" type="Area2D" parent="Flipped"]
-script = ExtResource("5_jjw23")
+script = ExtResource("5_31d43")
 damage = 15
 knockback = 300
 
@@ -165,7 +165,7 @@ scale = Vector2(0.4, 0.4)
 shape = SubResource("CircleShape2D_unv2e")
 
 [node name="SlamHitbox" type="Area2D" parent="Flipped"]
-script = ExtResource("5_jjw23")
+script = ExtResource("5_31d43")
 damage = 6
 knockback = 10
 
@@ -184,19 +184,19 @@ shape = SubResource("RectangleShape2D_ufdj5")
 shape = SubResource("CircleShape2D_xr2jt")
 
 [node name="StateMachine" type="Node" parent="."]
-script = ExtResource("6_56f0l")
+script = ExtResource("6_88vil")
 
 [node name="EnemyIdle" type="Node" parent="StateMachine"]
-script = ExtResource("5_rva3f")
+script = ExtResource("7_2rv0l")
 
 [node name="EnemyChase" type="Node" parent="StateMachine"]
-script = ExtResource("6_oogn5")
+script = ExtResource("8_wyats")
 
 [node name="EnemyPunch" type="Node" parent="StateMachine"]
-script = ExtResource("7_av5gr")
+script = ExtResource("9_dtmk6")
 
 [node name="EnemyHurt" type="Node" parent="StateMachine"]
-script = ExtResource("10_qq6i4")
+script = ExtResource("10_w01m7")
 
 [node name="CooldownTimer" type="Timer" parent="."]
 wait_time = 3.0

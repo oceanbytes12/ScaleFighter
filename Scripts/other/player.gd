@@ -34,7 +34,7 @@ func _ready():
 
 func _process(_delta: float) -> void:
 	label.text = fsm.state.name
-	if Input.is_action_just_pressed("Grow"): #and LevelBase.can_grow:
+	if Input.is_action_just_pressed("Grow") and LevelBase.can_grow:
 		EventBus.on_player_grow.emit()
 		grow()
 	
