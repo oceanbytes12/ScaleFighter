@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://05ukpwn07wnq"]
+[gd_scene load_steps=41 format=3 uid="uid://05ukpwn07wnq"]
 
 [ext_resource type="Script" path="res://Scripts/other/StateEnemy.gd" id="1_buy47"]
 [ext_resource type="Animation" uid="uid://o4rsdts5xnsq" path="res://Visual/Animations/Punch.res" id="2_p2nk6"]
@@ -17,6 +17,7 @@
 [ext_resource type="Script" path="res://Scripts/Enemy_States/EnemyJump.gd" id="8_aldih"]
 [ext_resource type="Script" path="res://Scripts/Enemy_States/EnemyHurt.gd" id="10_qq6i4"]
 [ext_resource type="Script" path="res://Scripts/Enemy_States/EnemyRandom.gd" id="12_yiyxc"]
+[ext_resource type="Script" path="res://Scripts/IntString.gd" id="18_rp5at"]
 [ext_resource type="Script" path="res://Scripts/Enemy_States/EnemyFall.gd" id="18_u7m3d"]
 [ext_resource type="Script" path="res://Scripts/Enemy_States/EnemyDefeated.gd" id="19_pcnyy"]
 
@@ -222,6 +223,16 @@ radius = 14.3333
 [sub_resource type="CircleShape2D" id="CircleShape2D_57ohj"]
 radius = 5.70575
 
+[sub_resource type="Resource" id="Resource_fqdqw"]
+script = ExtResource("18_rp5at")
+weight = 10
+name = "EnemyChase"
+
+[sub_resource type="Resource" id="Resource_eeq8w"]
+script = ExtResource("18_rp5at")
+weight = 10
+name = "EnemyJump"
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_568bd"]
 radius = 3.83333
 height = 12.9998
@@ -341,6 +352,7 @@ script = ExtResource("10_qq6i4")
 
 [node name="EnemyRandom" type="Node" parent="StateMachine"]
 script = ExtResource("12_yiyxc")
+int_string_pairs = Array[ExtResource("18_rp5at")]([SubResource("Resource_fqdqw"), SubResource("Resource_eeq8w")])
 
 [node name="EnemyFall" type="Node" parent="StateMachine"]
 script = ExtResource("18_u7m3d")

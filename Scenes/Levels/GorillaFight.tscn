@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://cujkhawkt2egg" path="res://Scenes/Player/player.tscn" id="9_gmrbk"]
 [ext_resource type="PackedScene" uid="uid://beh82u6kyw1bt" path="res://Scenes/Enemies/Gorilla.tscn" id="10_dc7cp"]
 [ext_resource type="Script" path="res://Scripts/other/PlayerCamera.gd" id="11_30gjy"]
-[ext_resource type="PackedScene" uid="uid://dojynfwd6nb5h" path="res://Scenes/Other/EnemyTitleAnimator.tscn" id="12_2w3it"]
+[ext_resource type="PackedScene" path="res://Scenes/Other/EnemyTitleAnimator.tscn" id="12_2w3it"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rd2u5"]
 bg_color = Color(0.865675, 0.380193, 0.951176, 1)
