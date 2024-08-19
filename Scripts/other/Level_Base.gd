@@ -1,16 +1,19 @@
-
 class_name LevelBase extends Node2D
 @export var grow_text : RichTextLabel
 @export var gameover_text : RichTextLabel
 @export var win_text : RichTextLabel
+@export var right_wall_collider : CollisionShape2D
+@export_enum("None", "Jump", "Slam") var power_unlocked
+@export var next_scene = "res://Scenes/SquirrelFight.tscn"
+
 
 @onready var animator := $CanvasLayer/ColorRect/AnimationPlayer
-@export var right_wall_collider : CollisionShape2D
 
 static var can_grow = false
 
 
 func _ready():
+	print(next_scene)
 	EventBus.on_player_grow.connect(TurnOffUI)
 	EventBus.on_player_take_damage.connect(HandleTakeDamage)
 	EventBus.on_enemy_take_damage.connect(HandleTakeDamage)
@@ -49,7 +52,13 @@ func _on_boss_hp_bar_empty():
 	right_wall_collider.set_deferred("disabled", true)
 	# Display new power text	
 	win_text.visible = true
-
+	
+	# Unlock player power
+	match power_unlocked:
+		1:
+			Player.canJump = true
+		2:
+			Player.canSlam = true
 
 
 func _on_exit_level_trigger_body_entered(body):
@@ -58,9 +67,12 @@ func _on_exit_level_trigger_body_entered(body):
 		#Show temp text so we know it's not frozen?
 		print("Player exited level.")
 		#get_tree().paused = true
-		load_level()
+		load_scene()
 
 
-func load_level():
-	# For now, just reload the current level
-	get_tree().call_deferred("reload_current_scene")
+func load_scene():
+	can_grow = false
+	#get_tree().call_deferred("reload_current_scene")
+	#get_tree().call_deferred(&"change_scene_to_packed", preload(GAME_SCENE))
+	#get_tree().change_scene_to_file(next_scene)
+	get_tree().call_deferred(&"change_scene_to_file", next_scene)

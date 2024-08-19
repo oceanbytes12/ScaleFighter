@@ -9,7 +9,7 @@ func physics_update(delta: float) -> void:
 	player.animate("Walk")
 	if not player.is_on_floor():
 		finished.emit(FALLING)
-	elif Input.is_action_just_pressed("Up"):
+	elif Input.is_action_just_pressed("Up") && Player.canJump:
 		finished.emit(JUMPING)
 	elif Input.is_action_just_pressed("Attack"):
 		finished.emit(PUNCHING)
