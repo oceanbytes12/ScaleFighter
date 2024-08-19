@@ -1,10 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://dojynfwd6nb5h"]
 
-[ext_resource type="Script" path="res://Scripts/Other/TitleAnimator.gd" id="1_5rr12"]
+[ext_resource type="Script" path="res://Scripts/other/EnemyTitleAnimator.gd" id="1_xp7ca"]
 [ext_resource type="Texture2D" uid="uid://bgtfmf5t0yc84" path="res://Visual/Sprites/Titles.png" id="2_1ss42"]
 
 [node name="TitleAnimator" type="Node2D"]
-script = ExtResource("1_5rr12")
+script = ExtResource("1_xp7ca")
 
 [node name="Kong" type="Sprite2D" parent="."]
 visible = false
