@@ -57,7 +57,7 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("Grow") and LevelBase.can_grow:
 		EventBus.on_player_grow.emit()
 		grow()
-	
+		
 	var input_direction_x = Input.get_axis("Left", "Right")
 	if input_direction_x < 0:
 		Flipped.scale.x = -1
@@ -79,7 +79,7 @@ func hit(position, damage, knockback):
 func grow():
 	if(tween and tween.is_running()):
 		tween.kill()
-		
+	$Grow.play()
 	tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BOUNCE)
 	var start_scale = scale
 	var target_scale = Vector2(scale.x+grow_amount, scale.y+grow_amount)  # Scale to twice the original size

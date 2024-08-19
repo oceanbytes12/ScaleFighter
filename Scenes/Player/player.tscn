@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://cujkhawkt2egg"]
+[gd_scene load_steps=40 format=3 uid="uid://cujkhawkt2egg"]
 
 [ext_resource type="Script" path="res://Scripts/other/player.gd" id="1_vo1r3"]
 [ext_resource type="Texture2D" uid="uid://m1v10b585sus" path="res://Visual/Sprites/BaseFighter-Sheet.png" id="2_4usyc"]
@@ -9,14 +9,21 @@
 [ext_resource type="Script" path="res://Scripts/State/state_machine.gd" id="6_1utgt"]
 [ext_resource type="Script" path="res://Scenes/Enemies/HurtBox.gd" id="7_1eam7"]
 [ext_resource type="Script" path="res://Scripts/Player_States/idle.gd" id="7_w0w0b"]
+[ext_resource type="AudioStream" uid="uid://2d8e5852sk2p" path="res://Sound/Sfx/Punches/Punch_hit_sfx_v1.wav" id="8_q7kps"]
 [ext_resource type="Script" path="res://Scripts/Player_States/running.gd" id="8_qtf6m"]
 [ext_resource type="Script" path="res://Scripts/Player_States/jumping.gd" id="9_22a62"]
+[ext_resource type="AudioStream" uid="uid://dqq3j0cgvndiq" path="res://Sound/Sfx/Punches/Punch_hit_sfx_v2.wav" id="9_su8gv"]
 [ext_resource type="Script" path="res://Scripts/Player_States/falling.gd" id="10_ajlu7"]
+[ext_resource type="AudioStream" uid="uid://byjqdysyoftbp" path="res://Sound/Sfx/Punches/Punch_hit_sfx_v3.wav" id="10_vwdyh"]
 [ext_resource type="Script" path="res://Scripts/Player_States/punching.gd" id="11_6cxed"]
 [ext_resource type="Script" path="res://Scripts/Player_States/airpunching.gd" id="12_yajeu"]
 [ext_resource type="Script" path="res://Scripts/Player_States/slamming.gd" id="13_hyj6v"]
 [ext_resource type="Script" path="res://Scripts/Player_States/slamfinish.gd" id="14_n2k4j"]
 [ext_resource type="Script" path="res://Scripts/Player_States/playerhurt.gd" id="15_nb2ow"]
+[ext_resource type="AudioStream" uid="uid://daxge4yrqs2a8" path="res://Sound/Sfx/Punches/Punch_woosh_sfx_v1.wav" id="17_lppgu"]
+[ext_resource type="AudioStream" uid="uid://ciom40c8sd5kw" path="res://Sound/Sfx/Punches/Punch_woosh_sfx_v2.wav" id="18_se3e6"]
+[ext_resource type="AudioStream" uid="uid://c4sevwe8yor7a" path="res://Sound/Sfx/Punches/Punch_woosh_sfx_v3.wav" id="19_7vxl3"]
+[ext_resource type="AudioStream" uid="uid://7kygs4ylls2i" path="res://Sound/Sfx/Grow_SF_v3_sfx.wav" id="24_20ohd"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n3n25"]
 radius = 3.5
@@ -289,8 +296,26 @@ _data = {
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gjiiv"]
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_h8ioa"]
+streams_count = 3
+stream_0/stream = ExtResource("8_q7kps")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("9_su8gv")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("10_vwdyh")
+stream_2/weight = 1.0
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tlehm"]
 size = Vector2(80, 22.5)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_2yfd8"]
+streams_count = 3
+stream_0/stream = ExtResource("17_lppgu")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("18_se3e6")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("19_7vxl3")
+stream_2/weight = 1.0
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox")]
 visibility_layer = 2
@@ -337,17 +362,21 @@ libraries = {
 "": SubResource("AnimationLibrary_4d6ly")
 }
 
-[node name="PunchHitbox" type="Area2D" parent="Flipped"]
+[node name="PunchHitbox" type="Area2D" parent="Flipped" node_paths=PackedStringArray("sound")]
 collision_layer = 0
 collision_mask = 8
 script = ExtResource("5_gdpkv")
 damage = 3
 knockback = 3
+sound = NodePath("Punch_hit")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Flipped/PunchHitbox"]
 position = Vector2(4, 3)
 scale = Vector2(0.4, 0.4)
 shape = SubResource("CircleShape2D_gjiiv")
+
+[node name="Punch_hit" type="AudioStreamPlayer2D" parent="Flipped/PunchHitbox"]
+stream = SubResource("AudioStreamRandomizer_h8ioa")
 
 [node name="SlamHitbox" type="Area2D" parent="Flipped"]
 collision_layer = 0
@@ -379,6 +408,10 @@ script = ExtResource("10_ajlu7")
 [node name="Punching" type="Node" parent="StateMachine"]
 script = ExtResource("11_6cxed")
 
+[node name="Punch_woosh" type="AudioStreamPlayer2D" parent="StateMachine/Punching"]
+scale = Vector2(2, 2)
+stream = SubResource("AudioStreamRandomizer_2yfd8")
+
 [node name="AirPunching" type="Node" parent="StateMachine"]
 script = ExtResource("12_yajeu")
 
@@ -408,6 +441,9 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 position = Vector2(0, 6)
 
 [node name="InvincibilityTimer" type="Timer" parent="."]
+
+[node name="Grow" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("24_20ohd")
 
 [connection signal="area_entered" from="Flipped/PunchHitbox" to="Flipped/PunchHitbox" method="_on_area_entered"]
 [connection signal="body_entered" from="Flipped/PunchHitbox" to="Flipped/PunchHitbox" method="_on_body_entered"]
