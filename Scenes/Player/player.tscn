@@ -3,12 +3,12 @@
 [ext_resource type="Script" path="res://Scripts/other/player.gd" id="1_vo1r3"]
 [ext_resource type="Shader" path="res://Visual/Shaders/hitEffect.gdshader" id="2_07hnp"]
 [ext_resource type="PackedScene" uid="uid://dkreawyu7cx8i" path="res://Scenes/Other/ParticleGenerator.tscn" id="2_cnb4c"]
+[ext_resource type="Script" path="res://Scripts/other/HurtBox.gd" id="3_4iq6g"]
 [ext_resource type="Animation" uid="uid://2qjbe73y56cw" path="res://Visual/Animations/Idle.res" id="3_egu5v"]
 [ext_resource type="Texture2D" uid="uid://lstpevst8lwk" path="res://Visual/LizardFighter-Sheet.png" id="4_ngy8a"]
 [ext_resource type="Script" path="res://Scripts/other/HitBox.gd" id="5_gdpkv"]
 [ext_resource type="Animation" uid="uid://3u1m8wk8f5ud" path="res://Visual/Animations/Walk.res" id="5_wslkp"]
 [ext_resource type="Script" path="res://Scripts/State/state_machine.gd" id="6_1utgt"]
-[ext_resource type="Script" path="res://Scenes/Enemies/HurtBox.gd" id="7_1eam7"]
 [ext_resource type="Script" path="res://Scripts/Player_States/idle.gd" id="7_w0w0b"]
 [ext_resource type="AudioStream" uid="uid://2d8e5852sk2p" path="res://Sound/Sfx/Punches/Punch_hit_sfx_v1.wav" id="8_q7kps"]
 [ext_resource type="Script" path="res://Scripts/Player_States/running.gd" id="8_qtf6m"]
@@ -358,7 +358,7 @@ particle_gen = ExtResource("2_cnb4c")
 [node name="PlayerHurtBox" type="Area2D" parent="."]
 collision_layer = 16
 collision_mask = 0
-script = ExtResource("7_1eam7")
+script = ExtResource("3_4iq6g")
 
 [node name="HurtBox" type="CollisionShape2D" parent="PlayerHurtBox"]
 position = Vector2(0, 3)

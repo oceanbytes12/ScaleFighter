@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://tmj8273tqhjq"]
+[gd_scene load_steps=20 format=3 uid="uid://tmj8273tqhjq"]
 
 [ext_resource type="Script" path="res://Scripts/other/Level_Base.gd" id="1_xaqio"]
 [ext_resource type="Texture2D" uid="uid://06x3cxd605xx" path="res://Visual/Sprites/Backgrounds/bg3.png" id="2_ynsbm"]
@@ -9,7 +9,6 @@
 [ext_resource type="Shader" path="res://Visual/Shaders/LoaderShader.gdshader" id="7_yntbr"]
 [ext_resource type="Texture2D" uid="uid://bu5mt783frc2i" path="res://Visual/Sprites/Loader.png" id="8_8301x"]
 [ext_resource type="PackedScene" uid="uid://cujkhawkt2egg" path="res://Scenes/Player/player.tscn" id="9_sph5s"]
-[ext_resource type="PackedScene" uid="uid://05ukpwn07wnq" path="res://Scenes/Enemies/Squirrel.tscn" id="10_ef312"]
 [ext_resource type="Script" path="res://Scripts/other/PlayerCamera.gd" id="11_f5tk5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rd2u5"]
@@ -222,8 +221,6 @@ shape = SubResource("RectangleShape2D_ulv0b")
 [node name="Player" parent="." instance=ExtResource("9_sph5s")]
 position = Vector2(-100, 0)
 jump_impulse = 600.0
-
-[node name="Squirrel" parent="." instance=ExtResource("10_ef312")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.9, 0.9)

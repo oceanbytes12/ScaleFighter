@@ -5,7 +5,7 @@ extends EnemyState
 
 var TARGET : CharacterBody2D
 var inrange = false
-var detection_range = 100
+var detection_range = 70
 
 func enter(_previous_state_path: String, _data := {}) -> void:
 	owner.animate("Walk")

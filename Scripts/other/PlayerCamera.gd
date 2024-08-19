@@ -14,7 +14,7 @@ func _ready():
 	EventBus.connect("on_player_take_damage", shake_with_damage)
 	EventBus.connect("on_enemy_minor_damage", shake_with_damage)
 	EventBus.connect("on_enemy_critical_damage", shake_with_damage)
-	#EventBus.on_slam_finish.connect("shake_with_power")
+	EventBus.connect("on_slam_finish", shake_with_damage)
 
 # Shake with decreasing intensity while there's time remaining.
 func _process(delta):

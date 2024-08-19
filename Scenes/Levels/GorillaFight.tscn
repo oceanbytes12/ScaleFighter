@@ -9,7 +9,7 @@
 [ext_resource type="Shader" path="res://Visual/Shaders/LoaderShader.gdshader" id="7_0hvrg"]
 [ext_resource type="Texture2D" uid="uid://bu5mt783frc2i" path="res://Visual/Sprites/Loader.png" id="8_bquj0"]
 [ext_resource type="PackedScene" uid="uid://cujkhawkt2egg" path="res://Scenes/Player/player.tscn" id="9_gmrbk"]
-[ext_resource type="PackedScene" uid="uid://05ukpwn07wnq" path="res://Scenes/Enemies/Squirrel.tscn" id="10_abi7g"]
+[ext_resource type="PackedScene" uid="uid://beh82u6kyw1bt" path="res://Scenes/Enemies/Gorilla.tscn" id="10_dc7cp"]
 [ext_resource type="Script" path="res://Scripts/other/PlayerCamera.gd" id="11_30gjy"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rd2u5"]
@@ -122,6 +122,7 @@ step = 1.0
 value = 50.0
 show_percentage = false
 script = ExtResource("4_1464u")
+maxHP = 10
 isHealedOnHit = true
 
 [node name="GrowText" type="RichTextLabel" parent="CanvasLayer"]
@@ -223,7 +224,7 @@ shape = SubResource("RectangleShape2D_ulv0b")
 position = Vector2(-100, 0)
 jump_impulse = 600.0
 
-[node name="Squirrel" parent="." instance=ExtResource("10_abi7g")]
+[node name="Gorilla" parent="." instance=ExtResource("10_dc7cp")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.9, 0.9)

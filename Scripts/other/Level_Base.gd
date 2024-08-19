@@ -24,6 +24,7 @@ func _ready():
 	EventBus.on_enemy_minor_damage.connect(HandleEnemyMinorDamage)
 	#Handle armor breaking
 	EventBus.on_enemy_critical_damage.connect(HandleEnemyCriticalDamage)
+	EventBus.on_slam_finish.connect(HandleSlam)
 	
 	if(animator):
 		print("Playing FadeIn")
@@ -31,6 +32,10 @@ func _ready():
 	await get_tree().create_timer(1).timeout
 	
 	EventBus.on_game_ready.emit()
+
+func HandleSlam(slamamount):
+	HitStop(0.5, 0.1)
+	
 
 func TurnOffUI():
 	grow_text.visible = false
@@ -47,7 +52,6 @@ func HandleEnemyCriticalDamage(amount):
 	if(0 >= BossBar.value):
 		print("BOSS DEFEATED")
 		BossDefeated = true
-		EventBus.on_boss_defeat.emit()
 		HitStop(1.2, 0.05)
 	else:
 		GrowBar._on_damage_received(amount)
@@ -62,7 +66,6 @@ func HandleEnemyMinorDamage(amount):
 		print("BOSS DEFEATED")
 		BossDefeated = true
 		HitStop(1.2, 0.05)
-		EventBus.on_boss_defeat.emit()
 		
 	elif(amount > 10):
 		HitStop(0.4, 0.1)
