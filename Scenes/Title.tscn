@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://5c4vgkb0px60"]
+[gd_scene load_steps=12 format=3 uid="uid://5c4vgkb0px60"]
 
 [ext_resource type="Texture2D" uid="uid://06x3cxd605xx" path="res://Visual/Sprites/Backgrounds/bg3.png" id="1_0m8vh"]
 [ext_resource type="Script" path="res://Scenes/Title.gd" id="1_2nhra"]
 [ext_resource type="FontFile" uid="uid://bawienkaqsabo" path="res://Visual/Super Carnival.ttf" id="2_wvyu7"]
 [ext_resource type="Shader" path="res://Visual/Shaders/LoaderShader.gdshader" id="5_hc86l"]
+[ext_resource type="AudioStream" uid="uid://u5k1y40e6tvc" path="res://Scale_Fighter_track1_v1.wav" id="6_1ht6i"]
 [ext_resource type="Texture2D" uid="uid://bu5mt783frc2i" path="res://Visual/Sprites/Loader.png" id="6_t17ks"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mrlh2"]
@@ -138,3 +139,5 @@ libraries = {
 }
 
 [node name="Music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_1ht6i")
+autoplay = true

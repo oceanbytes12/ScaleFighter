@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="ScaleFighter"
-run/main_scene="res://Geko/Game.tscn"
+run/main_scene="res://Scenes/Title.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://Visual/Sprites/icon.svg"
 
