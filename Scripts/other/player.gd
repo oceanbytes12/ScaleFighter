@@ -1,6 +1,10 @@
 # Character that moves and jumps.
 class_name Player extends CharacterBody2D
 
+# static vars for unlocking player abilities between levels
+static var canJump = false
+static var canSlam = false
+
 @export var slam_speed := 100
 @export var max_slam_speed := 300
 @export var speed := 500.0

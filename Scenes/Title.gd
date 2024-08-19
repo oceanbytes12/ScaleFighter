@@ -1,5 +1,5 @@
 extends Node2D
-const GAME_SCENE = "res://Scenes/Game.tscn"
+const GAME_SCENE = "res://Scenes/SquirrelFight.tscn"
 @onready var animator := $CanvasLayer/ColorRect/AnimationPlayer
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
