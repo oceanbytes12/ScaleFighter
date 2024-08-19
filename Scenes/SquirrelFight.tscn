@@ -1,8 +1,9 @@
-[gd_scene load_steps=21 format=3 uid="uid://cpw72g2clnklq"]
+[gd_scene load_steps=22 format=3 uid="uid://cpw72g2clnklq"]
 
 [ext_resource type="Script" path="res://Scripts/other/Level_Base.gd" id="1_0stu2"]
-[ext_resource type="Texture2D" uid="uid://06x3cxd605xx" path="res://Visual/Sprites/gmtk_bg_big_street.png" id="2_idtgm"]
+[ext_resource type="Texture2D" uid="uid://dt2t7dakyscjp" path="res://Visual/Sprites/Backgrounds/ParkBattle.png" id="2_5leiq"]
 [ext_resource type="PackedScene" uid="uid://dlh2vlug8qltd" path="res://Scenes/Other/progress_bar.tscn" id="3_6n5ed"]
+[ext_resource type="Texture2D" uid="uid://06x3cxd605xx" path="res://Visual/Sprites/Backgrounds/gmtk_bg_big_street.png" id="3_bfrw1"]
 [ext_resource type="Script" path="res://Scripts/other/ProgressBar.gd" id="4_p0nnr"]
 [ext_resource type="Texture2D" uid="uid://btoqs6agu1b26" path="res://Visual/Sprites/Arrow_Temp.JPG" id="5_rntbf"]
 [ext_resource type="Script" path="res://Scripts/other/FlashingEffect.gd" id="6_712r5"]
@@ -88,8 +89,8 @@ power_unlocked = 1
 next_scene = "res://Scenes/PurpleGuyFight.tscn"
 
 [node name="Background" type="Sprite2D" parent="."]
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("2_idtgm")
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("2_5leiq")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 anchors_preset = 15
@@ -97,7 +98,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_idtgm")
+texture = ExtResource("3_bfrw1")
 expand_mode = 1
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]

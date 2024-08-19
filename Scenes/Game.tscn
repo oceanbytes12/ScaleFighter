@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://Scripts/other/FlashingEffect.gd" id="6_t507m"]
 [ext_resource type="Script" path="res://Scripts/other/ProgressBar.gd" id="6_wptig"]
 [ext_resource type="Shader" path="res://Visual/Shaders/LoaderShader.gdshader" id="7_kvq4m"]
-[ext_resource type="Texture2D" uid="uid://06x3cxd605xx" path="res://Visual/Sprites/gmtk_bg_big_street.png" id="7_q4pwo"]
+[ext_resource type="Texture2D" uid="uid://06x3cxd605xx" path="res://Visual/Sprites/Backgrounds/gmtk_bg_big_street.png" id="7_q4pwo"]
 [ext_resource type="Texture2D" uid="uid://bu5mt783frc2i" path="res://Visual/Sprites/Loader.png" id="8_ylevf"]
 [ext_resource type="PackedScene" uid="uid://bcp0tupxne6ai" path="res://Scenes/Enemies/PurpleEnemy.tscn" id="10_27deo"]
 
