@@ -27,6 +27,7 @@ var invincible = false
 @onready var invincibility_timer := $InvincibilityTimer
 #@onready var hurtbox := $HurtBox/HurtBox
 @export var hurtbox : HurtBox
+@export var particle_gen : PackedScene
 
 signal on_take_damage(damageamount)
 
@@ -34,6 +35,7 @@ var tween
 var isright
 
 var power = 1
+var isPlayerLarge = false # Used to track how large the hit_effects should be
 
 static var mainPlayer : Player
 
@@ -41,7 +43,10 @@ func _ready():
 	mainPlayer = self
 	invincibility_timer.timeout.connect(EndInvincible)
 	hurtbox.take_damage.connect(hit)
-	pass
+	EventBus.on_player_grow.connect(PlayerGrew)
+
+func PlayerGrew():
+	isPlayerLarge = true;
 
 func EndInvincible():
 	#hurtbox.disabled = false
@@ -68,8 +73,16 @@ func _process(_delta: float) -> void:
 func animate(animationname):
 	animator.play(animationname)
 
-func hit(position, damage, knockback):
-	var knockback_velocity = (self.global_position-position).normalized() * knockback
+func hit(hit_position, damage, knockback):
+	# Generate hit effect 
+	var particleNode = particle_gen.instantiate()
+	particleNode.global_position = global_position
+	#if isPlayerLarge:
+		## hit_effects from enemy should be halved in size
+		#particleNode.scale = particleNode.scale*0.5 
+	get_parent().add_child(particleNode)
+
+	var knockback_velocity = (self.global_position-hit_position).normalized() * knockback
 	knockback_velocity.y = min(knockback_velocity.y, -200)
 	velocity = knockback_velocity
 	on_take_damage.emit(damage)

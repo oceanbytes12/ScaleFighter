@@ -1,6 +1,7 @@
-[gd_scene load_steps=33 format=3 uid="uid://cp64myqho0u1u"]
+[gd_scene load_steps=34 format=3 uid="uid://cp64myqho0u1u"]
 
 [ext_resource type="Script" path="res://Scripts/other/StateEnemy.gd" id="1_hwthq"]
+[ext_resource type="PackedScene" uid="uid://dkreawyu7cx8i" path="res://Scenes/Other/ParticleGenerator.tscn" id="2_6w5qy"]
 [ext_resource type="Script" path="res://Scenes/Enemies/HurtBox.gd" id="2_h6lxt"]
 [ext_resource type="Shader" path="res://Visual/Shaders/hitEffect.gdshader" id="3_8isn3"]
 [ext_resource type="Texture2D" uid="uid://bs8aginxbhwpj" path="res://Visual/Sprites/SquirrelFighter-Sheet.png" id="4_1x4i7"]
@@ -210,7 +211,7 @@ radius = 14.3333
 [sub_resource type="CircleShape2D" id="CircleShape2D_57ohj"]
 radius = 5.70575
 
-[node name="Squirrel" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox", "bodyhitbox")]
+[node name="Gorilla" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox", "bodyhitbox")]
 position = Vector2(0.5, 0)
 scale = Vector2(3, 3)
 collision_layer = 2
@@ -218,6 +219,7 @@ collision_mask = 6
 script = ExtResource("1_hwthq")
 hurtbox = NodePath("EnemyHurtBox")
 bodyhitbox = NodePath("Flipped/HitBoxes/EnemyBodyHitBox/EnemyBodyCollider")
+particle_gen = ExtResource("2_6w5qy")
 metadata/_edit_group_ = true
 
 [node name="EnemyHurtBox" type="Area2D" parent="."]

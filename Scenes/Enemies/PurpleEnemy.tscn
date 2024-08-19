@@ -1,6 +1,7 @@
-[gd_scene load_steps=24 format=3 uid="uid://bcp0tupxne6ai"]
+[gd_scene load_steps=25 format=3 uid="uid://bcp0tupxne6ai"]
 
 [ext_resource type="Script" path="res://Scripts/other/StateEnemy.gd" id="1_x625n"]
+[ext_resource type="PackedScene" uid="uid://dkreawyu7cx8i" path="res://Scenes/Other/ParticleGenerator.tscn" id="2_37epy"]
 [ext_resource type="Shader" path="res://Visual/Shaders/hitEffect.gdshader" id="2_nffil"]
 [ext_resource type="Texture2D" uid="uid://m1v10b585sus" path="res://Visual/Sprites/BaseFighter-Sheet.png" id="3_q1t7b"]
 [ext_resource type="Animation" uid="uid://o4rsdts5xnsq" path="res://Visual/Animations/Punch.res" id="4_2msxp"]
@@ -130,6 +131,7 @@ radius = 14.3333
 [node name="PurpleEnemy" type="CharacterBody2D"]
 scale = Vector2(3, 3)
 script = ExtResource("1_x625n")
+particle_gen = ExtResource("2_37epy")
 metadata/_edit_group_ = true
 
 [node name="Flipped" type="Node2D" parent="."]

@@ -11,17 +11,24 @@ class_name StateEnemy extends CharacterBody2D
 @onready var hit_animator := $Flipped/HitAnimationPlayer
 @export var hurtbox : HurtBox
 @export var bodyhitbox : CollisionShape2D
+@export var particle_gen : PackedScene
 
 var TARGET : Player
 var power = 1
 var max_armor = 40
 var current_armor
 var is_on_wall = false
+var isPlayerLarge = false # Used to track how large the hit_effects should be
 
 func _ready():
 	current_armor = max_armor
 	TARGET = Player.mainPlayer
 	hurtbox.take_damage.connect(hit)
+	print("Connecting!")
+	EventBus.on_player_grow.connect(PlayerGrew)
+
+func PlayerGrew():
+	isPlayerLarge = true;
 	
 func SetEnemyBodyDamages(isOn):
 	#bodyhitbox.disabled = !isOn
@@ -45,6 +52,18 @@ func Flip(isFlipped):
 func hit(hit_position, damage, knockback):
 	
 	hit_animator.play("hit")
+	# Generate hit effect 
+	var particleNode = particle_gen.instantiate()
+	particleNode.global_position = global_position
+	if isPlayerLarge:
+		# hit_effects from players should be doubled in size
+		particleNode.scale = particleNode.scale*2
+	get_parent().add_child(particleNode)
+	
+	print("hit")
+	hit_animator.play("hit")
+	EventBus.on_enemy_take_damage.emit(damage)
+	#EventBus.on_damage_at_position.emit(hit_position) # Not in use
 	current_armor-=damage
 	
 	#Inform the game about damage

@@ -1,0 +1,151 @@
+[gd_scene load_steps=12 format=3 uid="uid://dkreawyu7cx8i"]
+
+[ext_resource type="Script" path="res://Scripts/other/ParticleGenerator.gd" id="1_ous8k"]
+[ext_resource type="Texture2D" uid="uid://oyuapsyqfqrk" path="res://Visual/Sprites/HitEffects-Sheet.png" id="2_bjaec"]
+
+[sub_resource type="Animation" id="Animation_w5ote"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_s46hb"]
+resource_name = "hit_effect1"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ParticleSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 29]
+}
+
+[sub_resource type="Animation" id="Animation_qxgw5"]
+resource_name = "hit_effect2"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ParticleSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [6, 7, 8, 9, 10, 11, 29]
+}
+
+[sub_resource type="Animation" id="Animation_1xsqq"]
+resource_name = "hit_effect3"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ParticleSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [12, 13, 14, 15, 16, 17, 29]
+}
+
+[sub_resource type="Animation" id="Animation_6uf37"]
+resource_name = "hit_effect4"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ParticleSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [18, 19, 20, 21, 22, 23, 29]
+}
+
+[sub_resource type="Animation" id="Animation_6rqk4"]
+resource_name = "hit_effect5"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ParticleSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [24, 25, 26, 27, 28, 29]
+}
+
+[sub_resource type="Animation" id="Animation_8eyow"]
+resource_name = "hit_effect6"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ParticleSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [30, 31, 32, 33, 34, 35, 29]
+}
+
+[sub_resource type="Animation" id="Animation_dardd"]
+resource_name = "hit_effect7"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ParticleSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [36, 37, 38, 39, 40, 41, 29]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ifmv3"]
+_data = {
+"RESET": SubResource("Animation_w5ote"),
+"hit_effect1": SubResource("Animation_s46hb"),
+"hit_effect2": SubResource("Animation_qxgw5"),
+"hit_effect3": SubResource("Animation_1xsqq"),
+"hit_effect4": SubResource("Animation_6uf37"),
+"hit_effect5": SubResource("Animation_6rqk4"),
+"hit_effect6": SubResource("Animation_8eyow"),
+"hit_effect7": SubResource("Animation_dardd")
+}
+
+[node name="ParticleGenerator" type="Node2D"]
+script = ExtResource("1_ous8k")
+
+[node name="ParticleSprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_bjaec")
+hframes = 6
+vframes = 7
+frame = 29
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ifmv3")
+}
+speed_scale = 2.0
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 1.5
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

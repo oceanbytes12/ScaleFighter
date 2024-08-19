@@ -5,6 +5,7 @@ signal on_player_grow
 signal on_player_take_damage(amount)
 
 signal on_game_ready
+#signal on_damage_at_position(hit_position) # Not in use
 
 signal on_enemy_critical_damage(amount)
 signal on_enemy_minor_damage(amount)
