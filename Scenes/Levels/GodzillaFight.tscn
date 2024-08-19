@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://tmj8273tqhjq"]
+[gd_scene load_steps=23 format=3 uid="uid://tmj8273tqhjq"]
 
 [ext_resource type="Script" path="res://Scripts/other/Level_Base.gd" id="1_xaqio"]
 [ext_resource type="Texture2D" uid="uid://06x3cxd605xx" path="res://Visual/Sprites/Backgrounds/bg3.png" id="2_ynsbm"]
@@ -11,9 +11,12 @@
 [ext_resource type="PackedScene" uid="uid://cujkhawkt2egg" path="res://Scenes/Player/player.tscn" id="9_sph5s"]
 [ext_resource type="PackedScene" uid="uid://05ukpwn07wnq" path="res://Scenes/Enemies/Squirrel.tscn" id="10_ef312"]
 [ext_resource type="Script" path="res://Scripts/other/PlayerCamera.gd" id="11_f5tk5"]
+[ext_resource type="PackedScene" uid="uid://dojynfwd6nb5h" path="res://Scenes/Other/EnemyTitleAnimator.tscn" id="12_agfln"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rd2u5"]
-bg_color = Color(0.207843, 0.729412, 0.952941, 1)
+bg_color = Color(0.866667, 0.380392, 0.952941, 1)
+
+[sub_resource type="Theme" id="Theme_0ru5m"]
 
 [sub_resource type="Theme" id="Theme_4tts6"]
 
@@ -85,6 +88,7 @@ gameover_text = NodePath("CanvasLayer/GameOverText")
 win_text = NodePath("CanvasLayer/WinText")
 right_wall_collider = NodePath("Walls/RightWall/CollisionShape2D")
 power_unlocked = 2
+title_toshow = 0
 next_scene = "res://Scenes/Levels/SquirrelFight.tscn"
 GrowBar = NodePath("CanvasLayer/GrowBar")
 BossBar = NodePath("CanvasLayer/Boss_HPBar")
@@ -121,18 +125,21 @@ step = 1.0
 value = 50.0
 show_percentage = false
 script = ExtResource("4_jow8v")
-maxHP = 300
 isHealedOnHit = true
 
 [node name="GrowText" type="RichTextLabel" parent="CanvasLayer"]
 visible = false
 offset_left = 11.0
-offset_top = 37.0
+offset_top = 45.0
 offset_right = 315.0
-offset_bottom = 60.0
+offset_bottom = 83.0
 size_flags_horizontal = 4
-theme = SubResource("Theme_4tts6")
-theme_override_font_sizes/normal_font_size = 12
+theme = SubResource("Theme_0ru5m")
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/normal_font_size = 20
 bbcode_enabled = true
 text = "[center]G to [rainbow freq=1.0 sat=0.8 val=0.8][wave amp=50.0 freq=5.0 connected=1][pulse freq=1.0 color=#ffffff40 ease=-2.0]GROW"
 
@@ -156,11 +163,13 @@ offset_right = 312.0
 offset_bottom = 127.0
 size_flags_horizontal = 4
 theme = SubResource("Theme_4tts6")
-theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
 theme_override_font_sizes/normal_font_size = 20
 bbcode_enabled = true
-text = "[center]New Power:
-Press 'S' in air to slam![/center]"
+text = "[center]YOU WON![/center]"
 
 [node name="Arrow" type="Sprite2D" parent="CanvasLayer"]
 visible = false
@@ -236,6 +245,8 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExitLevelTrigger"]
 position = Vector2(214, -18)
 shape = SubResource("RectangleShape2D_se114")
+
+[node name="TitleAnimator" parent="." instance=ExtResource("12_agfln")]
 
 [connection signal="BarEmpty" from="CanvasLayer/Player_HPBar" to="." method="_on_player_hp_bar_empty"]
 [connection signal="BarEmpty" from="CanvasLayer/Boss_HPBar" to="." method="_on_boss_hp_bar_empty"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dqs5up6xt3yr2"]
+[gd_scene load_steps=23 format=3 uid="uid://dqs5up6xt3yr2"]
 
 [ext_resource type="Script" path="res://Scripts/other/Level_Base.gd" id="1_ud67y"]
 [ext_resource type="Texture2D" uid="uid://daon7f1gf8ss2" path="res://Visual/Sprites/Backgrounds/bg2.png" id="2_biu23"]
@@ -14,7 +14,9 @@
 [ext_resource type="PackedScene" uid="uid://dojynfwd6nb5h" path="res://Scenes/Other/EnemyTitleAnimator.tscn" id="12_2w3it"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rd2u5"]
-bg_color = Color(0.207843, 0.729412, 0.952941, 1)
+bg_color = Color(0.865675, 0.380193, 0.951176, 1)
+
+[sub_resource type="Theme" id="Theme_7k74m"]
 
 [sub_resource type="Theme" id="Theme_4tts6"]
 
@@ -129,12 +131,16 @@ isHealedOnHit = true
 [node name="GrowText" type="RichTextLabel" parent="CanvasLayer"]
 visible = false
 offset_left = 11.0
-offset_top = 37.0
+offset_top = 45.0
 offset_right = 315.0
-offset_bottom = 60.0
+offset_bottom = 83.0
 size_flags_horizontal = 4
-theme = SubResource("Theme_4tts6")
-theme_override_font_sizes/normal_font_size = 12
+theme = SubResource("Theme_7k74m")
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/normal_font_size = 20
 bbcode_enabled = true
 text = "[center]G to [rainbow freq=1.0 sat=0.8 val=0.8][wave amp=50.0 freq=5.0 connected=1][pulse freq=1.0 color=#ffffff40 ease=-2.0]GROW"
 
@@ -158,7 +164,10 @@ offset_right = 312.0
 offset_bottom = 127.0
 size_flags_horizontal = 4
 theme = SubResource("Theme_4tts6")
-theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
 theme_override_font_sizes/normal_font_size = 20
 bbcode_enabled = true
 text = "[center]New Power:
