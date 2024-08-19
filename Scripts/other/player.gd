@@ -74,6 +74,7 @@ func hit(position, damage, knockback):
 	on_take_damage.emit(damage)
 	fsm.state.finished.emit("Hurt")
 	EventBus.on_player_take_damage.emit(damage)
+	$Gecko_cry.play()
 	StartInvincible()
 
 func grow():

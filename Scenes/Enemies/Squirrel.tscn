@@ -1,13 +1,17 @@
-[gd_scene load_steps=31 format=3 uid="uid://05ukpwn07wnq"]
+[gd_scene load_steps=36 format=3 uid="uid://05ukpwn07wnq"]
 
 [ext_resource type="Script" path="res://Scripts/other/StateEnemy.gd" id="1_buy47"]
 [ext_resource type="Animation" uid="uid://o4rsdts5xnsq" path="res://Visual/Animations/Punch.res" id="2_p2nk6"]
 [ext_resource type="Script" path="res://Scenes/Enemies/HurtBox.gd" id="2_pu8xq"]
 [ext_resource type="Shader" path="res://Visual/Shaders/hitEffect.gdshader" id="2_rit0p"]
 [ext_resource type="Texture2D" uid="uid://bs8aginxbhwpj" path="res://Visual/Sprites/SquirrelFighter-Sheet.png" id="3_22wam"]
+[ext_resource type="AudioStream" uid="uid://bgcgi3yy7k685" path="res://Sound/Sfx/Squirrel/Squirrel_cry_wet01_v1.wav" id="3_oqkpn"]
+[ext_resource type="AudioStream" uid="uid://d2sh0lmu1kf8q" path="res://Sound/Sfx/Squirrel/Squirrel_cry_wet02_v1.wav" id="4_fen6k"]
 [ext_resource type="Script" path="res://Scripts/other/HitBox.gd" id="5_jjw23"]
 [ext_resource type="Script" path="res://Scripts/Enemy_States/EnemyIdle.gd" id="5_rva3f"]
+[ext_resource type="AudioStream" uid="uid://bal734bcpwvep" path="res://Sound/Sfx/Squirrel/Squirrel_cry_wet03_v1.wav" id="5_wp3hs"]
 [ext_resource type="Script" path="res://Scripts/State/state_machine.gd" id="6_56f0l"]
+[ext_resource type="AudioStream" uid="uid://bkpwqh2mir5i7" path="res://Sound/Sfx/Squirrel/Squirrel_cry_wet04_v1.wav" id="6_56ur3"]
 [ext_resource type="Script" path="res://Scripts/Enemy_States/EnemyChase.gd" id="6_oogn5"]
 [ext_resource type="Script" path="res://Scripts/Enemy_States/EnemyPunch.gd" id="7_av5gr"]
 [ext_resource type="Script" path="res://Scripts/Enemy_States/EnemyJump.gd" id="8_aldih"]
@@ -17,6 +21,17 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ufdj5"]
 size = Vector2(8.33333, 9.00035)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_6umqw"]
+streams_count = 4
+stream_0/stream = ExtResource("3_oqkpn")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("4_fen6k")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("5_wp3hs")
+stream_2/weight = 1.0
+stream_3/stream = ExtResource("6_56ur3")
+stream_3/weight = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_je0ey"]
 resource_local_to_scene = true
@@ -218,15 +233,19 @@ hurtbox = NodePath("EnemyHurtBox")
 bodyhitbox = NodePath("Flipped/HitBoxes/EnemyBodyHitBox/EnemyBodyCollider")
 metadata/_edit_group_ = true
 
-[node name="EnemyHurtBox" type="Area2D" parent="."]
+[node name="EnemyHurtBox" type="Area2D" parent="." node_paths=PackedStringArray("sound")]
 visible = false
 collision_layer = 8
 collision_mask = 0
 script = ExtResource("2_pu8xq")
+sound = NodePath("Squirrel_cry")
 
 [node name="HurtBox" type="CollisionShape2D" parent="EnemyHurtBox"]
 position = Vector2(-3.17891e-07, 2.167)
 shape = SubResource("RectangleShape2D_ufdj5")
+
+[node name="Squirrel_cry" type="AudioStreamPlayer2D" parent="EnemyHurtBox"]
+stream = SubResource("AudioStreamRandomizer_6umqw")
 
 [node name="EnemyCollision" type="CollisionShape2D" parent="."]
 position = Vector2(-3.17891e-07, 2.167)
