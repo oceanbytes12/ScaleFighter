@@ -1,4 +1,4 @@
-class_name TitleAnimator extends Node2D
+class_name EnemyTitleAnimator extends Node2D
 
 @export var wordAnimTime = 1.5
 @export var countdownAnimTime = .7
