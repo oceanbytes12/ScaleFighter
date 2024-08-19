@@ -122,7 +122,7 @@ step = 1.0
 value = 50.0
 show_percentage = false
 script = ExtResource("4_2ii5w")
-maxHP = 50
+maxHP = 25
 isHealedOnHit = true
 
 [node name="GrowText" type="RichTextLabel" parent="CanvasLayer"]

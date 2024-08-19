@@ -11,7 +11,6 @@
 [ext_resource type="Script" path="res://Scripts/Enemy_States/EnemyIdle.gd" id="5_rva3f"]
 [ext_resource type="AudioStream" uid="uid://bal734bcpwvep" path="res://Sound/Sfx/Squirrel/Squirrel_cry_wet03_v1.wav" id="5_wp3hs"]
 [ext_resource type="Script" path="res://Scripts/State/state_machine.gd" id="6_56f0l"]
-[ext_resource type="AudioStream" uid="uid://bkpwqh2mir5i7" path="res://Sound/Sfx/Squirrel/Squirrel_cry_wet04_v1.wav" id="6_56ur3"]
 [ext_resource type="Script" path="res://Scripts/Enemy_States/EnemyChase.gd" id="6_oogn5"]
 [ext_resource type="Script" path="res://Scripts/Enemy_States/EnemyPunch.gd" id="7_av5gr"]
 [ext_resource type="Script" path="res://Scripts/Enemy_States/EnemyJump.gd" id="8_aldih"]
@@ -21,18 +20,16 @@
 [ext_resource type="Script" path="res://Scenes/Enemies/EnemyDefeated.gd" id="19_n2rnl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ufdj5"]
-size = Vector2(8.33333, 9.00035)
+size = Vector2(8.33333, 12.3332)
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_6umqw"]
-streams_count = 4
+streams_count = 3
 stream_0/stream = ExtResource("3_oqkpn")
 stream_0/weight = 1.0
 stream_1/stream = ExtResource("4_fen6k")
 stream_1/weight = 1.0
 stream_2/stream = ExtResource("5_wp3hs")
 stream_2/weight = 1.0
-stream_3/stream = ExtResource("6_56ur3")
-stream_3/weight = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_je0ey"]
 resource_local_to_scene = true
@@ -224,6 +221,10 @@ radius = 14.3333
 [sub_resource type="CircleShape2D" id="CircleShape2D_57ohj"]
 radius = 5.70575
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_568bd"]
+radius = 3.83333
+height = 12.9998
+
 [node name="Squirrel" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox", "bodyhitbox")]
 position = Vector2(0.5, 0)
 scale = Vector2(3, 3)
@@ -248,10 +249,6 @@ shape = SubResource("RectangleShape2D_ufdj5")
 [node name="Squirrel_cry" type="AudioStreamPlayer2D" parent="EnemyHurtBox"]
 stream = SubResource("AudioStreamRandomizer_6umqw")
 
-[node name="EnemyCollision" type="CollisionShape2D" parent="."]
-position = Vector2(-3.17891e-07, 2.167)
-shape = SubResource("RectangleShape2D_ufdj5")
-
 [node name="Flipped" type="Node2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="Flipped"]
@@ -275,6 +272,7 @@ libraries = {
 }
 
 [node name="HitBoxes" type="Node2D" parent="Flipped"]
+visible = false
 
 [node name="PunchHitBox" type="Area2D" parent="Flipped/HitBoxes"]
 visible = false
@@ -361,6 +359,10 @@ offset_right = 8.0
 offset_bottom = -7.0
 size_flags_stretch_ratio = 0.5
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+
+[node name="EnemyCollision" type="CollisionShape2D" parent="."]
+position = Vector2(-3.17891e-07, 2.167)
+shape = SubResource("CapsuleShape2D_568bd")
 
 [connection signal="area_entered" from="Flipped/HitBoxes/PunchHitBox" to="Flipped/HitBoxes/PunchHitBox" method="_on_area_entered"]
 [connection signal="area_entered" from="Flipped/HitBoxes/EnemyBodyHitBox" to="Flipped/HitBoxes/EnemyBodyHitBox" method="_on_area_entered"]
