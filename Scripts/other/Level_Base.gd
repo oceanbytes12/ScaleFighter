@@ -26,6 +26,7 @@ func _ready():
 	EventBus.on_enemy_critical_damage.connect(HandleEnemyCriticalDamage)
 	
 	if(animator):
+		print("Playing FadeIn")
 		animator.play("FadeIn")
 	await get_tree().create_timer(1).timeout
 	
@@ -77,7 +78,12 @@ func _on_player_hp_bar_empty():
 	# Game Over text appears on screen
 	#gameover_text.visible = true
 	#get_tree().paused = true
-	get_tree().call_deferred(&"change_scene_to_packed", preload(title_scene))
+	if(animator):
+		print("has animator")
+		animator.play("FadeIn")
+	await get_tree().create_timer(1).timeout
+	get_tree().call_deferred(&"change_scene_to_file", title_scene)
+
 	
 	
 
@@ -110,7 +116,8 @@ func _on_exit_level_trigger_body_entered(body):
 
 func load_scene():
 	can_grow = false
-	#get_tree().call_deferred("reload_current_scene")
-	#get_tree().call_deferred(&"change_scene_to_packed", preload(GAME_SCENE))
-	#get_tree().change_scene_to_file(next_scene)
+	if(animator):
+		print("has animator")
+		animator.play("FadeOut")
+	await get_tree().create_timer(1).timeout
 	get_tree().call_deferred(&"change_scene_to_file", next_scene)
