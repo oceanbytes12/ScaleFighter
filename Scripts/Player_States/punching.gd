@@ -13,7 +13,7 @@ func end():
 	attacking = false
 
 func physics_update(_delta: float) -> void:
-	#player.velocity.x = 0
+	player.velocity.x = 0
 	player.move_and_slide()
 	
 	if attacking:

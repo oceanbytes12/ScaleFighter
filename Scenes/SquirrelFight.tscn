@@ -73,17 +73,19 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ulv0b"]
-size = Vector2(20, 20.2)
+size = Vector2(20, 19.4)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_se114"]
 size = Vector2(20, 162)
 
-[node name="Game" type="Node2D" node_paths=PackedStringArray("grow_text", "gameover_text", "win_text", "right_wall_collider")]
+[node name="Fight" type="Node2D" node_paths=PackedStringArray("grow_text", "gameover_text", "win_text", "right_wall_collider", "GrowBar", "BossBar")]
 script = ExtResource("1_0stu2")
 grow_text = NodePath("CanvasLayer/GrowText")
 gameover_text = NodePath("CanvasLayer/GameOverText")
 win_text = NodePath("CanvasLayer/WinText")
 right_wall_collider = NodePath("Walls/RightWall/CollisionShape2D")
+GrowBar = NodePath("CanvasLayer/GrowBar")
+BossBar = NodePath("CanvasLayer/Boss_HPBar")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.3, 0.3)
@@ -197,15 +199,19 @@ libraries = {
 [node name="BottomWall" type="StaticBody2D" parent="Walls"]
 position = Vector2(-1, 167)
 scale = Vector2(2, 2)
+collision_layer = 4
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/BottomWall"]
-position = Vector2(0, -0.5)
+position = Vector2(0, 1.5)
 scale = Vector2(10, 5)
 shape = SubResource("RectangleShape2D_ulv0b")
 
 [node name="RightWall" type="StaticBody2D" parent="Walls"]
 position = Vector2(201, -97)
 scale = Vector2(0.240002, 8.92)
+collision_layer = 4
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/RightWall"]
 scale = Vector2(10, 5)
@@ -214,6 +220,8 @@ shape = SubResource("RectangleShape2D_ulv0b")
 [node name="LeftWall" type="StaticBody2D" parent="Walls"]
 position = Vector2(-201, -94)
 scale = Vector2(0.240002, 8.92)
+collision_layer = 4
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/LeftWall"]
 scale = Vector2(10, 5)
@@ -230,6 +238,8 @@ zoom = Vector2(0.9, 0.9)
 script = ExtResource("11_aigyi")
 
 [node name="ExitLevelTrigger" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExitLevelTrigger"]
 position = Vector2(214, -18)
@@ -241,6 +251,4 @@ shape = SubResource("RectangleShape2D_se114")
 [connection signal="BarFull" from="CanvasLayer/GrowBar" to="." method="_on_grow_bar_full"]
 [connection signal="timeout" from="CanvasLayer/Arrow/Timer" to="CanvasLayer/Arrow" method="toggle_visibility"]
 [connection signal="on_take_damage" from="Player" to="CanvasLayer/Player_HPBar" method="_on_damage_received"]
-[connection signal="take_damage" from="Squirrel" to="CanvasLayer/Boss_HPBar" method="_on_damage_received"]
-[connection signal="take_damage" from="Squirrel" to="CanvasLayer/GrowBar" method="_on_damage_received"]
 [connection signal="body_entered" from="ExitLevelTrigger" to="." method="_on_exit_level_trigger_body_entered"]

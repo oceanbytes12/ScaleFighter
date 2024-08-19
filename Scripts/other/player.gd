@@ -12,6 +12,7 @@ class_name Player extends CharacterBody2D
 @export var glide_jump_impulse := 800.0
 var grow_amount = 1
 var grow_time = 0.5
+var invincible = false
 @onready var fsm := $StateMachine
 @onready var label := $Label
 @onready var animator := $Flipped/AnimationPlayer
@@ -19,6 +20,10 @@ var grow_time = 0.5
 @onready var slam_hitbox := $Flipped/SlamHitbox
 @onready var Flipped := $Flipped
 @onready var Feet := $Feet
+@onready var invincibility_timer := $InvincibilityTimer
+#@onready var hurtbox := $HurtBox/HurtBox
+@export var hurtbox : HurtBox
+
 signal on_take_damage(damageamount)
 
 var tween
@@ -30,8 +35,19 @@ static var mainPlayer : Player
 
 func _ready():
 	mainPlayer = self
+	invincibility_timer.timeout.connect(EndInvincible)
+	hurtbox.take_damage.connect(hit)
 	pass
 
+func EndInvincible():
+	#hurtbox.disabled = false
+	invincible = false
+
+func StartInvincible():
+	invincible = true
+	#hurtbox.disabled = true
+	invincibility_timer.start(1)
+	
 func _process(_delta: float) -> void:
 	label.text = fsm.state.name
 	if Input.is_action_just_pressed("Grow") and LevelBase.can_grow:
@@ -47,13 +63,14 @@ func _process(_delta: float) -> void:
 func animate(animationname):
 	animator.play(animationname)
 
-func take_hit(position, damage, knockback):
+func hit(position, damage, knockback):
 	var knockback_velocity = (self.global_position-position).normalized() * knockback
 	knockback_velocity.y = min(knockback_velocity.y, -200)
 	velocity = knockback_velocity
 	on_take_damage.emit(damage)
 	fsm.state.finished.emit("Hurt")
 	EventBus.on_player_take_damage.emit(damage)
+	StartInvincible()
 
 func grow():
 	if(tween and tween.is_running()):

@@ -60,6 +60,13 @@ Grow={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_2="Character"
+2d_physics/layer_3="Ground"
+2d_physics/layer_4="Enemy_HurtBox"
+2d_physics/layer_5="PlayerHurtbox"
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0

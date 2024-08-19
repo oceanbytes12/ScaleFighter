@@ -6,9 +6,8 @@ const IDLE = "EnemyIdle"
 const CHASE = "EnemyChase"
 const PUNCH = "EnemyPunch"
 const JUMP = "EnemyJump"
-
+const FALL = "EnemyFall"
 var player: StateEnemy
-
 
 func _ready() -> void:
 	await owner.ready

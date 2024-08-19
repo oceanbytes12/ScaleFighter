@@ -1,4 +1,4 @@
-extends ProgressBar
+class_name GameBar extends ProgressBar
 
 signal BarFull
 signal BarEmpty

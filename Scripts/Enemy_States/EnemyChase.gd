@@ -18,24 +18,24 @@ func physics_update(delta: float) -> void:
 	var target_vector = Vector2.ZERO
 	if(TARGET):
 		target_vector = TARGET.global_position - owner.global_position
+	
 	if target_vector.x < 0:
-		owner.Flipped.scale.x = -1
+		owner.Flip(true)
 	elif(target_vector.x > 0):
-		owner.Flipped.scale.x = 1
+		owner.Flip(false)
+		
 	if(TARGET):
 		target_vector = TARGET.global_position - owner.global_position
 	else:
 		print("NO TARGET")
 	target_vector = target_vector.normalized()
 	target_vector.y = 0
+	
 	if (not inrange):
 		owner.velocity = target_vector * owner.SPEED
 	else:
-		finished.emit(JUMP)
-		#if CanJump:
-			#finished.emit(JUMP)
-		#else: # Temp, later make a ChooseAttack func
-			#finished.emit(PUNCH)
+		finished.emit(PUNCH)
+		
 	if not owner.is_on_floor():
 		owner.velocity.y += owner.GRAVITY * delta
 

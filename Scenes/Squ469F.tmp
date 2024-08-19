@@ -1,16 +1,16 @@
-[gd_scene load_steps=21 format=3 uid="uid://b6e2daejvjv0y"]
+[gd_scene load_steps=21 format=3 uid="uid://cpw72g2clnklq"]
 
-[ext_resource type="Script" path="res://Scripts/other/Level_Base.gd" id="1_c4rpu"]
-[ext_resource type="PackedScene" uid="uid://cujkhawkt2egg" path="res://Scenes/Player/player.tscn" id="3_j6x1p"]
-[ext_resource type="Script" path="res://Scripts/other/PlayerCamera.gd" id="4_shjsq"]
-[ext_resource type="PackedScene" uid="uid://dlh2vlug8qltd" path="res://Scenes/Other/progress_bar.tscn" id="5_p8b2s"]
-[ext_resource type="Texture2D" uid="uid://btoqs6agu1b26" path="res://Visual/Sprites/Arrow_Temp.JPG" id="5_q1e2h"]
-[ext_resource type="Script" path="res://Scripts/other/FlashingEffect.gd" id="6_t507m"]
-[ext_resource type="Script" path="res://Scripts/other/ProgressBar.gd" id="6_wptig"]
-[ext_resource type="Shader" path="res://Visual/Shaders/LoaderShader.gdshader" id="7_kvq4m"]
-[ext_resource type="Texture2D" uid="uid://06x3cxd605xx" path="res://Visual/Sprites/gmtk_bg_big_street.png" id="7_q4pwo"]
-[ext_resource type="Texture2D" uid="uid://bu5mt783frc2i" path="res://Visual/Sprites/Loader.png" id="8_ylevf"]
-[ext_resource type="PackedScene" uid="uid://bcp0tupxne6ai" path="res://Scenes/Enemies/PurpleEnemy.tscn" id="10_27deo"]
+[ext_resource type="Script" path="res://Scripts/other/Level_Base.gd" id="1_0stu2"]
+[ext_resource type="Texture2D" uid="uid://06x3cxd605xx" path="res://Visual/Sprites/gmtk_bg_big_street.png" id="2_idtgm"]
+[ext_resource type="PackedScene" uid="uid://dlh2vlug8qltd" path="res://Scenes/Other/progress_bar.tscn" id="3_6n5ed"]
+[ext_resource type="Script" path="res://Scripts/other/ProgressBar.gd" id="4_p0nnr"]
+[ext_resource type="Texture2D" uid="uid://btoqs6agu1b26" path="res://Visual/Sprites/Arrow_Temp.JPG" id="5_rntbf"]
+[ext_resource type="Script" path="res://Scripts/other/FlashingEffect.gd" id="6_712r5"]
+[ext_resource type="Shader" path="res://Visual/Shaders/LoaderShader.gdshader" id="7_yvw1f"]
+[ext_resource type="Texture2D" uid="uid://bu5mt783frc2i" path="res://Visual/Sprites/Loader.png" id="8_nx0bm"]
+[ext_resource type="PackedScene" uid="uid://cujkhawkt2egg" path="res://Scenes/Player/player.tscn" id="9_q8jt5"]
+[ext_resource type="PackedScene" uid="uid://05ukpwn07wnq" path="res://Scenes/Enemies/Squirrel.tscn" id="10_rbjsn"]
+[ext_resource type="Script" path="res://Scripts/other/PlayerCamera.gd" id="11_aigyi"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rd2u5"]
 bg_color = Color(0.207843, 0.729412, 0.952941, 1)
@@ -19,9 +19,9 @@ bg_color = Color(0.207843, 0.729412, 0.952941, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_okhwt"]
 resource_local_to_scene = true
-shader = ExtResource("7_kvq4m")
+shader = ExtResource("7_yvw1f")
 shader_parameter/scale = 1.0
-shader_parameter/mask = ExtResource("8_ylevf")
+shader_parameter/mask = ExtResource("8_nx0bm")
 
 [sub_resource type="Animation" id="Animation_6vobu"]
 resource_name = "FadeIn"
@@ -78,8 +78,8 @@ size = Vector2(20, 20.2)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_se114"]
 size = Vector2(20, 162)
 
-[node name="Game" type="Node2D" node_paths=PackedStringArray("grow_text", "gameover_text", "win_text", "right_wall_collider")]
-script = ExtResource("1_c4rpu")
+[node name="Game2" type="Node2D" node_paths=PackedStringArray("grow_text", "gameover_text", "win_text", "right_wall_collider")]
+script = ExtResource("1_0stu2")
 grow_text = NodePath("CanvasLayer/GrowText")
 gameover_text = NodePath("CanvasLayer/GameOverText")
 win_text = NodePath("CanvasLayer/WinText")
@@ -87,7 +87,7 @@ right_wall_collider = NodePath("Walls/RightWall/CollisionShape2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.3, 0.3)
-texture = ExtResource("7_q4pwo")
+texture = ExtResource("2_idtgm")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 anchors_preset = 15
@@ -95,18 +95,18 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("7_q4pwo")
+texture = ExtResource("2_idtgm")
 expand_mode = 1
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Player_HPBar" parent="CanvasLayer" instance=ExtResource("5_p8b2s")]
+[node name="Player_HPBar" parent="CanvasLayer" instance=ExtResource("3_6n5ed")]
 offset_left = 10.0
 offset_top = 10.0
 offset_right = 150.0
 offset_bottom = 20.0
 
-[node name="Boss_HPBar" parent="CanvasLayer" instance=ExtResource("5_p8b2s")]
+[node name="Boss_HPBar" parent="CanvasLayer" instance=ExtResource("3_6n5ed")]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -126,7 +126,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_rd2u5")
 step = 1.0
 value = 50.0
 show_percentage = false
-script = ExtResource("6_wptig")
+script = ExtResource("4_p0nnr")
 maxHP = 50
 isHealedOnHit = true
 
@@ -172,8 +172,8 @@ Press 'A' to Jump[/center]"
 visible = false
 position = Vector2(280, 66)
 scale = Vector2(0.113445, 0.107143)
-texture = ExtResource("5_q1e2h")
-script = ExtResource("6_t507m")
+texture = ExtResource("5_rntbf")
+script = ExtResource("6_712r5")
 
 [node name="Timer" type="Timer" parent="CanvasLayer/Arrow"]
 wait_time = 0.5
@@ -197,6 +197,8 @@ libraries = {
 [node name="BottomWall" type="StaticBody2D" parent="Walls"]
 position = Vector2(-1, 167)
 scale = Vector2(2, 2)
+collision_layer = 4
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/BottomWall"]
 position = Vector2(0, -0.5)
@@ -206,6 +208,8 @@ shape = SubResource("RectangleShape2D_ulv0b")
 [node name="RightWall" type="StaticBody2D" parent="Walls"]
 position = Vector2(201, -97)
 scale = Vector2(0.240002, 8.92)
+collision_layer = 4
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/RightWall"]
 scale = Vector2(10, 5)
@@ -214,24 +218,26 @@ shape = SubResource("RectangleShape2D_ulv0b")
 [node name="LeftWall" type="StaticBody2D" parent="Walls"]
 position = Vector2(-201, -94)
 scale = Vector2(0.240002, 8.92)
+collision_layer = 4
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/LeftWall"]
 scale = Vector2(10, 5)
 shape = SubResource("RectangleShape2D_ulv0b")
 
-[node name="Player" parent="." instance=ExtResource("3_j6x1p")]
+[node name="Player" parent="." instance=ExtResource("9_q8jt5")]
 position = Vector2(-100, 0)
 jump_impulse = 600.0
 
-[node name="State_Enemy" parent="." instance=ExtResource("10_27deo")]
-position = Vector2(100, 0)
-SPEED = 100
+[node name="Squirrel" parent="." instance=ExtResource("10_rbjsn")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.9, 0.9)
-script = ExtResource("4_shjsq")
+script = ExtResource("11_aigyi")
 
 [node name="ExitLevelTrigger" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExitLevelTrigger"]
 position = Vector2(214, -18)
@@ -243,6 +249,6 @@ shape = SubResource("RectangleShape2D_se114")
 [connection signal="BarFull" from="CanvasLayer/GrowBar" to="." method="_on_grow_bar_full"]
 [connection signal="timeout" from="CanvasLayer/Arrow/Timer" to="CanvasLayer/Arrow" method="toggle_visibility"]
 [connection signal="on_take_damage" from="Player" to="CanvasLayer/Player_HPBar" method="_on_damage_received"]
-[connection signal="take_damage" from="State_Enemy" to="CanvasLayer/Boss_HPBar" method="_on_damage_received"]
-[connection signal="take_damage" from="State_Enemy" to="CanvasLayer/GrowBar" method="_on_damage_received"]
+[connection signal="take_damage" from="Squirrel" to="CanvasLayer/Boss_HPBar" method="_on_damage_received"]
+[connection signal="take_damage" from="Squirrel" to="CanvasLayer/GrowBar" method="_on_damage_received"]
 [connection signal="body_entered" from="ExitLevelTrigger" to="." method="_on_exit_level_trigger_body_entered"]

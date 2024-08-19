@@ -1,57 +1,56 @@
 extends EnemyState
 
 var TARGET : CharacterBody2D
-const JUMP_VELOCITY = -400.0
-var SPEED = 100.0
+const JUMP_Y_SPEED = -400.0
+var JUMP_X_SPEED = 120
+var max_velocity = 200
 var gravity = 1000
-
-var inrange = false
 var isJumping = false
+var hasReversed = false
 
 func enter(previous_state_path: String, data := {}) -> void:
 	print("Entered JUMP state")
-	owner.animate("Idle") # Change to Jump
+	owner.animate("Jump") # Change to Jump
 	FindTarget()
 	
+	isJumping = false
+	hasReversed = false
+	#Jump towards target
+	var target_vector = TARGET.global_position - owner.global_position
+	#Jump in direction of player a set amount
+	if(target_vector.x > 0):
+		owner.Flip(false)
+		owner.velocity.x = JUMP_X_SPEED
+		owner.velocity.y = JUMP_Y_SPEED
+	else:
+		owner.Flip(true)
+		owner.velocity.x = -JUMP_X_SPEED
+		owner.velocity.y = JUMP_Y_SPEED
+
 func FindTarget():
 	TARGET = Player.mainPlayer
 
 func physics_update(delta: float) -> void:
-
-	var target_vector = Vector2.ZERO
+	if(!TARGET):
+		finished.emit(IDLE)
+		return
 	
-	if(TARGET):
-		if not isJumping:
-			#Jump towards target
-			target_vector = TARGET.global_position - owner.global_position
-			target_vector = target_vector.normalized() * SPEED 
-			owner.velocity.y = JUMP_VELOCITY
-			owner.velocity.x = target_vector.x
-			isJumping = true
-	else:
-		print("NO TARGET")
+	if owner.is_on_wall and not hasReversed:
+		print("Reversing!")
+		owner.velocity.x = -owner.velocity.x  
+		hasReversed = true
+		if(owner.velocity.x > 0):
+			owner.Flip(false)
+		else:
+			owner.Flip(true)
 		
-	if isJumping:
-		# Check if we are on top of the player. Stop moving in x dir if yes
-		if (int)(TARGET.global_position.x - owner.global_position.x) == 0:
-			owner.velocity.x = 0
-			
-	# Add the gravity.
+	#Go down if in air.
 	if not owner.is_on_floor():
 		owner.velocity.y += gravity * delta
+		owner.velocity.y = min(max_velocity, owner.velocity.y)
 		
-	if owner.is_on_floor():
-		print("Returning to CHASE state")
-		isJumping = false
-		finished.emit(CHASE)
-		
+	#If go down, fall
+	if(owner.velocity.y > 3):
+		finished.emit(FALL)
+	
 	owner.move_and_slide()
-
-
-func _on_attack_range_body_entered(body):
-	if body == TARGET:
-		inrange = true
-
-func _on_attack_range_body_exited(body):
-	if body == TARGET:
-		inrange = false

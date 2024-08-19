@@ -7,6 +7,9 @@ class_name LevelBase extends Node2D
 @onready var animator := $CanvasLayer/ColorRect/AnimationPlayer
 @export var right_wall_collider : CollisionShape2D
 
+@export var GrowBar : GameBar
+@export var BossBar : GameBar
+
 static var can_grow = false
 
 
@@ -24,12 +27,16 @@ func TurnOffUI():
 	grow_text.visible = false
 
 func HandleTakeDamage(amount):
+	GrowBar._on_damage_received(amount)
+	BossBar._on_damage_received(amount)
 	if(amount > 10):
 		var duration = 0.4
 		var timeScale = 0.1
 		Engine.time_scale = timeScale
 		await get_tree().create_timer(duration*timeScale).timeout
 		Engine.time_scale = 1
+	
+	
 	
 func _on_player_hp_bar_empty():
 	# Game Over text appears on screen
@@ -52,7 +59,7 @@ func _on_boss_hp_bar_empty():
 
 
 
-func _on_exit_level_trigger_body_entered(body):
+func _on_exit_level_trigger_body_entered(body):  
 	if body is Player:
 		# Load next level
 		#Show temp text so we know it's not frozen?

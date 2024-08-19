@@ -1,9 +1,13 @@
 extends EnemyState
 
-
+func exit() -> void:
+	owner.SetEnemyBodyDamages(true)
+	
 func enter(previous_state_path: String, data := {}) -> void:
+	owner.SetEnemyBodyDamages(false)
+	
 	owner.animate("Stun")
-	await get_tree().create_timer(5).timeout
+	await get_tree().create_timer(3).timeout
 	finished.emit(IDLE)
 
 

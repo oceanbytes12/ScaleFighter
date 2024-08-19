@@ -2,14 +2,21 @@ extends Area2D
 
 @export var damage = 1
 @export var knockback = 1
-@onready var collision := $CollisionShape2D
+@export var startDisabled = true
+@export var disableAfterHit = true
+
+var collision : CollisionShape2D
 
 func _ready():
-	collision.disabled = true
-	
-func _on_body_entered(body):
+	collision = get_child(0)
+	if(startDisabled):
+		collision.disabled = true
+
+func _on_area_entered(area):
 	# Check if hitting self or friend
-	if body != owner:
-		if body.has_method("take_hit"):
-			body.take_hit(global_position, damage * owner.power, knockback*owner.power)
-			collision.call_deferred("set_disabled", true)
+	print(name," is hitting:", area.name)
+	if area.owner != owner:
+		if area.has_method("take_hit"):
+			area.take_hit(global_position, damage * owner.power, knockback*owner.power)
+			if(disableAfterHit):
+				collision.call_deferred("set_disabled", true)
