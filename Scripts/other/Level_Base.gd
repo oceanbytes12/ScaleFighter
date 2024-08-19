@@ -4,10 +4,12 @@ class_name LevelBase extends Node2D
 @export var win_text : RichTextLabel
 @export var right_wall_collider : CollisionShape2D
 @export_enum("None", "Jump", "Slam") var power_unlocked
+@export_enum("Squirrel", "Kong", "Godzilla") var title_toshow
 @export var next_scene = "res://Scenes/SquirrelFight.tscn"
 const title_scene = "res://Scenes/Title.tscn"
 
 @onready var animator := $CanvasLayer/ColorRect/AnimationPlayer
+@onready var title_animator := $TitleAnimator
 @export var GrowBar : GameBar
 @export var BossBar : GameBar
 
@@ -30,10 +32,25 @@ func _ready():
 		animator.play("FadeIn")
 	await get_tree().create_timer(1).timeout
 	
+	ShowTitleAnim()
+	
 	EventBus.on_game_ready.emit()
 
 func TurnOffUI():
 	grow_text.visible = false
+	
+func ShowTitleAnim():
+	# Need to pass strings to title_animator
+	match title_toshow:
+		0: 
+			title_animator.DisplayEnemyTitle("Squirrel")
+		1:
+			title_animator.DisplayEnemyTitle("Kong")
+		2:
+			title_animator.DisplayEnemyTitle("Godzilla")
+	get_tree().paused = true
+	await get_tree().create_timer(6.5).timeout # Change this value to match with title_animator
+	get_tree().paused = false
 
 func HandlePlayerTakeDamage(amount):
 	if(amount > 10):
@@ -79,13 +96,10 @@ func _on_player_hp_bar_empty():
 	#gameover_text.visible = true
 	#get_tree().paused = true
 	if(animator):
-		print("has animator")
-		animator.play("FadeIn")
+		animator.play("FadeOut")
 	await get_tree().create_timer(1).timeout
 	get_tree().call_deferred(&"change_scene_to_file", title_scene)
 
-	
-	
 
 func _on_grow_bar_full():
 	# Text prompt on screen for player: "Press 'G' to Grow!"	
@@ -109,15 +123,9 @@ func _on_boss_hp_bar_empty():
 func _on_exit_level_trigger_body_entered(body):  
 	if body is Player:
 		# Load next level
-		#Show temp text so we know it's not frozen?
-		print("Player exited level.")
-		#get_tree().paused = true
-		load_scene()
-
-func load_scene():
-	can_grow = false
-	if(animator):
-		print("has animator")
-		animator.play("FadeOut")
-	await get_tree().create_timer(1).timeout
-	get_tree().call_deferred(&"change_scene_to_file", next_scene)
+		can_grow = false
+		if(animator):
+			print("has animator")
+			animator.play("FadeOut")
+		await get_tree().create_timer(1).timeout
+		get_tree().call_deferred(&"change_scene_to_file", next_scene)
