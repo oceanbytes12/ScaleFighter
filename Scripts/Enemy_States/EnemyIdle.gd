@@ -6,6 +6,7 @@ var maxtime=1
 @export var nextState = ""
 
 func enter(_previous_state_path: String, _data := {}) -> void:
+	owner.SetEnemyBodyDamages(false)
 	owner.animate("Idle")
 	currenttime = maxtime
 	owner.velocity.x = 0

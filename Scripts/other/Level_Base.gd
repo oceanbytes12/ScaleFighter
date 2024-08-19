@@ -5,53 +5,81 @@ class_name LevelBase extends Node2D
 @export var right_wall_collider : CollisionShape2D
 @export_enum("None", "Jump", "Slam") var power_unlocked
 @export var next_scene = "res://Scenes/SquirrelFight.tscn"
-
-
 @onready var animator := $CanvasLayer/ColorRect/AnimationPlayer
-
 @export var GrowBar : GameBar
 @export var BossBar : GameBar
 
+static var BossDefeated = false
 static var can_grow = false
 
-
 func _ready():
-	print(next_scene)
+	BossDefeated = false
+	can_grow = false
+	
 	EventBus.on_player_grow.connect(TurnOffUI)
-	EventBus.on_player_take_damage.connect(HandleTakeDamage)
-	EventBus.on_enemy_take_damage.connect(HandleTakeDamage)
+	EventBus.on_player_take_damage.connect(HandlePlayerTakeDamage)
+	#Handle lethal and nonlethal damage
+	EventBus.on_enemy_minor_damage.connect(HandleEnemyMinorDamage)
+	#Handle armor breaking
+	EventBus.on_enemy_critical_damage.connect(HandleEnemyCriticalDamage)
+	
 	if(animator):
 		animator.play("FadeIn")
 	await get_tree().create_timer(1).timeout
+	
 	EventBus.on_game_ready.emit()
-
 
 func TurnOffUI():
 	grow_text.visible = false
 
-func HandleTakeDamage(amount):
-	GrowBar._on_damage_received(amount)
-	BossBar._on_damage_received(amount)
+func HandlePlayerTakeDamage(amount):
 	if(amount > 10):
-		var duration = 0.4
-		var timeScale = 0.1
-		Engine.time_scale = timeScale
-		await get_tree().create_timer(duration*timeScale).timeout
-		Engine.time_scale = 1
+		HitStop(0.4, 0.1)
+
+func HandleEnemyCriticalDamage(amount):
+	if(BossDefeated):
+		return
+		
+	BossBar._on_damage_received(amount)
+	if(0 >= BossBar.value):
+		print("BOSS DEFEATED")
+		BossDefeated = true
+		EventBus.on_boss_defeat.emit()
+		HitStop(1.2, 0.05)
+	else:
+		GrowBar._on_damage_received(amount)
+		HitStop(1, 0.1)
 	
+func HandleEnemyMinorDamage(amount):
+	if(BossDefeated):
+		return
+		
+	BossBar._on_damage_received(amount)
+	if(0 >= BossBar.value):
+		print("BOSS DEFEATED")
+		BossDefeated = true
+		HitStop(1.2, 0.05)
+		EventBus.on_boss_defeat.emit()
+		
+	elif(amount > 10):
+		HitStop(0.4, 0.1)
 	
+	GrowBar._on_damage_received(amount)
+
+func HitStop(duration, scale):
+	Engine.time_scale = scale
+	await get_tree().create_timer(duration*scale).timeout
+	Engine.time_scale = 1
 	
 func _on_player_hp_bar_empty():
 	# Game Over text appears on screen
 	gameover_text.visible = true
 	get_tree().paused = true
 
-
 func _on_grow_bar_full():
 	# Text prompt on screen for player: "Press 'G' to Grow!"	
 	grow_text.visible = true
 	can_grow = true
-
 
 func _on_boss_hp_bar_empty():
 	# Level Complete
@@ -67,7 +95,6 @@ func _on_boss_hp_bar_empty():
 		2:
 			Player.canSlam = true
 
-
 func _on_exit_level_trigger_body_entered(body):  
 	if body is Player:
 		# Load next level
@@ -75,7 +102,6 @@ func _on_exit_level_trigger_body_entered(body):
 		print("Player exited level.")
 		#get_tree().paused = true
 		load_scene()
-
 
 func load_scene():
 	can_grow = false

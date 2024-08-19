@@ -4,8 +4,8 @@ extends EnemyState
 #@export var CanSlam = false # Not implemented yet
 
 var TARGET : CharacterBody2D
-
 var inrange = false
+var detection_range = 100
 
 func enter(_previous_state_path: String, _data := {}) -> void:
 	owner.animate("Walk")
@@ -18,6 +18,8 @@ func physics_update(delta: float) -> void:
 	var target_vector = Vector2.ZERO
 	if(TARGET):
 		target_vector = TARGET.global_position - owner.global_position
+		
+	inrange = TARGET.global_position.distance_to(owner.global_position)<=detection_range
 	
 	if target_vector.x < 0:
 		owner.Flip(true)

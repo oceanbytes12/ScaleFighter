@@ -22,12 +22,13 @@ func _ready():
 	current_armor = max_armor
 	TARGET = Player.mainPlayer
 	hurtbox.take_damage.connect(hit)
-	print("Connecting!")
 	
 func SetEnemyBodyDamages(isOn):
-	print("Turning body damage: ", isOn)
 	#bodyhitbox.disabled = !isOn
 	bodyhitbox.set_deferred("disabled", !isOn)
+
+func ToggleHurtBox(isOn):
+	hurtbox.toggle(isOn)
 
 func _process(_delta: float) -> void:
 	label.text = fsm.state.name
@@ -42,16 +43,33 @@ func Flip(isFlipped):
 		Flipped.scale.x = 1
 
 func hit(hit_position, damage, knockback):
-	print("hit")
+	
 	hit_animator.play("hit")
-	EventBus.on_enemy_take_damage.emit(damage)
 	current_armor-=damage
+	
+	#Inform the game about damage
 	if(current_armor <= 0):
-		current_armor = max_armor
-		var knockback_velocity = (self.global_position-hit_position).normalized() * knockback
+		EventBus.on_enemy_critical_damage.emit(damage)
+	else:
+		EventBus.on_enemy_minor_damage.emit(damage)
+	
+	#Handle Big hits
+	if(LevelBase.BossDefeated == true):
+		var knockback_velocity = (self.global_position-hit_position).normalized() * 1200
+		knockback_velocity.y = min(knockback_velocity.y, -800)
+		velocity = knockback_velocity
+		
+		fsm.state.finished.emit("EnemyDefeated")
+		
+	elif(current_armor <= 0):
+		current_armor = max_armor+10
+		
+		var knockback_velocity = (self.global_position-hit_position).normalized() * 600
 		knockback_velocity.y = min(knockback_velocity.y, -400)
 		velocity = knockback_velocity
+		
 		fsm.state.finished.emit("EnemyHurt")
+
 
 func hit_wall(_body):
 	is_on_wall = true

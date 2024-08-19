@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://cujkhawkt2egg"]
+[gd_scene load_steps=47 format=3 uid="uid://cujkhawkt2egg"]
 
 [ext_resource type="Script" path="res://Scripts/other/player.gd" id="1_vo1r3"]
 [ext_resource type="Texture2D" uid="uid://m1v10b585sus" path="res://Visual/Sprites/BaseFighter-Sheet.png" id="2_4usyc"]
@@ -24,7 +24,9 @@
 [ext_resource type="AudioStream" uid="uid://ciom40c8sd5kw" path="res://Sound/Sfx/Punches/Punch_woosh_sfx_v2.wav" id="18_se3e6"]
 [ext_resource type="AudioStream" uid="uid://c4sevwe8yor7a" path="res://Sound/Sfx/Punches/Punch_woosh_sfx_v3.wav" id="19_7vxl3"]
 [ext_resource type="AudioStream" uid="uid://7kygs4ylls2i" path="res://Sound/Sfx/Grow/Grow_SF_v3_sfx.wav" id="24_20ohd"]
+[ext_resource type="AudioStream" uid="uid://pk3b6md2dvii" path="res://Sound/Sfx/Grow/Grow_SF_v1_sfx.wav" id="24_ftbgx"]
 [ext_resource type="AudioStream" uid="uid://b0wnfwparaujf" path="res://Sound/Sfx/Gecko/Gecko_cry_wet01_v1.wav" id="25_4tvhd"]
+[ext_resource type="AudioStream" uid="uid://cesi2u6hiaong" path="res://Sound/Sfx/Grow/Grow_SF_v2_sfx.wav" id="25_7fjw4"]
 [ext_resource type="AudioStream" uid="uid://c3bntexuxcoat" path="res://Sound/Sfx/Gecko/Gecko_cry_wet02_v1.wav" id="26_vuqxm"]
 [ext_resource type="AudioStream" uid="uid://ur5jbpk7yqhq" path="res://Sound/Sfx/Gecko/Gecko_cry_wet03_v1.wav" id="27_xabnu"]
 
@@ -320,6 +322,17 @@ stream_1/weight = 1.0
 stream_2/stream = ExtResource("19_7vxl3")
 stream_2/weight = 1.0
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_owdgt"]
+playback_mode = 2
+random_pitch = 10.0
+streams_count = 3
+stream_0/stream = ExtResource("24_ftbgx")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("25_7fjw4")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("24_20ohd")
+stream_2/weight = 1.0
+
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_2867f"]
 streams_count = 3
 stream_0/stream = ExtResource("25_4tvhd")
@@ -333,7 +346,7 @@ stream_2/weight = 1.0
 visibility_layer = 2
 scale = Vector2(2, 2)
 collision_layer = 2
-collision_mask = 6
+collision_mask = 4
 script = ExtResource("1_vo1r3")
 speed = 250.0
 gravity = 2000.0
@@ -378,8 +391,6 @@ libraries = {
 collision_layer = 0
 collision_mask = 8
 script = ExtResource("5_gdpkv")
-damage = 3
-knockback = 3
 sound = NodePath("Punch_hit")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Flipped/PunchHitbox"]
@@ -394,8 +405,8 @@ stream = SubResource("AudioStreamRandomizer_h8ioa")
 collision_layer = 0
 collision_mask = 8
 script = ExtResource("5_gdpkv")
-damage = 3
-knockback = 10
+damage = 5
+knockback = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Flipped/SlamHitbox"]
 position = Vector2(-1.19209e-07, 10.5)
@@ -455,7 +466,7 @@ position = Vector2(0, 6)
 [node name="InvincibilityTimer" type="Timer" parent="."]
 
 [node name="Grow" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("24_20ohd")
+stream = SubResource("AudioStreamRandomizer_owdgt")
 
 [node name="Gecko_cry" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_2867f")

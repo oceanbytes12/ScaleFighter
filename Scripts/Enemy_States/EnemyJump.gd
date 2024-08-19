@@ -11,6 +11,7 @@ var hasReversed = false
 func enter(_previous_state_path: String, _data := {}) -> void:
 	print("Entered JUMP state")
 	owner.animate("Jump") # Change to Jump
+	owner.SetEnemyBodyDamages(true)
 	FindTarget()
 	
 	isJumping = false

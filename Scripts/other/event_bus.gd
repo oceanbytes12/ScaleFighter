@@ -3,8 +3,12 @@ extends Node
 signal on_slam_finish(amount)
 signal on_player_grow
 signal on_player_take_damage(amount)
-signal on_enemy_take_damage(amount)
+
 signal on_game_ready
+
+signal on_enemy_critical_damage(amount)
+signal on_enemy_minor_damage(amount)
+signal on_boss_defeat
 
 const IDLE = "Idle"
 const RUNNING = "Running"

@@ -14,7 +14,6 @@ func _ready():
 
 func _on_area_entered(area):
 	# Check if hitting self or friend
-	print(name," is hitting:", area.name)
 	if area.owner != owner:
 		if area.has_method("take_hit"):
 			area.take_hit(global_position, damage * owner.power, knockback*owner.power)

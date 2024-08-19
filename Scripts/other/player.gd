@@ -78,18 +78,28 @@ func hit(position, damage, knockback):
 	StartInvincible()
 
 func grow():
+	var grow_audio : AudioStreamPlayer2D
+	grow_audio = $Grow
+	
 	if(tween and tween.is_running()):
 		tween.kill()
-	$Grow.play()
-	tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BOUNCE)
+		
 	var start_scale = scale
 	var target_scale = Vector2(scale.x+grow_amount, scale.y+grow_amount)  # Scale to twice the original size
 	var second_scale = Vector2(scale.x+grow_amount*2, scale.y+grow_amount*2)
 	var third_scale = Vector2(scale.x+grow_amount*3, scale.y+grow_amount*3)
-	tween.tween_property(self, "scale", target_scale, grow_time).from(start_scale)  # Easing out for a smooth finish
-	tween.chain().tween_property(self, "scale", second_scale, grow_time).from(target_scale)
-	tween.chain().tween_property(self, "scale", third_scale, grow_time).from(second_scale)
 	
+	tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BOUNCE)
+	tween.tween_property(self, "scale", target_scale, grow_time).from(start_scale)  # Easing out for a smooth finish
+	grow_audio.play()
+	await tween.finished
+	tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BOUNCE)
+	tween.tween_property(self, "scale", second_scale, grow_time).from(target_scale)
+	grow_audio.play()
+	await tween.finished
+	tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BOUNCE)
+	tween.tween_property(self, "scale", third_scale, grow_time).from(second_scale)
+	grow_audio.play()
 	await tween.finished
 	
 	power = scale.x*10
