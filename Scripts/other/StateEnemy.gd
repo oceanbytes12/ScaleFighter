@@ -62,8 +62,6 @@ func hit(hit_position, damage, knockback):
 	
 	print("hit")
 	hit_animator.play("hit")
-	EventBus.on_enemy_take_damage.emit(damage)
-	#EventBus.on_damage_at_position.emit(hit_position) # Not in use
 	current_armor-=damage
 	
 	#Inform the game about damage
