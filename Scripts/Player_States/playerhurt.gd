@@ -2,7 +2,7 @@ extends PlayerState
 
 @export var blinkAnimator : AnimationPlayer
 
-func enter(previous_state_path: String, data := {}) -> void:
+func enter(_previous_state_path: String, _data := {}) -> void:
 	player.animate("Idle")
 	blinkAnimator.play("Blink")
 	await get_tree().create_timer(0.5).timeout

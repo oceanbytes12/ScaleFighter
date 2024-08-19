@@ -1,7 +1,7 @@
 extends PlayerState
 
 
-func enter(previous_state_path: String, data := {}) -> void:
+func enter(previous_state_path: String, _data := {}) -> void:
 	if previous_state_path == GLIDING:
 		player.velocity.y = -player.glide_jump_impulse
 	else:

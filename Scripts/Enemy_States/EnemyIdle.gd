@@ -5,7 +5,7 @@ var maxtime=1
 
 @export var nextState = ""
 
-func enter(previous_state_path: String, data := {}) -> void:
+func enter(_previous_state_path: String, _data := {}) -> void:
 	owner.animate("Idle")
 	currenttime = maxtime
 	owner.velocity.x = 0

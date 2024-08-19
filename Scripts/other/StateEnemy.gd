@@ -53,8 +53,8 @@ func hit(hit_position, damage, knockback):
 		velocity = knockback_velocity
 		fsm.state.finished.emit("EnemyHurt")
 
-func hit_wall(body):
+func hit_wall(_body):
 	is_on_wall = true
 
-func exit_wall(body):
+func exit_wall(_body):
 	is_on_wall = false

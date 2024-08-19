@@ -1,6 +1,6 @@
 extends PlayerState
 
-func enter(previous_state_path: String, data := {}) -> void:
+func enter(_previous_state_path: String, _data := {}) -> void:
 	owner.animate("AirSlam")
 	player.velocity.y = 0
 
