@@ -56,6 +56,7 @@ func _process(_delta: float) -> void:
 	label.text = fsm.state.name
 	if Input.is_action_just_pressed("Grow") and LevelBase.can_grow:
 		EventBus.on_player_grow.emit()
+		LevelBase.can_grow = false
 		grow()
 		
 	var input_direction_x = Input.get_axis("Left", "Right")

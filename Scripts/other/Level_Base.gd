@@ -5,6 +5,8 @@ class_name LevelBase extends Node2D
 @export var right_wall_collider : CollisionShape2D
 @export_enum("None", "Jump", "Slam") var power_unlocked
 @export var next_scene = "res://Scenes/SquirrelFight.tscn"
+const title_scene = "res://Scenes/Title.tscn"
+
 @onready var animator := $CanvasLayer/ColorRect/AnimationPlayer
 @export var GrowBar : GameBar
 @export var BossBar : GameBar
@@ -73,8 +75,11 @@ func HitStop(duration, scale):
 	
 func _on_player_hp_bar_empty():
 	# Game Over text appears on screen
-	gameover_text.visible = true
-	get_tree().paused = true
+	#gameover_text.visible = true
+	#get_tree().paused = true
+	get_tree().call_deferred(&"change_scene_to_packed", preload(title_scene))
+	
+	
 
 func _on_grow_bar_full():
 	# Text prompt on screen for player: "Press 'G' to Grow!"	
