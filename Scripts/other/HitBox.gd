@@ -4,7 +4,7 @@ extends Area2D
 @export var knockback = 1
 @export var startDisabled = true
 @export var disableAfterHit = true
-
+@export var sound: AudioStreamPlayer2D
 var collision : CollisionShape2D
 
 func _ready():
@@ -18,5 +18,7 @@ func _on_area_entered(area):
 	if area.owner != owner:
 		if area.has_method("take_hit"):
 			area.take_hit(global_position, damage * owner.power, knockback*owner.power)
+			if (sound):
+				sound.play()
 			if(disableAfterHit):
 				collision.call_deferred("set_disabled", true)

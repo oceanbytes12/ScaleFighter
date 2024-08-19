@@ -8,6 +8,7 @@ func enter(previous_state_path: String, data := {}) -> void:
 	
 func start():
 	attacking = true
+	$Punch_woosh.play()
 	
 func end():
 	attacking = false
