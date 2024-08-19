@@ -2,9 +2,10 @@ extends EnemyState
 
 var attacking = false
 
-func enter(_previous_state_path: String, _data := {}) -> void:
-	print("Entering PUNCH state")
-	owner.animate("Punch")
+func enter(previous_state_path: String, data := {}) -> void:
+	print("Entering FLAMES state")
+	owner.animate("Punch") # Change to Flames
+	#owner.animate("Flames")
 	attacking = true
 
 func start():
@@ -13,7 +14,7 @@ func start():
 func end():
 	attacking = false
 
-func physics_update(_delta: float) -> void:
+func physics_update(delta: float) -> void:
 	player.velocity.x = 0
 	owner.move_and_slide()
 	if attacking:

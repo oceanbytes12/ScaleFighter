@@ -8,7 +8,7 @@ var gravity = 1000
 var isJumping = false
 var hasReversed = false
 
-func enter(previous_state_path: String, data := {}) -> void:
+func enter(_previous_state_path: String, _data := {}) -> void:
 	print("Entered JUMP state")
 	owner.animate("Jump") # Change to Jump
 	FindTarget()

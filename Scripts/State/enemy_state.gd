@@ -7,6 +7,9 @@ const CHASE = "EnemyChase"
 const PUNCH = "EnemyPunch"
 const JUMP = "EnemyJump"
 const FALL = "EnemyFall"
+const SLAM = "EnemySlam"
+const SLAMFINISH = "EnemySlamFinish"
+const FLAMES = "EnemyFlames"
 var player: StateEnemy
 
 func _ready() -> void:

@@ -3,7 +3,7 @@ extends EnemyState
 @export var possible_states: Array[String] = []
 
 # Called when the node enters the scene tree for the first time.
-func enter(previous_state_path: String, data := {}) -> void:
+func enter(_previous_state_path: String, _data := {}) -> void:
 	var random_state = get_random_state()
 	finished.emit(random_state)
 

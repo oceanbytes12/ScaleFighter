@@ -1,8 +1,8 @@
-extends PlayerState
+extends EnemyState
 
 var attacking = false
 
-func enter(_previous_state_path: String, _data := {}) -> void:
+func enter(previous_state_path: String, data := {}) -> void:
 	owner.animate("SlamFinish")
 	EventBus.on_slam_finish.emit(owner.power)
 	

@@ -3,7 +3,7 @@ extends EnemyState
 func exit() -> void:
 	owner.SetEnemyBodyDamages(true)
 	
-func enter(previous_state_path: String, data := {}) -> void:
+func enter(_previous_state_path: String, _data := {}) -> void:
 	owner.SetEnemyBodyDamages(false)
 	
 	owner.animate("Stun")
