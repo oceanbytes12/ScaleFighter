@@ -1,7 +1,7 @@
 [gd_scene load_steps=21 format=3 uid="uid://qcup6vi7yufl"]
 
 [ext_resource type="Script" path="res://Scripts/other/Level_Base.gd" id="1_y07ea"]
-[ext_resource type="Texture2D" uid="uid://06x3cxd605xx" path="res://Visual/Sprites/gmtk_bg_big_street.png" id="2_0x8j5"]
+[ext_resource type="Texture2D" uid="uid://06x3cxd605xx" path="res://Visual/Sprites/Backgrounds/bg3.png" id="2_0x8j5"]
 [ext_resource type="PackedScene" uid="uid://dlh2vlug8qltd" path="res://Scenes/Other/progress_bar.tscn" id="3_bs6lp"]
 [ext_resource type="Script" path="res://Scripts/other/ProgressBar.gd" id="4_i2khq"]
 [ext_resource type="Texture2D" uid="uid://btoqs6agu1b26" path="res://Visual/Sprites/Arrow_Temp.JPG" id="5_cd547"]

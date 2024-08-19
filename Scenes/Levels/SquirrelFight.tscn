@@ -1,16 +1,16 @@
 [gd_scene load_steps=21 format=3 uid="uid://cpw72g2clnklq"]
 
-[ext_resource type="Script" path="res://Scripts/other/Level_Base.gd" id="1_0stu2"]
-[ext_resource type="Texture2D" uid="uid://06x3cxd605xx" path="res://Visual/Sprites/Backgrounds/gmtk_bg_big_street.png" id="2_idtgm"]
-[ext_resource type="PackedScene" uid="uid://dlh2vlug8qltd" path="res://Scenes/Other/progress_bar.tscn" id="3_6n5ed"]
-[ext_resource type="Script" path="res://Scripts/other/ProgressBar.gd" id="4_p0nnr"]
-[ext_resource type="Texture2D" uid="uid://btoqs6agu1b26" path="res://Visual/Sprites/Arrow_Temp.JPG" id="5_rntbf"]
-[ext_resource type="Script" path="res://Scripts/other/FlashingEffect.gd" id="6_712r5"]
-[ext_resource type="Shader" path="res://Visual/Shaders/LoaderShader.gdshader" id="7_yvw1f"]
-[ext_resource type="Texture2D" uid="uid://bu5mt783frc2i" path="res://Visual/Sprites/Loader.png" id="8_nx0bm"]
-[ext_resource type="PackedScene" uid="uid://cujkhawkt2egg" path="res://Scenes/Player/player.tscn" id="9_q8jt5"]
-[ext_resource type="PackedScene" uid="uid://05ukpwn07wnq" path="res://Scenes/Enemies/Squirrel.tscn" id="10_rbjsn"]
-[ext_resource type="Script" path="res://Scripts/other/PlayerCamera.gd" id="11_aigyi"]
+[ext_resource type="Script" path="res://Scripts/other/Level_Base.gd" id="1_bnkg8"]
+[ext_resource type="Texture2D" uid="uid://dt2t7dakyscjp" path="res://Visual/Sprites/Backgrounds/bg1.png" id="2_redwd"]
+[ext_resource type="PackedScene" uid="uid://dlh2vlug8qltd" path="res://Scenes/Other/progress_bar.tscn" id="3_uuq1v"]
+[ext_resource type="Script" path="res://Scripts/other/ProgressBar.gd" id="4_2ii5w"]
+[ext_resource type="Texture2D" uid="uid://btoqs6agu1b26" path="res://Visual/Sprites/Arrow_Temp.JPG" id="5_mkjpc"]
+[ext_resource type="Script" path="res://Scripts/other/FlashingEffect.gd" id="6_hnko6"]
+[ext_resource type="Shader" path="res://Visual/Shaders/LoaderShader.gdshader" id="7_m68fn"]
+[ext_resource type="Texture2D" uid="uid://bu5mt783frc2i" path="res://Visual/Sprites/Loader.png" id="8_ds3gt"]
+[ext_resource type="PackedScene" uid="uid://cujkhawkt2egg" path="res://Scenes/Player/player.tscn" id="9_i2pr3"]
+[ext_resource type="PackedScene" uid="uid://05ukpwn07wnq" path="res://Scenes/Enemies/Squirrel.tscn" id="10_bxw3c"]
+[ext_resource type="Script" path="res://Scripts/other/PlayerCamera.gd" id="11_ntscg"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rd2u5"]
 bg_color = Color(0.207843, 0.729412, 0.952941, 1)
@@ -19,9 +19,9 @@ bg_color = Color(0.207843, 0.729412, 0.952941, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_okhwt"]
 resource_local_to_scene = true
-shader = ExtResource("7_yvw1f")
+shader = ExtResource("7_m68fn")
 shader_parameter/scale = 1.0
-shader_parameter/mask = ExtResource("8_nx0bm")
+shader_parameter/mask = ExtResource("8_ds3gt")
 
 [sub_resource type="Animation" id="Animation_6vobu"]
 resource_name = "FadeIn"
@@ -79,38 +79,29 @@ size = Vector2(20, 19.4)
 size = Vector2(20, 162)
 
 [node name="Fight" type="Node2D" node_paths=PackedStringArray("grow_text", "gameover_text", "win_text", "right_wall_collider", "GrowBar", "BossBar")]
-script = ExtResource("1_0stu2")
+script = ExtResource("1_bnkg8")
 grow_text = NodePath("CanvasLayer/GrowText")
 gameover_text = NodePath("CanvasLayer/GameOverText")
 win_text = NodePath("CanvasLayer/WinText")
 right_wall_collider = NodePath("Walls/RightWall/CollisionShape2D")
 power_unlocked = 1
-next_scene = "res://Scenes/GorillaFight.tscn"
+next_scene = "res://Scenes/Levels/GorillaFight.tscn"
 GrowBar = NodePath("CanvasLayer/GrowBar")
 BossBar = NodePath("CanvasLayer/Boss_HPBar")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("2_idtgm")
-
-[node name="TextureRect" type="TextureRect" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("2_idtgm")
-expand_mode = 1
+scale = Vector2(1.15, 1.15)
+texture = ExtResource("2_redwd")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Player_HPBar" parent="CanvasLayer" instance=ExtResource("3_6n5ed")]
+[node name="Player_HPBar" parent="CanvasLayer" instance=ExtResource("3_uuq1v")]
 offset_left = 10.0
 offset_top = 10.0
 offset_right = 150.0
 offset_bottom = 20.0
 
-[node name="Boss_HPBar" parent="CanvasLayer" instance=ExtResource("3_6n5ed")]
+[node name="Boss_HPBar" parent="CanvasLayer" instance=ExtResource("3_uuq1v")]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -130,7 +121,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_rd2u5")
 step = 1.0
 value = 50.0
 show_percentage = false
-script = ExtResource("4_p0nnr")
+script = ExtResource("4_2ii5w")
 maxHP = 50
 isHealedOnHit = true
 
@@ -176,8 +167,8 @@ Press 'W' to Jump[/center]"
 visible = false
 position = Vector2(280, 66)
 scale = Vector2(0.113445, 0.107143)
-texture = ExtResource("5_rntbf")
-script = ExtResource("6_712r5")
+texture = ExtResource("5_mkjpc")
+script = ExtResource("6_hnko6")
 
 [node name="Timer" type="Timer" parent="CanvasLayer/Arrow"]
 wait_time = 0.5
@@ -229,15 +220,15 @@ collision_mask = 0
 scale = Vector2(10, 5)
 shape = SubResource("RectangleShape2D_ulv0b")
 
-[node name="Player" parent="." instance=ExtResource("9_q8jt5")]
+[node name="Player" parent="." instance=ExtResource("9_i2pr3")]
 position = Vector2(-100, 0)
 jump_impulse = 600.0
 
-[node name="Squirrel" parent="." instance=ExtResource("10_rbjsn")]
+[node name="Squirrel" parent="." instance=ExtResource("10_bxw3c")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.9, 0.9)
-script = ExtResource("11_aigyi")
+script = ExtResource("11_ntscg")
 
 [node name="ExitLevelTrigger" type="Area2D" parent="."]
 collision_layer = 0

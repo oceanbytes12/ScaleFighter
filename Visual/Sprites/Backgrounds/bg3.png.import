@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dt2t7dakyscjp"
-path="res://.godot/imported/ParkBattle.png-8f4d67b04397602562e85f68ae6d8e8e.ctex"
+uid="uid://06x3cxd605xx"
+path="res://.godot/imported/bg3.png-4c0e8e8d936da51155c22dd0a30f261c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Visual/Sprites/Backgrounds/ParkBattle.png"
-dest_files=["res://.godot/imported/ParkBattle.png-8f4d67b04397602562e85f68ae6d8e8e.ctex"]
+source_file="res://Visual/Sprites/Backgrounds/bg3.png"
+dest_files=["res://.godot/imported/bg3.png-4c0e8e8d936da51155c22dd0a30f261c.ctex"]
 
 [params]
 

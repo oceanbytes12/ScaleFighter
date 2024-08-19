@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://06x3cxd605xx"
-path="res://.godot/imported/gmtk_bg_big_street.png-49bd26071bc62afa28e6c37c6ec1cbbf.ctex"
+uid="uid://daon7f1gf8ss2"
+path="res://.godot/imported/bg2.png-73c64966a69c4859a36f9837527d2eb5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Visual/Sprites/Backgrounds/gmtk_bg_big_street.png"
-dest_files=["res://.godot/imported/gmtk_bg_big_street.png-49bd26071bc62afa28e6c37c6ec1cbbf.ctex"]
+source_file="res://Visual/Sprites/Backgrounds/bg2.png"
+dest_files=["res://.godot/imported/bg2.png-73c64966a69c4859a36f9837527d2eb5.ctex"]
 
 [params]
 
