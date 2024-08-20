@@ -17,9 +17,11 @@ const title_scene = "res://Scenes/Title.tscn"
 
 static var PlayerDefeated = false
 static var BossDefeated = false
+static var FightStarted = false
 static var can_grow = false
 
 func _ready():
+	FightStarted = false
 	PlayerDefeated = false
 	BossDefeated = false
 	can_grow = false
@@ -38,12 +40,10 @@ func _ready():
 	if(animator):
 		print("Playing FadeIn")
 		animator.play("FadeIn")
+		
 	await get_tree().create_timer(1).timeout
-	if(Engine.time_scale != 1):
-		return
-	ShowTitleAnim()
 	
-	EventBus.on_game_ready.emit()
+	ShowTitleAnim()
 
 func HandleSlam(slamamount):
 	HitStop(0.5, 0.1)
@@ -60,9 +60,7 @@ func ShowTitleAnim():
 			title_animator.DisplayEnemyTitle("Kong")
 		2:
 			title_animator.DisplayEnemyTitle("Godzilla")
-	get_tree().paused = true
-	await get_tree().create_timer(6.5).timeout # Change this value to match with title_animator
-	get_tree().paused = false
+			
 
 func HitStop(duration, scale):
 	Engine.time_scale = scale
@@ -161,5 +159,5 @@ func HandleEnemyCriticalDamage(amount):
 		HitStop(1.2, 0.05)
 	else:
 		GrowBar._on_damage_received(amount)
-		HitStop(1, 0.1)
+		HitStop(0.6, 0.05)
 	

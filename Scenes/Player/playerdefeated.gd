@@ -5,6 +5,7 @@ extends PlayerState
 var is_downed = false
 var check_for_downed = false
 func enter(_previous_state_path: String, _data := {}) -> void:
+	owner.animate("Hurt")
 	is_downed = false
 	owner.Blink()
 	owner.ToggleHurtBox(false)
