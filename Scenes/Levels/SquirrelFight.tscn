@@ -100,6 +100,7 @@ texture = ExtResource("2_redwd")
 [node name="Portraits" type="Node2D" parent="CanvasLayer"]
 
 [node name="Squirrel" type="Sprite2D" parent="CanvasLayer/Portraits"]
+texture_filter = 1
 position = Vector2(173, 15)
 scale = Vector2(0.9, 0.9)
 texture = ExtResource("3_d35b7")
@@ -107,6 +108,7 @@ region_enabled = true
 region_rect = Rect2(93.1758, 78.6374, 19.369, 21.9805)
 
 [node name="Player" type="Sprite2D" parent="CanvasLayer/Portraits"]
+texture_filter = 1
 position = Vector2(149.5, 15)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("3_d35b7")
@@ -129,14 +131,13 @@ offset_top = 10.0
 offset_right = -8.0
 offset_bottom = 20.0
 grow_horizontal = 0
-maxHP = 300
 
 [node name="GrowBar" parent="CanvasLayer" instance=ExtResource("4_ximp7")]
 offset_left = 12.0
 offset_top = 27.0
 offset_right = 309.0
 offset_bottom = 37.0
-maxHP = 50
+maxHP = 30
 
 [node name="GrowText" type="Sprite2D" parent="CanvasLayer"]
 visible = false

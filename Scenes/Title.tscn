@@ -140,5 +140,5 @@ libraries = {
 
 [node name="Music" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_1ht6i")
-volume_db = -20.0
+volume_db = -10.0
 autoplay = true
