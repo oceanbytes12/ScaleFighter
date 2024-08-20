@@ -40,7 +40,7 @@ func _ready():
 		animator.play("FadeIn")
 	await get_tree().create_timer(1).timeout
 	
-	ShowTitleAnim()
+	#ShowTitleAnim()
 	
 	EventBus.on_game_ready.emit()
 
@@ -69,7 +69,7 @@ func HitStop(duration, scale):
 	Engine.time_scale = 1
 	
 func _on_grow_bar_full():
-	# Text prompt on screen for player: "Press 'G' to Grow!"	
+	# Text prompt on screen for player: "Press 'G' to Grow!"
 	grow_text.visible = true
 	can_grow = true
 

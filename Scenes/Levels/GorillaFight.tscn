@@ -1,9 +1,9 @@
-[gd_scene load_steps=24 format=3 uid="uid://dqs5up6xt3yr2"]
+[gd_scene load_steps=23 format=3 uid="uid://dqs5up6xt3yr2"]
 
 [ext_resource type="Script" path="res://Scripts/other/Level_Base.gd" id="1_ud67y"]
 [ext_resource type="Texture2D" uid="uid://daon7f1gf8ss2" path="res://Visual/Sprites/Backgrounds/bg2.png" id="2_biu23"]
 [ext_resource type="PackedScene" uid="uid://dlh2vlug8qltd" path="res://Scenes/Other/progress_bar.tscn" id="3_cact6"]
-[ext_resource type="Script" path="res://Scripts/other/ProgressBar.gd" id="4_1464u"]
+[ext_resource type="PackedScene" uid="uid://d1n8xycy34w5" path="res://Scenes/Other/grow_progress_bar.tscn" id="4_7k25r"]
 [ext_resource type="Texture2D" uid="uid://btoqs6agu1b26" path="res://Visual/Sprites/Arrow_Temp.JPG" id="5_ko83f"]
 [ext_resource type="Script" path="res://Scripts/other/FlashingEffect.gd" id="6_n51mo"]
 [ext_resource type="Shader" path="res://Visual/Shaders/LoaderShader.gdshader" id="7_0hvrg"]
@@ -11,16 +11,13 @@
 [ext_resource type="PackedScene" uid="uid://cujkhawkt2egg" path="res://Scenes/Player/player.tscn" id="9_gmrbk"]
 [ext_resource type="PackedScene" uid="uid://beh82u6kyw1bt" path="res://Scenes/Enemies/Gorilla.tscn" id="10_dc7cp"]
 [ext_resource type="Script" path="res://Scripts/other/PlayerCamera.gd" id="11_30gjy"]
-[ext_resource type="PackedScene" path="res://Scenes/Other/EnemyTitleAnimator.tscn" id="12_2w3it"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rd2u5"]
-bg_color = Color(0.865675, 0.380193, 0.951176, 1)
+[ext_resource type="PackedScene" uid="uid://sockfkjnaotu" path="res://Scenes/Other/EnemyTitleAnimator.tscn" id="12_2w3it"]
 
 [sub_resource type="Theme" id="Theme_7k74m"]
 
-[sub_resource type="Theme" id="Theme_kv8w0"]
-
 [sub_resource type="Theme" id="Theme_4tts6"]
+
+[sub_resource type="Theme" id="Theme_1rxdi"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_okhwt"]
 resource_local_to_scene = true
@@ -119,18 +116,12 @@ offset_bottom = 20.0
 grow_horizontal = 0
 maxHP = 300
 
-[node name="GrowBar" type="ProgressBar" parent="CanvasLayer"]
-offset_left = 10.0
+[node name="GrowBar" parent="CanvasLayer" instance=ExtResource("4_7k25r")]
+offset_left = 12.0
 offset_top = 27.0
 offset_right = 309.0
 offset_bottom = 37.0
-theme_override_styles/fill = SubResource("StyleBoxFlat_rd2u5")
-step = 1.0
-value = 50.0
-show_percentage = false
-script = ExtResource("4_1464u")
-maxHP = 10
-isHealedOnHit = true
+maxHP = 5
 
 [node name="GrowText" type="RichTextLabel" parent="CanvasLayer"]
 visible = false
@@ -147,22 +138,6 @@ theme_override_constants/outline_size = 2
 theme_override_font_sizes/normal_font_size = 20
 bbcode_enabled = true
 text = "[center]G to [rainbow freq=1.0 sat=0.8 val=0.8][wave amp=50.0 freq=5.0 connected=1][pulse freq=1.0 color=#ffffff40 ease=-2.0]GROW"
-
-[node name="GameOverText" type="RichTextLabel" parent="CanvasLayer"]
-visible = false
-offset_left = 12.0
-offset_top = 54.0
-offset_right = 312.0
-offset_bottom = 127.0
-size_flags_horizontal = 4
-theme = SubResource("Theme_kv8w0")
-theme_override_colors/default_color = Color(1, 1, 1, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 2
-theme_override_font_sizes/normal_font_size = 20
-bbcode_enabled = true
-text = "[center]KO...[/center]"
 
 [node name="WinText" type="RichTextLabel" parent="CanvasLayer"]
 visible = false
@@ -181,6 +156,22 @@ bbcode_enabled = true
 text = "[center]New Power:
 Press 'S' in air to slam![/center]"
 
+[node name="GameOverText" type="RichTextLabel" parent="CanvasLayer"]
+visible = false
+offset_left = 12.0
+offset_top = 54.0
+offset_right = 312.0
+offset_bottom = 127.0
+size_flags_horizontal = 4
+theme = SubResource("Theme_1rxdi")
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "[center]KO...[/center]"
+
 [node name="Arrow" type="Sprite2D" parent="CanvasLayer"]
 visible = false
 position = Vector2(280, 66)
@@ -192,6 +183,7 @@ script = ExtResource("6_n51mo")
 wait_time = 0.5
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+z_index = 1
 material = SubResource("ShaderMaterial_okhwt")
 anchors_preset = 15
 anchor_right = 1.0
