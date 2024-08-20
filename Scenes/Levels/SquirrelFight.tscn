@@ -1,11 +1,12 @@
-[gd_scene load_steps=23 format=3 uid="uid://cpw72g2clnklq"]
+[gd_scene load_steps=24 format=3 uid="uid://cpw72g2clnklq"]
 
 [ext_resource type="Script" path="res://Scripts/other/Level_Base.gd" id="1_bnkg8"]
 [ext_resource type="Texture2D" uid="uid://dt2t7dakyscjp" path="res://Visual/Sprites/Backgrounds/bg1.png" id="2_redwd"]
+[ext_resource type="Texture2D" uid="uid://dhoewbqfo07di" path="res://Visual/Portraits.png" id="3_d35b7"]
 [ext_resource type="PackedScene" uid="uid://dlh2vlug8qltd" path="res://Scenes/Other/progress_bar.tscn" id="3_uuq1v"]
 [ext_resource type="PackedScene" uid="uid://d1n8xycy34w5" path="res://Scenes/Other/grow_progress_bar.tscn" id="4_ximp7"]
 [ext_resource type="Texture2D" uid="uid://b4qdwe8jnrg7g" path="res://Visual/Level_Text_Sheet.png" id="5_aqxgk"]
-[ext_resource type="Texture2D" uid="uid://c4eimd1h21w1r" path="res://Visual/Sprites/UglyArrow.png" id="5_yqbsp"]
+[ext_resource type="Texture2D" uid="uid://cffmxdlyjrxx5" path="res://Visual/Arrow-export.png" id="6_a4w6r"]
 [ext_resource type="Script" path="res://Scripts/other/FlashingEffect.gd" id="6_hnko6"]
 [ext_resource type="Shader" path="res://Visual/Shaders/LoaderShader.gdshader" id="7_m68fn"]
 [ext_resource type="Texture2D" uid="uid://bu5mt783frc2i" path="res://Visual/Sprites/Loader.png" id="8_ds3gt"]
@@ -96,9 +97,26 @@ texture = ExtResource("2_redwd")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
+[node name="Portraits" type="Node2D" parent="CanvasLayer"]
+
+[node name="Squirrel" type="Sprite2D" parent="CanvasLayer/Portraits"]
+position = Vector2(173, 15)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("3_d35b7")
+region_enabled = true
+region_rect = Rect2(93.1758, 78.6374, 19.369, 21.9805)
+
+[node name="Player" type="Sprite2D" parent="CanvasLayer/Portraits"]
+position = Vector2(149.5, 15)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("3_d35b7")
+region_enabled = true
+region_rect = Rect2(90.0659, 110.748, 25.8234, 24.0216)
+
 [node name="Player_HPBar" parent="CanvasLayer" instance=ExtResource("3_uuq1v")]
-offset_left = 10.0
+offset_left = 8.0
 offset_top = 10.0
+offset_right = 138.0
 offset_bottom = 20.0
 maxHP = 50
 
@@ -106,9 +124,9 @@ maxHP = 50
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -150.0
+offset_left = -138.0
 offset_top = 10.0
-offset_right = -10.0
+offset_right = -8.0
 offset_bottom = 20.0
 grow_horizontal = 0
 maxHP = 300
@@ -153,9 +171,9 @@ region_rect = Rect2(430, 198, 140, 75)
 
 [node name="Arrow" type="Sprite2D" parent="CanvasLayer"]
 visible = false
-position = Vector2(275, 65)
-scale = Vector2(0.182207, 0.200464)
-texture = ExtResource("5_yqbsp")
+position = Vector2(296, 85)
+scale = Vector2(0.12, 0.12)
+texture = ExtResource("6_a4w6r")
 script = ExtResource("6_hnko6")
 
 [node name="Timer" type="Timer" parent="CanvasLayer/Arrow"]

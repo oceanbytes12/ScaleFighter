@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://wc8v1447wt3t"]
+[gd_scene load_steps=17 format=3 uid="uid://wc8v1447wt3t"]
 
 [ext_resource type="Script" path="res://Scripts/other/EnemyTitleAnimator.gd" id="1_xp7ca"]
 [ext_resource type="Texture2D" uid="uid://bgtfmf5t0yc84" path="res://Visual/Sprites/Titles.png" id="2_1ss42"]
@@ -7,6 +7,8 @@
 [ext_resource type="AudioStream" uid="uid://bqgvgdyb0w21k" path="res://Sound/Sfx/Announcer/Announcer1/Announcer1_03_sfx_v1.wav" id="5_y4iqw"]
 [ext_resource type="AudioStream" uid="uid://bx0vcgq824wb2" path="res://Sound/Sfx/Announcer/Announcer1/Announcer1_04_sfx_v1.wav" id="6_hlwnd"]
 [ext_resource type="Texture2D" uid="uid://b4qdwe8jnrg7g" path="res://Visual/Level_Text_Sheet.png" id="7_fbrmr"]
+[ext_resource type="Texture2D" uid="uid://c3xu0thpx0k53" path="res://Visual/slam.png" id="8_u6jlg"]
+[ext_resource type="Texture2D" uid="uid://dhoewbqfo07di" path="res://Visual/Portraits.png" id="9_tmvo1"]
 
 [sub_resource type="Animation" id="Animation_67lc7"]
 resource_name = "CountDown"
@@ -334,6 +336,31 @@ region_rect = Rect2(231, 184, 188, 52)
 
 [node name="SToSlam" type="Sprite2D" parent="OtherWords"]
 visible = false
-texture = ExtResource("7_fbrmr")
-region_enabled = true
+texture = ExtResource("8_u6jlg")
 region_rect = Rect2(231, 234, 188, 53)
+
+[node name="Portraits" type="Node2D" parent="."]
+
+[node name="DarkLizard" type="Sprite2D" parent="Portraits"]
+visible = false
+texture = ExtResource("9_tmvo1")
+region_enabled = true
+region_rect = Rect2(128.898, 75.4103, 31.0461, 26.709)
+
+[node name="Kong" type="Sprite2D" parent="Portraits"]
+visible = false
+texture = ExtResource("9_tmvo1")
+region_enabled = true
+region_rect = Rect2(135.946, 109.058, 23.9987, 25.9176)
+
+[node name="Squirrel" type="Sprite2D" parent="Portraits"]
+visible = false
+texture = ExtResource("9_tmvo1")
+region_enabled = true
+region_rect = Rect2(93.1758, 78.6374, 19.369, 21.9805)
+
+[node name="Player" type="Sprite2D" parent="Portraits"]
+visible = false
+texture = ExtResource("9_tmvo1")
+region_enabled = true
+region_rect = Rect2(90.0659, 110.748, 25.8234, 24.0216)
