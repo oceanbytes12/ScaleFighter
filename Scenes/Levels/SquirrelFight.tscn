@@ -269,6 +269,7 @@ shape = SubResource("RectangleShape2D_se114")
 [node name="GongLow" type="AudioStreamPlayer2D" parent="Sound"]
 visible = false
 stream = ExtResource("14_8rntb")
+volume_db = -5.0
 
 [node name="GongHigh" type="AudioStreamPlayer2D" parent="Sound"]
 visible = false
