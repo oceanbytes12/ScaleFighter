@@ -352,7 +352,6 @@ shape = SubResource("RectangleShape2D_ufdj5")
 
 [node name="Gorilla_cries" type="AudioStreamPlayer2D" parent="EnemyHurtBox"]
 stream = SubResource("AudioStreamRandomizer_28fpf")
-volume_db = -9.905
 
 [node name="EnemyCollision" type="CollisionShape2D" parent="."]
 position = Vector2(-3.17891e-07, 2.167)
