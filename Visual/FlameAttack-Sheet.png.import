@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://pfvgk8k5eakr"
-path="res://.godot/imported/gmtk_title_screen.png-56b8d77623adba400f7d66f6c600dee5.ctex"
+uid="uid://baf23yv4rffvy"
+path="res://.godot/imported/FlameAttack-Sheet.png-dc9247a912e78846b41359fe0ec16f42.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://gmtk_title_screen.png"
-dest_files=["res://.godot/imported/gmtk_title_screen.png-56b8d77623adba400f7d66f6c600dee5.ctex"]
+source_file="res://Visual/FlameAttack-Sheet.png"
+dest_files=["res://.godot/imported/FlameAttack-Sheet.png-dc9247a912e78846b41359fe0ec16f42.ctex"]
 
 [params]
 

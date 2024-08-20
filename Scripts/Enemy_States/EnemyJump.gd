@@ -9,7 +9,6 @@ var isJumping = false
 var hasReversed = false
 
 func enter(_previous_state_path: String, _data := {}) -> void:
-	print("Entered JUMP state")
 	owner.animate("Jump") # Change to Jump
 	FindTarget()
 	
@@ -36,7 +35,6 @@ func physics_update(delta: float) -> void:
 		return
 	
 	if owner.is_on_wall and not hasReversed:
-		print("Reversing!")
 		owner.velocity.x = -owner.velocity.x  
 		hasReversed = true
 		if(owner.velocity.x > 0):

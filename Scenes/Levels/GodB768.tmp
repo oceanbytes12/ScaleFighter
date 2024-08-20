@@ -235,6 +235,8 @@ scale = Vector2(10, 5)
 shape = SubResource("RectangleShape2D_ulv0b")
 
 [node name="Player" parent="." instance=ExtResource("9_sph5s")]
+position = Vector2(-100, 0)
+jump_impulse = 600.0
 
 [node name="Godzilla" parent="." instance=ExtResource("9_nno0b")]
 position = Vector2(10, -22)
@@ -259,4 +261,5 @@ shape = SubResource("RectangleShape2D_se114")
 [connection signal="BarEmpty" from="CanvasLayer/Player_HPBar" to="." method="_on_player_hp_bar_empty"]
 [connection signal="BarEmpty" from="CanvasLayer/Boss_HPBar" to="." method="_on_boss_hp_bar_empty"]
 [connection signal="BarFull" from="CanvasLayer/GrowBar" to="." method="_on_grow_bar_full"]
+[connection signal="on_take_damage" from="Player" to="CanvasLayer/Player_HPBar" method="_on_damage_received"]
 [connection signal="body_entered" from="ExitLevelTrigger" to="." method="_on_exit_level_trigger_body_entered"]

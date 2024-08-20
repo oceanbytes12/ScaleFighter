@@ -10,7 +10,7 @@ var hasReversed = false
 var time_in_state = 0
 var required_time = 1.3
 var current_wall_pause_time = 0
-var max_wall_pause_time = 1
+@export var max_wall_pause_time = 1.0
 var range = 50
 var num_jumps_used = 0
 var max_jumps = 3
@@ -20,7 +20,6 @@ func enter(_previous_state_path: String, _data := {}) -> void:
 	num_jumps_used = 0
 	time_in_state = 0
 	current_wall_pause_time = 0
-	print("Entered JUMP state")
 	owner.animate("Jump") # Change to Jump
 	FindTarget()
 	
@@ -73,7 +72,6 @@ func physics_update(delta: float) -> void:
 			owner.Flip(true)
 		current_wall_pause_time = max_wall_pause_time
 		num_jumps_used+=1
-		print("I have used: ", num_jumps_used)
 		
 	#Go down if in air.
 	if not owner.is_on_floor():

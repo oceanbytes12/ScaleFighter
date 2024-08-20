@@ -12,10 +12,10 @@ class_name StateEnemy extends CharacterBody2D
 @export var hurtbox : HurtBox
 @export var bodyhitbox : CollisionShape2D
 @export var particle_gen : PackedScene
+@export var max_armor = 40
 
 var TARGET : Player
 var power = 1
-var max_armor = 40
 var current_armor
 var is_on_wall = false
 var isPlayerLarge = false # Used to track how large the hit_effects should be
@@ -24,7 +24,6 @@ func _ready():
 	current_armor = max_armor
 	TARGET = Player.mainPlayer
 	hurtbox.take_damage.connect(hit)
-	print("Connecting!")
 	EventBus.on_player_grow.connect(PlayerGrew)
 
 func PlayerGrew():

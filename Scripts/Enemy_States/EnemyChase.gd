@@ -5,8 +5,8 @@ extends EnemyState
 
 var TARGET : CharacterBody2D
 var inrange = false
-var detection_range = 70
-
+@export var detection_range = 70
+@export var next_state = "PUNCH"
 func enter(_previous_state_path: String, _data := {}) -> void:
 	owner.animate("Walk")
 	FindTarget()
@@ -32,14 +32,13 @@ func physics_update(delta: float) -> void:
 	if(TARGET):
 		target_vector = TARGET.global_position - owner.global_position
 	else:
-		print("NO TARGET")
-	target_vector = target_vector.normalized()
-	target_vector.y = 0
+		target_vector = target_vector.normalized()
+		target_vector.y = 0
 	
 	if (not inrange):
 		owner.velocity = target_vector * owner.SPEED
 	else:
-		finished.emit(PUNCH)
+		finished.emit(next_state)
 		
 	if not owner.is_on_floor():
 		owner.velocity.y += owner.GRAVITY * delta

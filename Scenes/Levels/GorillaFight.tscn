@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://beh82u6kyw1bt" path="res://Scenes/Enemies/Gorilla.tscn" id="10_dc7cp"]
 [ext_resource type="Script" path="res://Scripts/other/PlayerCamera.gd" id="11_30gjy"]
 [ext_resource type="PackedScene" uid="uid://wc8v1447wt3t" path="res://Scenes/Other/EnemyTitleAnimator.tscn" id="12_2w3it"]
-[ext_resource type="PackedScene" uid="uid://ucd2petm8ie1" path="res://Scenes/sound.tscn" id="14_r1lug"]
+[ext_resource type="PackedScene" uid="uid://ucd2petm8ie1" path="res://Scenes/Other/sound.tscn" id="14_r1lug"]
 
 [sub_resource type="Theme" id="Theme_7k74m"]
 

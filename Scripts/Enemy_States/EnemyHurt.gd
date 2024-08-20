@@ -7,7 +7,6 @@ func exit() -> void:
 	owner.SetEnemyBodyDamages(true)
 	
 func enter(_previous_state_path: String, _data := {}) -> void:
-	print("Entering Enemy Hurt")
 	owner.SetEnemyBodyDamages(false)
 	owner.animate("Stun")
 	current_time = max_time

@@ -19,9 +19,9 @@
 [ext_resource type="AudioStream" uid="uid://b4kfrynmreya4" path="res://Sound/Sfx/Squirrel/Punches/Squirrel_punch1_v1.wav" id="11_bhvd3"]
 [ext_resource type="AudioStream" uid="uid://bkw0xgj8nbf8w" path="res://Sound/Sfx/Squirrel/Punches/Squirrel_punch2_v1.wav" id="12_aow4o"]
 [ext_resource type="Script" path="res://Scripts/Enemy_States/EnemyRandom.gd" id="12_yiyxc"]
-[ext_resource type="Script" path="res://Scripts/IntString.gd" id="18_rp5at"]
 [ext_resource type="Script" path="res://Scripts/Enemy_States/EnemyFall.gd" id="18_u7m3d"]
 [ext_resource type="Script" path="res://Scripts/Enemy_States/EnemyDefeated.gd" id="19_pcnyy"]
+[ext_resource type="Script" path="res://Scripts/other/IntString.gd" id="20_bcpnr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ufdj5"]
 size = Vector2(8.33333, 12.3332)
@@ -233,12 +233,12 @@ radius = 14.3333
 radius = 5.70575
 
 [sub_resource type="Resource" id="Resource_fqdqw"]
-script = ExtResource("18_rp5at")
+script = ExtResource("20_bcpnr")
 weight = 10
 name = "EnemyChase"
 
 [sub_resource type="Resource" id="Resource_eeq8w"]
-script = ExtResource("18_rp5at")
+script = ExtResource("20_bcpnr")
 weight = 10
 name = "EnemyJump"
 
@@ -252,6 +252,7 @@ scale = Vector2(3, 3)
 collision_layer = 2
 collision_mask = 4
 script = ExtResource("1_buy47")
+SPEED = 1
 hurtbox = NodePath("EnemyHurtBox")
 bodyhitbox = NodePath("Flipped/HitBoxes/EnemyBodyHitBox/EnemyBodyCollider")
 particle_gen = ExtResource("2_p3s5g")
@@ -356,6 +357,7 @@ script = ExtResource("8_aldih")
 
 [node name="EnemyChase" type="Node" parent="StateMachine"]
 script = ExtResource("6_oogn5")
+next_state = "EnemyPunch"
 
 [node name="EnemyPunch" type="Node" parent="StateMachine"]
 script = ExtResource("7_av5gr")
@@ -365,7 +367,7 @@ script = ExtResource("10_qq6i4")
 
 [node name="EnemyRandom" type="Node" parent="StateMachine"]
 script = ExtResource("12_yiyxc")
-int_string_pairs = Array[ExtResource("18_rp5at")]([SubResource("Resource_fqdqw"), SubResource("Resource_eeq8w")])
+int_string_pairs = Array[ExtResource("20_bcpnr")]([SubResource("Resource_fqdqw"), SubResource("Resource_eeq8w")])
 
 [node name="EnemyFall" type="Node" parent="StateMachine"]
 script = ExtResource("18_u7m3d")

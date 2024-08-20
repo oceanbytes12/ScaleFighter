@@ -3,10 +3,8 @@ extends EnemyState
 var attacking = false
 
 func enter(previous_state_path: String, data := {}) -> void:
-	print("Entering FLAMES state")
-	owner.animate("Punch") # Change to Flames
-	#owner.animate("Flames")
-	attacking = true
+	owner.animate("Shoot")
+
 
 func start():
 	attacking = true

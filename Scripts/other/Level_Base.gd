@@ -42,7 +42,6 @@ func _ready():
 	EventBus.on_slam_finish.connect(HandleSlam)
 	
 	if(animator):
-		print("Playing FadeIn")
 		animator.play("FadeIn")
 		
 	await get_tree().create_timer(1).timeout
@@ -113,7 +112,6 @@ func _on_exit_level_trigger_body_entered(body):
 		# Load next level
 		can_grow = false
 		if(animator):
-			print("has animator")
 			animator.play("FadeOut")
 		await get_tree().create_timer(1).timeout
 		get_tree().call_deferred(&"change_scene_to_file", next_scene)
@@ -153,7 +151,6 @@ func HandleEnemyMinorDamage(amount):
 		
 	BossBar._on_damage_received(amount)
 	if(0 >= BossBar.value):
-		print("BOSS DEFEATED")
 		BossDefeated = true
 		HitStop(1.2, 0.05)
 		
@@ -168,7 +165,6 @@ func HandleEnemyCriticalDamage(amount):
 		
 	BossBar._on_damage_received(amount)
 	if(0 >= BossBar.value):
-		print("BOSS DEFEATED")
 		BossDefeated = true
 		HitStop(1.2, 0.05)
 	else:

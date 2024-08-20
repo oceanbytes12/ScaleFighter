@@ -63,21 +63,16 @@ func _ready():
 func _on_damage_received(amount : int):
 	if canBeChanged:
 		if isHealedOnHit:
-			print("old value ", value)
 			if value != max_value:
 				# Restore progressBar by "amount"
 				var result = value + amount
-				print("result value ", result)
-				print("max value ", max_value)
 				if result >= max_value:
 					_set_health(max_value)
 					#value = max_value
-					print("bar full emit")
 					BarFull.emit()
 				else:
 					_set_health(result)
 					#value = result
-				print("new value ", value)
 			 
 		else:
 			if value != 0:

@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://bfcg3wlt2b25p"
-path="res://.godot/imported/Martyric_PersonalUse.ttf-49f210b1ef2c5b2eb870e014370525d0.fontdata"
+path="res://.godot/imported/Martyric_PersonalUse.ttf-50d53f80452bc81719866f6021b364e1.fontdata"
 
 [deps]
 
-source_file="res://Martyric_PersonalUse.ttf"
-dest_files=["res://.godot/imported/Martyric_PersonalUse.ttf-49f210b1ef2c5b2eb870e014370525d0.fontdata"]
+source_file="res://Visual/Martyric_PersonalUse.ttf"
+dest_files=["res://.godot/imported/Martyric_PersonalUse.ttf-50d53f80452bc81719866f6021b364e1.fontdata"]
 
 [params]
 
