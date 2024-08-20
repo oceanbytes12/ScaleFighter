@@ -1,9 +1,9 @@
-[gd_scene load_steps=22 format=3 uid="uid://cpw72g2clnklq"]
+[gd_scene load_steps=21 format=3 uid="uid://cpw72g2clnklq"]
 
 [ext_resource type="Script" path="res://Scripts/other/Level_Base.gd" id="1_bnkg8"]
 [ext_resource type="Texture2D" uid="uid://dt2t7dakyscjp" path="res://Visual/Sprites/Backgrounds/bg1.png" id="2_redwd"]
 [ext_resource type="PackedScene" uid="uid://dlh2vlug8qltd" path="res://Scenes/Other/progress_bar.tscn" id="3_uuq1v"]
-[ext_resource type="Script" path="res://Scripts/other/ProgressBar.gd" id="4_2ii5w"]
+[ext_resource type="PackedScene" uid="uid://d1n8xycy34w5" path="res://Scenes/Other/grow_progress_bar.tscn" id="4_ximp7"]
 [ext_resource type="Texture2D" uid="uid://btoqs6agu1b26" path="res://Visual/Sprites/Arrow_Temp.JPG" id="5_mkjpc"]
 [ext_resource type="Script" path="res://Scripts/other/FlashingEffect.gd" id="6_hnko6"]
 [ext_resource type="Shader" path="res://Visual/Shaders/LoaderShader.gdshader" id="7_m68fn"]
@@ -11,10 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://cujkhawkt2egg" path="res://Scenes/Player/player.tscn" id="9_i2pr3"]
 [ext_resource type="PackedScene" uid="uid://05ukpwn07wnq" path="res://Scenes/Enemies/Squirrel.tscn" id="10_bxw3c"]
 [ext_resource type="Script" path="res://Scripts/other/PlayerCamera.gd" id="11_ntscg"]
-[ext_resource type="PackedScene" path="res://Scenes/Other/EnemyTitleAnimator.tscn" id="12_2gnqg"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rd2u5"]
-bg_color = Color(0.866667, 0.380392, 0.952941, 1)
+[ext_resource type="PackedScene" uid="uid://sockfkjnaotu" path="res://Scenes/Other/EnemyTitleAnimator.tscn" id="12_2gnqg"]
 
 [sub_resource type="Theme" id="Theme_4tts6"]
 
@@ -101,7 +98,6 @@ texture = ExtResource("2_redwd")
 [node name="Player_HPBar" parent="CanvasLayer" instance=ExtResource("3_uuq1v")]
 offset_left = 10.0
 offset_top = 10.0
-offset_right = 150.0
 offset_bottom = 20.0
 maxHP = 50
 
@@ -116,18 +112,12 @@ offset_bottom = 20.0
 grow_horizontal = 0
 maxHP = 300
 
-[node name="GrowBar" type="ProgressBar" parent="CanvasLayer"]
-offset_left = 10.0
+[node name="GrowBar" parent="CanvasLayer" instance=ExtResource("4_ximp7")]
+offset_left = 12.0
 offset_top = 27.0
 offset_right = 309.0
 offset_bottom = 37.0
-theme_override_styles/fill = SubResource("StyleBoxFlat_rd2u5")
-step = 1.0
-value = 50.0
-show_percentage = false
-script = ExtResource("4_2ii5w")
 maxHP = 5
-isHealedOnHit = true
 
 [node name="GrowText" type="RichTextLabel" parent="CanvasLayer"]
 visible = false
@@ -145,18 +135,6 @@ theme_override_font_sizes/normal_font_size = 20
 bbcode_enabled = true
 text = "[center]G to [rainbow freq=1.0 sat=0.8 val=0.8][wave amp=50.0 freq=5.0 connected=1][pulse freq=1.0 color=#ffffff40 ease=-2.0]GROW"
 
-[node name="GameOverText" type="RichTextLabel" parent="CanvasLayer"]
-visible = false
-offset_left = 12.0
-offset_top = 54.0
-offset_right = 312.0
-offset_bottom = 127.0
-size_flags_horizontal = 4
-theme = SubResource("Theme_4tts6")
-theme_override_font_sizes/normal_font_size = 50
-bbcode_enabled = true
-text = "[center]GAME OVER[/center]"
-
 [node name="WinText" type="RichTextLabel" parent="CanvasLayer"]
 visible = false
 offset_left = 12.0
@@ -172,7 +150,23 @@ theme_override_constants/outline_size = 2
 theme_override_font_sizes/normal_font_size = 20
 bbcode_enabled = true
 text = "[center]New Power:
-Press 'W' to Jump[/center]"
+Press 'W' to Jump![/center]"
+
+[node name="GameOverText" type="RichTextLabel" parent="CanvasLayer"]
+visible = false
+offset_left = 12.0
+offset_top = 54.0
+offset_right = 312.0
+offset_bottom = 127.0
+size_flags_horizontal = 4
+theme = SubResource("Theme_4tts6")
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "[center]KO...[/center]"
 
 [node name="Arrow" type="Sprite2D" parent="CanvasLayer"]
 visible = false
@@ -185,6 +179,7 @@ script = ExtResource("6_hnko6")
 wait_time = 0.5
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+z_index = 1
 material = SubResource("ShaderMaterial_plk3b")
 anchors_preset = 15
 anchor_right = 1.0
