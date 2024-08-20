@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://wc8v1447wt3t"]
+[gd_scene load_steps=15 format=3 uid="uid://wc8v1447wt3t"]
 
 [ext_resource type="Script" path="res://Scripts/other/EnemyTitleAnimator.gd" id="1_xp7ca"]
 [ext_resource type="Texture2D" uid="uid://bgtfmf5t0yc84" path="res://Visual/Sprites/Titles.png" id="2_1ss42"]
@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://b1g26r3aly4tn" path="res://Sound/Sfx/Announcer/Announcer1/Announcer1_02_sfx_v1.wav" id="4_raoul"]
 [ext_resource type="AudioStream" uid="uid://bqgvgdyb0w21k" path="res://Sound/Sfx/Announcer/Announcer1/Announcer1_03_sfx_v1.wav" id="5_y4iqw"]
 [ext_resource type="AudioStream" uid="uid://bx0vcgq824wb2" path="res://Sound/Sfx/Announcer/Announcer1/Announcer1_04_sfx_v1.wav" id="6_hlwnd"]
+[ext_resource type="Texture2D" uid="uid://b4qdwe8jnrg7g" path="res://Visual/Level_Text_Sheet.png" id="7_fbrmr"]
 
 [sub_resource type="Animation" id="Animation_67lc7"]
 resource_name = "CountDown"
@@ -286,3 +287,53 @@ region_rect = Rect2(355, 197, 49, 81)
 [node name="FightAnnouncer" type="AudioStreamPlayer2D" parent="."]
 visible = false
 stream = SubResource("AudioStreamRandomizer_3ejly")
+
+[node name="OtherWords" type="Node2D" parent="."]
+
+[node name="DarkLizard" type="Sprite2D" parent="OtherWords"]
+visible = false
+texture = ExtResource("7_fbrmr")
+region_enabled = true
+region_rect = Rect2(-1, 9, 255, 68)
+
+[node name="DarkLizardKanji" type="Sprite2D" parent="OtherWords"]
+visible = false
+texture = ExtResource("7_fbrmr")
+region_enabled = true
+region_rect = Rect2(2, 77, 252, 83)
+
+[node name="YouWin" type="Sprite2D" parent="OtherWords"]
+visible = false
+texture = ExtResource("7_fbrmr")
+region_enabled = true
+region_rect = Rect2(245, 44, 342, 112)
+
+[node name="KO" type="Sprite2D" parent="OtherWords"]
+visible = false
+texture = ExtResource("7_fbrmr")
+region_enabled = true
+region_rect = Rect2(430, 198, 140, 75)
+
+[node name="NewPower" type="Sprite2D" parent="OtherWords"]
+visible = false
+texture = ExtResource("7_fbrmr")
+region_enabled = true
+region_rect = Rect2(9, 171, 212, 69)
+
+[node name="GToGrow" type="Sprite2D" parent="OtherWords"]
+visible = false
+texture = ExtResource("7_fbrmr")
+region_enabled = true
+region_rect = Rect2(9, 240, 197, 58)
+
+[node name="WToJump" type="Sprite2D" parent="OtherWords"]
+visible = false
+texture = ExtResource("7_fbrmr")
+region_enabled = true
+region_rect = Rect2(231, 184, 188, 52)
+
+[node name="SToSlam" type="Sprite2D" parent="OtherWords"]
+visible = false
+texture = ExtResource("7_fbrmr")
+region_enabled = true
+region_rect = Rect2(231, 234, 188, 53)

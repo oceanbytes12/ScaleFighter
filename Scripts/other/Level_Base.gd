@@ -1,8 +1,8 @@
 class_name LevelBase extends Node2D
 @export var is_last_level = false
-@export var grow_text : RichTextLabel
-@export var gameover_text : RichTextLabel
-@export var win_text : RichTextLabel
+@export var grow_text : Node2D
+@export var gameover_text : Node2D
+@export var win_text : Node2D
 @export var right_wall_collider : CollisionShape2D
 @export_enum("None", "Jump", "Slam") var power_unlocked
 @export_enum("Squirrel", "Kong", "Godzilla") var title_toshow

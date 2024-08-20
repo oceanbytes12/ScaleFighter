@@ -1,10 +1,10 @@
-[gd_scene load_steps=23 format=3 uid="uid://tmj8273tqhjq"]
+[gd_scene load_steps=20 format=3 uid="uid://tmj8273tqhjq"]
 
 [ext_resource type="Script" path="res://Scripts/other/Level_Base.gd" id="1_xaqio"]
 [ext_resource type="Texture2D" uid="uid://06x3cxd605xx" path="res://Visual/Sprites/Backgrounds/bg3.png" id="2_ynsbm"]
 [ext_resource type="PackedScene" uid="uid://dlh2vlug8qltd" path="res://Scenes/Other/progress_bar.tscn" id="3_badop"]
 [ext_resource type="PackedScene" uid="uid://d1n8xycy34w5" path="res://Scenes/Other/grow_progress_bar.tscn" id="4_ht6xc"]
-[ext_resource type="Texture2D" uid="uid://bgtfmf5t0yc84" path="res://Visual/Sprites/Titles.png" id="7_rqr8y"]
+[ext_resource type="Texture2D" uid="uid://b4qdwe8jnrg7g" path="res://Visual/Level_Text_Sheet.png" id="7_bb4fc"]
 [ext_resource type="Shader" path="res://Visual/Shaders/LoaderShader.gdshader" id="7_yntbr"]
 [ext_resource type="Texture2D" uid="uid://bu5mt783frc2i" path="res://Visual/Sprites/Loader.png" id="8_8301x"]
 [ext_resource type="PackedScene" uid="uid://c3q138ajmubb" path="res://Scenes/Enemies/Godzilla.tscn" id="9_nno0b"]
@@ -12,12 +12,6 @@
 [ext_resource type="Script" path="res://Scripts/other/PlayerCamera.gd" id="11_f5tk5"]
 [ext_resource type="PackedScene" uid="uid://ucd2petm8ie1" path="res://Scenes/Other/sound.tscn" id="12_2widh"]
 [ext_resource type="PackedScene" uid="uid://wc8v1447wt3t" path="res://Scenes/Other/EnemyTitleAnimator.tscn" id="12_agfln"]
-
-[sub_resource type="Theme" id="Theme_0ru5m"]
-
-[sub_resource type="Theme" id="Theme_4tts6"]
-
-[sub_resource type="Theme" id="Theme_l1p0k"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_okhwt"]
 resource_local_to_scene = true
@@ -125,53 +119,27 @@ offset_right = 309.0
 offset_bottom = 37.0
 maxHP = 10
 
-[node name="GrowText" type="RichTextLabel" parent="CanvasLayer"]
+[node name="GrowText" type="Sprite2D" parent="CanvasLayer"]
 visible = false
-offset_left = 11.0
-offset_top = 45.0
-offset_right = 315.0
-offset_bottom = 83.0
-size_flags_horizontal = 4
-theme = SubResource("Theme_0ru5m")
-theme_override_colors/default_color = Color(1, 1, 1, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 2
-theme_override_font_sizes/normal_font_size = 20
-bbcode_enabled = true
-text = "[center]G to [rainbow freq=1.0 sat=0.8 val=0.8][wave amp=50.0 freq=5.0 connected=1][pulse freq=1.0 color=#ffffff40 ease=-2.0]GROW"
+position = Vector2(158, 70)
+texture = ExtResource("7_bb4fc")
+region_enabled = true
+region_rect = Rect2(9, 240, 197, 58)
 
-[node name="WinText" type="RichTextLabel" parent="CanvasLayer"]
+[node name="GameOverText" type="Sprite2D" parent="CanvasLayer"]
 visible = false
-offset_left = 12.0
-offset_top = 54.0
-offset_right = 312.0
-offset_bottom = 127.0
-size_flags_horizontal = 4
-theme = SubResource("Theme_4tts6")
-theme_override_colors/default_color = Color(1, 1, 1, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 2
-theme_override_font_sizes/normal_font_size = 20
-bbcode_enabled = true
-text = "[center]YOU WON![/center]"
+position = Vector2(157, 103)
+texture = ExtResource("7_bb4fc")
+region_enabled = true
+region_rect = Rect2(430, 198, 140, 75)
 
-[node name="GameOverText" type="RichTextLabel" parent="CanvasLayer"]
+[node name="WinText" type="Sprite2D" parent="CanvasLayer"]
 visible = false
-offset_left = 12.0
-offset_top = 54.0
-offset_right = 312.0
-offset_bottom = 127.0
-size_flags_horizontal = 4
-theme = SubResource("Theme_l1p0k")
-theme_override_colors/default_color = Color(1, 1, 1, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 2
-theme_override_font_sizes/normal_font_size = 20
-bbcode_enabled = true
-text = "[center]KO...[/center]"
+position = Vector2(157, 87)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("7_bb4fc")
+region_enabled = true
+region_rect = Rect2(245, 44, 342, 112)
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
 z_index = 1
@@ -190,17 +158,17 @@ libraries = {
 
 [node name="BossName" type="Sprite2D" parent="CanvasLayer"]
 visible = false
-position = Vector2(156, 94)
-texture = ExtResource("7_rqr8y")
+position = Vector2(156.5, 92.5)
+texture = ExtResource("7_bb4fc")
 region_enabled = true
-region_rect = Rect2(20, 26, 179, 61)
+region_rect = Rect2(-1, 9, 255, 68)
 
 [node name="BossKanji" type="Sprite2D" parent="CanvasLayer"]
 visible = false
-position = Vector2(156, 94)
-texture = ExtResource("7_rqr8y")
+position = Vector2(156.5, 92.5)
+texture = ExtResource("7_bb4fc")
 region_enabled = true
-region_rect = Rect2(200, 20, 202, 72)
+region_rect = Rect2(2, 77, 252, 83)
 
 [node name="Walls" type="Node2D" parent="."]
 
