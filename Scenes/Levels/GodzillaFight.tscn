@@ -117,7 +117,7 @@ offset_left = 12.0
 offset_top = 27.0
 offset_right = 309.0
 offset_bottom = 37.0
-maxHP = 10
+maxHP = 50
 
 [node name="GrowText" type="Sprite2D" parent="CanvasLayer"]
 visible = false
