@@ -92,7 +92,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_bottom = -137.0
+offset_bottom = -120.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
@@ -103,7 +103,7 @@ theme_override_fonts/normal_font = ExtResource("3_lhcro")
 theme_override_font_sizes/normal_font_size = 35
 bbcode_enabled = true
 text = "[center][tornado radius=2
-.0 freq=8 connected=1]Scale Fighter"
+.0 freq=8 connected=1]Scaled Up!"
 
 [node name="PressSpace" type="RichTextLabel" parent="CanvasLayer/Control"]
 clip_contents = false
@@ -119,7 +119,7 @@ theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(1, 0, 0, 0.396078)
 theme_override_constants/shadow_outline_size = 0
 theme_override_fonts/normal_font = ExtResource("2_wvyu7")
-theme_override_font_sizes/normal_font_size = 10
+theme_override_font_sizes/normal_font_size = 15
 bbcode_enabled = true
 text = "[pulse freq=1.0 color=#ffffff40 ease=-2.0][center]Press Space"
 
