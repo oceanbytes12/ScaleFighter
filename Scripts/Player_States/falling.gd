@@ -15,11 +15,8 @@ func physics_update(delta: float) -> void:
 	player.velocity.y += player.gravity * delta
 	player.move_and_slide()
 	
-	if Input.is_action_just_pressed("Down") && Player.canSlam:
-		finished.emit(SLAM)
-	elif Input.is_action_just_pressed("Attack"):
-		finished.emit(AIRPUNCH)
-	elif player.is_on_floor():
+
+	if player.is_on_floor():
 		play_effect(land_effect)
 		#Create landing effect
 		if is_equal_approx(player.velocity.x, 0.0):
@@ -27,3 +24,5 @@ func physics_update(delta: float) -> void:
 			$Gecko_land.play()
 		else:
 			finished.emit(RUNNING)
+	elif Input.is_action_just_pressed("Down") && Player.canSlam:
+		finished.emit(SLAM)
