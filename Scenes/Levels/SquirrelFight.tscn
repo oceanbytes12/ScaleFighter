@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cpw72g2clnklq"]
+[gd_scene load_steps=22 format=3 uid="uid://cpw72g2clnklq"]
 
 [ext_resource type="Script" path="res://Scripts/other/Level_Base.gd" id="1_bnkg8"]
 [ext_resource type="Texture2D" uid="uid://dt2t7dakyscjp" path="res://Visual/Sprites/Backgrounds/bg1.png" id="2_redwd"]
@@ -9,6 +9,7 @@
 [ext_resource type="Shader" path="res://Visual/Shaders/LoaderShader.gdshader" id="7_m68fn"]
 [ext_resource type="Texture2D" uid="uid://bu5mt783frc2i" path="res://Visual/Sprites/Loader.png" id="8_ds3gt"]
 [ext_resource type="PackedScene" uid="uid://cujkhawkt2egg" path="res://Scenes/Player/player.tscn" id="9_i2pr3"]
+[ext_resource type="Texture2D" uid="uid://bgtfmf5t0yc84" path="res://Visual/Sprites/Titles.png" id="9_rin6g"]
 [ext_resource type="PackedScene" uid="uid://05ukpwn07wnq" path="res://Scenes/Enemies/Squirrel.tscn" id="10_bxw3c"]
 [ext_resource type="Script" path="res://Scripts/other/PlayerCamera.gd" id="11_ntscg"]
 [ext_resource type="PackedScene" uid="uid://wc8v1447wt3t" path="res://Scenes/Other/EnemyTitleAnimator.tscn" id="12_2gnqg"]
@@ -192,6 +193,20 @@ color = Color(0, 0, 0, 1)
 libraries = {
 "": SubResource("AnimationLibrary_1t5nq")
 }
+
+[node name="BossName" type="Sprite2D" parent="CanvasLayer"]
+visible = false
+position = Vector2(162.5, 92)
+texture = ExtResource("9_rin6g")
+region_enabled = true
+region_rect = Rect2(14, 107, 185, 60)
+
+[node name="BossKanji" type="Sprite2D" parent="CanvasLayer"]
+visible = false
+position = Vector2(162.5, 92)
+texture = ExtResource("9_rin6g")
+region_enabled = true
+region_rect = Rect2(217, 108, 155, 78)
 
 [node name="Walls" type="Node2D" parent="."]
 
