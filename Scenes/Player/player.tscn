@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://cujkhawkt2egg"]
+[gd_scene load_steps=67 format=3 uid="uid://cujkhawkt2egg"]
 
 [ext_resource type="Script" path="res://Scripts/other/player.gd" id="1_vo1r3"]
 [ext_resource type="Shader" path="res://Visual/Shaders/hitEffect.gdshader" id="2_07hnp"]
@@ -11,26 +11,39 @@
 [ext_resource type="Script" path="res://Scripts/State/state_machine.gd" id="6_1utgt"]
 [ext_resource type="Script" path="res://Scripts/Player_States/idle.gd" id="7_w0w0b"]
 [ext_resource type="Script" path="res://Scripts/Player_States/running.gd" id="8_qtf6m"]
+[ext_resource type="AudioStream" uid="uid://2d8e5852sk2p" path="res://Sound/Sfx/Player/Punches/Punch_hit/Punch_hit_sfx_v1.wav" id="9_8irt5"]
 [ext_resource type="Script" path="res://Scripts/Player_States/jumping.gd" id="9_22a62"]
-[ext_resource type="AudioStream" uid="uid://2d8e5852sk2p" path="res://Sound/Sfx/Gecko/Punches/Punch_hit/Punch_hit_sfx_v1.wav" id="9_kge1a"]
 [ext_resource type="Script" path="res://Scripts/Player_States/falling.gd" id="10_ajlu7"]
-[ext_resource type="AudioStream" uid="uid://dqq3j0cgvndiq" path="res://Sound/Sfx/Gecko/Punches/Punch_hit/Punch_hit_sfx_v2.wav" id="10_fy558"]
+[ext_resource type="AudioStream" uid="uid://dqq3j0cgvndiq" path="res://Sound/Sfx/Player/Punches/Punch_hit/Punch_hit_sfx_v2.wav" id="10_kgucw"]
 [ext_resource type="Script" path="res://Scripts/Player_States/punching.gd" id="11_6cxed"]
-[ext_resource type="AudioStream" uid="uid://byjqdysyoftbp" path="res://Sound/Sfx/Gecko/Punches/Punch_hit/Punch_hit_sfx_v3.wav" id="11_uaf7o"]
+[ext_resource type="AudioStream" uid="uid://byjqdysyoftbp" path="res://Sound/Sfx/Player/Punches/Punch_hit/Punch_hit_sfx_v3.wav" id="11_8f43n"]
+[ext_resource type="AudioStream" uid="uid://bt0cdk2yxucsk" path="res://Sound/Sfx/Player/Punches/Punch_hit/Gecko_slam1_sfx_v1.wav" id="12_j217l"]
 [ext_resource type="Script" path="res://Scripts/Player_States/airpunching.gd" id="12_yajeu"]
 [ext_resource type="Script" path="res://Scripts/Player_States/slamming.gd" id="13_hyj6v"]
 [ext_resource type="Script" path="res://Scripts/Player_States/slamfinish.gd" id="14_n2k4j"]
 [ext_resource type="Script" path="res://Scripts/Player_States/playerhurt.gd" id="15_nb2ow"]
-[ext_resource type="AudioStream" uid="uid://daxge4yrqs2a8" path="res://Sound/Sfx/Gecko/Punches/Punch_woosh/Punch_woosh_sfx_v1.wav" id="18_aeh68"]
-[ext_resource type="AudioStream" uid="uid://ciom40c8sd5kw" path="res://Sound/Sfx/Gecko/Punches/Punch_woosh/Punch_woosh_sfx_v2.wav" id="19_jjsgp"]
-[ext_resource type="AudioStream" uid="uid://c4sevwe8yor7a" path="res://Sound/Sfx/Gecko/Punches/Punch_woosh/Punch_woosh_sfx_v3.wav" id="20_7lht2"]
-[ext_resource type="AudioStream" uid="uid://b0wnfwparaujf" path="res://Sound/Sfx/Gecko/Cries/Gecko_cry_wet01_v1.wav" id="23_kkkvx"]
-[ext_resource type="AudioStream" uid="uid://c3bntexuxcoat" path="res://Sound/Sfx/Gecko/Cries/Gecko_cry_wet02_v1.wav" id="24_6esre"]
-[ext_resource type="AudioStream" uid="uid://ur5jbpk7yqhq" path="res://Sound/Sfx/Gecko/Cries/Gecko_cry_wet03_v1.wav" id="25_nfsx0"]
+[ext_resource type="AudioStream" uid="uid://daxge4yrqs2a8" path="res://Sound/Sfx/Player/Punches/Punch_woosh/Punch_woosh_sfx_v1.wav" id="19_yaq0m"]
+[ext_resource type="AudioStream" uid="uid://ciom40c8sd5kw" path="res://Sound/Sfx/Player/Punches/Punch_woosh/Punch_woosh_sfx_v2.wav" id="20_ltpyx"]
+[ext_resource type="AudioStream" uid="uid://c4sevwe8yor7a" path="res://Sound/Sfx/Player/Punches/Punch_woosh/Punch_woosh_sfx_v3.wav" id="21_aliej"]
 [ext_resource type="Script" path="res://Scenes/Player/playerdefeated.gd" id="25_qgmis"]
-[ext_resource type="AudioStream" uid="uid://pk3b6md2dvii" path="res://Sound/Sfx/Gecko/Grow/Grow_SF_v1_sfx.wav" id="26_dmibk"]
-[ext_resource type="AudioStream" uid="uid://cesi2u6hiaong" path="res://Sound/Sfx/Gecko/Grow/Grow_SF_v2_sfx.wav" id="27_g80c2"]
-[ext_resource type="AudioStream" uid="uid://7kygs4ylls2i" path="res://Sound/Sfx/Gecko/Grow/Grow_SF_v3_sfx.wav" id="28_0vr4h"]
+[ext_resource type="AudioStream" uid="uid://7hjgoor4drua" path="res://Sound/Sfx/Player/Cries/Die/Little_die1.wav" id="27_vh1sc"]
+[ext_resource type="AudioStream" uid="uid://dw6osf0j5gfim" path="res://Sound/Sfx/Player/Cries/Die/Med_die1.wav" id="28_l657q"]
+[ext_resource type="AudioStream" uid="uid://b0mg184k6b1st" path="res://Sound/Sfx/Player/Cries/Die/Big_die1.wav" id="29_of5gm"]
+[ext_resource type="AudioStream" uid="uid://pk3b6md2dvii" path="res://Sound/Sfx/Player/Grow/Grow_SF_v1_sfx.wav" id="30_1mafj"]
+[ext_resource type="AudioStream" uid="uid://cesi2u6hiaong" path="res://Sound/Sfx/Player/Grow/Grow_SF_v2_sfx.wav" id="31_1ww82"]
+[ext_resource type="AudioStream" uid="uid://7kygs4ylls2i" path="res://Sound/Sfx/Player/Grow/Grow_SF_v3_sfx.wav" id="32_dmh1w"]
+[ext_resource type="AudioStream" uid="uid://lv4fonprs4bf" path="res://Sound/Sfx/Player/Cries/Hurt/Little_cry1.wav" id="33_3tjgx"]
+[ext_resource type="AudioStream" uid="uid://dqrwwarn6kcww" path="res://Sound/Sfx/Player/Cries/Hurt/Little_cry2.wav" id="34_l4xxm"]
+[ext_resource type="AudioStream" uid="uid://cmyhuqh5nb2oj" path="res://Sound/Sfx/Player/Cries/Hurt/Little_cry3.wav" id="35_0ib7h"]
+[ext_resource type="AudioStream" uid="uid://dyhfciplioesq" path="res://Sound/Sfx/Player/Cries/Hurt/Little_cry4.wav" id="36_mp305"]
+[ext_resource type="AudioStream" uid="uid://d10y5ghpbxhmu" path="res://Sound/Sfx/Player/Cries/Hurt/Little_cry5.wav" id="37_cvsnu"]
+[ext_resource type="AudioStream" uid="uid://m8nsrjwwdreg" path="res://Sound/Sfx/Player/Cries/Hurt/Little_cry6.wav" id="38_epxos"]
+[ext_resource type="AudioStream" uid="uid://cid5b4100se0i" path="res://Sound/Sfx/Player/Cries/Hurt/Little_cry7.wav" id="39_kouq7"]
+[ext_resource type="AudioStream" uid="uid://cdrg1hf5gdp7" path="res://Sound/Sfx/Player/Cries/Hurt/Med_cry1.wav" id="40_slr1w"]
+[ext_resource type="AudioStream" uid="uid://byicm53sw6c63" path="res://Sound/Sfx/Player/Cries/Hurt/Med_cry2.wav" id="41_76xn8"]
+[ext_resource type="AudioStream" uid="uid://dv5j7e63dpmxg" path="res://Sound/Sfx/Player/Cries/Hurt/Big_cry1.wav" id="42_r3a8m"]
+[ext_resource type="AudioStream" uid="uid://k63wlqocuh48" path="res://Sound/Sfx/Player/Cries/Hurt/Big_cry2.wav" id="43_urec2"]
+[ext_resource type="AudioStream" uid="uid://c4vto8g007xj2" path="res://Sound/Sfx/Player/Cries/Hurt/Big_cry3.wav" id="44_bs518"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n3n25"]
 radius = 3.5
@@ -341,46 +354,81 @@ _data = {
 random_pitch = 1.1
 random_volume_offset_db = 0.4
 streams_count = 3
-stream_0/stream = ExtResource("9_kge1a")
+stream_0/stream = ExtResource("9_8irt5")
 stream_0/weight = 1.0
-stream_1/stream = ExtResource("10_fy558")
+stream_1/stream = ExtResource("10_kgucw")
 stream_1/weight = 1.0
-stream_2/stream = ExtResource("11_uaf7o")
+stream_2/stream = ExtResource("11_8f43n")
 stream_2/weight = 1.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tlehm"]
 size = Vector2(80, 22.5)
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_d1t5x"]
+random_pitch = 1.15
+random_volume_offset_db = 0.4
+streams_count = 1
+stream_0/stream = ExtResource("12_j217l")
+stream_0/weight = 1.0
+
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_2yfd8"]
 random_pitch = 1.1
 random_volume_offset_db = 0.4
 streams_count = 3
-stream_0/stream = ExtResource("18_aeh68")
+stream_0/stream = ExtResource("19_yaq0m")
 stream_0/weight = 1.0
-stream_1/stream = ExtResource("19_jjsgp")
+stream_1/stream = ExtResource("20_ltpyx")
 stream_1/weight = 1.0
-stream_2/stream = ExtResource("20_7lht2")
+stream_2/stream = ExtResource("21_aliej")
 stream_2/weight = 1.0
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_owdgt"]
 playback_mode = 2
 streams_count = 3
-stream_0/stream = ExtResource("26_dmibk")
+stream_0/stream = ExtResource("30_1mafj")
 stream_0/weight = 1.0
-stream_1/stream = ExtResource("27_g80c2")
+stream_1/stream = ExtResource("31_1ww82")
 stream_1/weight = 1.0
-stream_2/stream = ExtResource("28_0vr4h")
+stream_2/stream = ExtResource("32_dmh1w")
 stream_2/weight = 1.0
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_2867f"]
-random_pitch = 1.1
-random_volume_offset_db = 0.4
-streams_count = 3
-stream_0/stream = ExtResource("23_kkkvx")
+random_pitch = 1.3
+random_volume_offset_db = 1.0
+streams_count = 7
+stream_0/stream = ExtResource("33_3tjgx")
 stream_0/weight = 1.0
-stream_1/stream = ExtResource("24_6esre")
+stream_1/stream = ExtResource("34_l4xxm")
 stream_1/weight = 1.0
-stream_2/stream = ExtResource("25_nfsx0")
+stream_2/stream = ExtResource("35_0ib7h")
+stream_2/weight = 1.0
+stream_3/stream = ExtResource("36_mp305")
+stream_3/weight = 1.0
+stream_4/stream = ExtResource("37_cvsnu")
+stream_4/weight = 1.0
+stream_5/stream = ExtResource("38_epxos")
+stream_5/weight = 1.0
+stream_6/stream = ExtResource("39_kouq7")
+stream_6/weight = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_1pmrq"]
+random_pitch = 1.56
+random_volume_offset_db = 1.48
+streams_count = 2
+stream_0/stream = ExtResource("40_slr1w")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("41_76xn8")
+stream_1/weight = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_q30tr"]
+random_pitch = 1.42
+random_volume_offset_db = 1.85
+streams_count = 3
+stream_0/stream = ExtResource("42_r3a8m")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("43_urec2")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("44_bs518")
 stream_2/weight = 1.0
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("blinkAnimator", "hurtbox")]
@@ -400,7 +448,7 @@ particle_gen = ExtResource("2_cnb4c")
 collision_layer = 16
 collision_mask = 0
 script = ExtResource("3_4iq6g")
-sound = NodePath("../Gecko_cry")
+sound = NodePath("../Gecko_little_cry")
 
 [node name="HurtBox" type="CollisionShape2D" parent="PlayerHurtBox"]
 position = Vector2(0, 3)
@@ -445,17 +493,22 @@ shape = SubResource("CircleShape2D_gjiiv")
 [node name="Punch_hit" type="AudioStreamPlayer2D" parent="Flipped/PunchHitbox"]
 stream = SubResource("AudioStreamRandomizer_h8ioa")
 
-[node name="SlamHitbox" type="Area2D" parent="Flipped"]
+[node name="SlamHitbox" type="Area2D" parent="Flipped" node_paths=PackedStringArray("sound")]
 collision_layer = 0
 collision_mask = 8
 script = ExtResource("5_gdpkv")
 damage = 5
 knockback = 3
+sound = NodePath("Slam_hit")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Flipped/SlamHitbox"]
 position = Vector2(-1.19209e-07, 10.5)
 scale = Vector2(0.4, 0.4)
 shape = SubResource("RectangleShape2D_tlehm")
+
+[node name="Slam_hit" type="AudioStreamPlayer2D" parent="Flipped/SlamHitbox"]
+stream = SubResource("AudioStreamRandomizer_d1t5x")
+volume_db = -0.99
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("6_1utgt")
@@ -494,6 +547,18 @@ script = ExtResource("15_nb2ow")
 [node name="Defeated" type="Node" parent="StateMachine"]
 script = ExtResource("25_qgmis")
 
+[node name="Gecko_little_die" type="AudioStreamPlayer2D" parent="StateMachine/Defeated"]
+scale = Vector2(2, 2)
+stream = ExtResource("27_vh1sc")
+
+[node name="Gecko_med_die" type="AudioStreamPlayer2D" parent="StateMachine/Defeated"]
+scale = Vector2(2, 2)
+stream = ExtResource("28_l657q")
+
+[node name="Gecko_big_die" type="AudioStreamPlayer2D" parent="StateMachine/Defeated"]
+scale = Vector2(2, 2)
+stream = ExtResource("29_of5gm")
+
 [node name="Label" type="Label" parent="."]
 visible = false
 anchors_preset = 5
@@ -514,8 +579,14 @@ position = Vector2(0, 6)
 [node name="Grow" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_owdgt")
 
-[node name="Gecko_cry" type="AudioStreamPlayer2D" parent="."]
+[node name="Gecko_little_cry" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_2867f")
+
+[node name="Gecko_med_cry" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_1pmrq")
+
+[node name="Gecko_big_cry" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_q30tr")
 
 [connection signal="area_entered" from="Flipped/PunchHitbox" to="Flipped/PunchHitbox" method="_on_area_entered"]
 [connection signal="body_entered" from="Flipped/PunchHitbox" to="Flipped/PunchHitbox" method="_on_body_entered"]
