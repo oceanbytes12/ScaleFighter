@@ -28,11 +28,12 @@ func _on_damage_received(amount : int):
 					value = result
 			 
 		else:
-			# Reduce progressBar by "amount"
-			var result = value - amount
-			if result <= 0:
-				value = 0
-				BarEmpty.emit()
-			else:
-				value = result
+			if value != 0:
+				# Reduce progressBar by "amount"
+				var result = value - amount
+				if result <= 0:
+					value = 0
+					BarEmpty.emit()
+				else:
+					value = result
 

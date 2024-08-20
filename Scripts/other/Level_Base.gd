@@ -96,13 +96,15 @@ func HitStop(duration, scale):
 	Engine.time_scale = 1
 	
 func _on_player_hp_bar_empty():
-	# Game Over text appears on screen
-	#gameover_text.visible = true
-	#get_tree().paused = true
+	# Reload current scene after brief pause
+	gameover_text.visible = true
+	await get_tree().create_timer(3).timeout
+	
 	if(animator):
 		animator.play("FadeOut")
 	await get_tree().create_timer(1).timeout
-	get_tree().call_deferred(&"change_scene_to_file", title_scene)
+	get_tree().call_deferred("reload_current_scene")
+	#get_tree().call_deferred("change_scene_to_file", title_scene)
 
 
 func _on_grow_bar_full():
