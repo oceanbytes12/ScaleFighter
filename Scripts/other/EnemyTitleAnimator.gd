@@ -1,57 +1,29 @@
 class_name EnemyTitleAnimator extends Node2D
 
 @export var wordAnimTime = 1.5
-@export var countdownAnimTime = .7
+@export var countdownAnimTime = 0.6
 #@export var announcerVoice := PackedScene
 const announcer_SCENE = "res://Scenes/Other/AnnouncerVoice.tscn"
 
+@onready var animator := $AnimationPlayer
 # Plays enemy title animation
+var play_automatically = false
+func _ready():
+	if(play_automatically):
+		DisplayEnemyTitle("Squirrel")
 
 func DisplayEnemyTitle(enemy_name):
-	match enemy_name:
-		"Squirrel":
-			TitleSquirrel()
-		"Kong":
-			TitleKong()
-		"Godzilla":
-			print("Godzilla Title not implemented yet!")
-			#TitleGodzilla()
+	animator.play(enemy_name)
 
 
-func TitleSquirrel():
-	$Squirrel.show()
+func TitleSquirrel(firstShown, secondShown):
+	firstShown.show()
 	await get_tree().create_timer(wordAnimTime).timeout
-	$Squirrel.hide() 
-	
-	$SquirrelKanji.show()
+	firstShown.hide() 
+	secondShown.show()
 	await get_tree().create_timer(wordAnimTime).timeout
-	$SquirrelKanji.hide()
+	secondShown.hide()
 	TitleCountdown()
-
-
-func TitleKong():
-	$Kong.show()
-	await get_tree().create_timer(wordAnimTime).timeout
-	$Kong.hide() 
-	
-	$KongKanji.show()
-	await get_tree().create_timer(wordAnimTime).timeout
-	$KongKanji.hide() 
-	
-	TitleCountdown()
-	
-	
-func TitleGodzilla():
-	$Godzilla.show()
-	await get_tree().create_timer(wordAnimTime).timeout
-	$Godzilla.hide() 
-	
-	$GodzillaKanji.show()
-	await get_tree().create_timer(wordAnimTime).timeout
-	$GodzillaKanji.hide() 
-	
-	TitleCountdown()
-	
 
 func TitleCountdown():
 	$Announcer1.play()

@@ -39,7 +39,8 @@ func _ready():
 		print("Playing FadeIn")
 		animator.play("FadeIn")
 	await get_tree().create_timer(1).timeout
-	
+	if(Engine.time_scale != 1):
+		return
 	ShowTitleAnim()
 	
 	EventBus.on_game_ready.emit()
