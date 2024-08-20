@@ -1,13 +1,239 @@
-[gd_scene load_steps=6 format=3 uid="uid://sockfkjnaotu"]
+[gd_scene load_steps=14 format=3 uid="uid://wc8v1447wt3t"]
 
 [ext_resource type="Script" path="res://Scripts/other/EnemyTitleAnimator.gd" id="1_xp7ca"]
 [ext_resource type="Texture2D" uid="uid://bgtfmf5t0yc84" path="res://Visual/Sprites/Titles.png" id="2_1ss42"]
-[ext_resource type="AudioStream" uid="uid://drwo1pm0ec8sm" path="res://Sound/Sfx/Announcer/Announcer1/Announcer_v1.wav" id="3_g6q06"]
-[ext_resource type="AudioStream" uid="uid://fhnefdo70ip1" path="res://Sound/Sfx/Announcer/Announcer2/Announcer2_v1.wav" id="4_rkg1i"]
-[ext_resource type="AudioStream" uid="uid://ukfxdq5l6wf4" path="res://Sound/Sfx/Announcer/Announcer3/Announcer3_v1.wav" id="5_1lfxa"]
+[ext_resource type="AudioStream" uid="uid://ec6avw6ksvlg" path="res://Sound/Sfx/Announcer/Announcer1/Announcer1_01_sfx_v1.wav" id="3_5acly"]
+[ext_resource type="AudioStream" uid="uid://b1g26r3aly4tn" path="res://Sound/Sfx/Announcer/Announcer1/Announcer1_02_sfx_v1.wav" id="4_raoul"]
+[ext_resource type="AudioStream" uid="uid://bqgvgdyb0w21k" path="res://Sound/Sfx/Announcer/Announcer1/Announcer1_03_sfx_v1.wav" id="5_y4iqw"]
+[ext_resource type="AudioStream" uid="uid://bx0vcgq824wb2" path="res://Sound/Sfx/Announcer/Announcer1/Announcer1_04_sfx_v1.wav" id="6_hlwnd"]
+
+[sub_resource type="Animation" id="Animation_67lc7"]
+resource_name = "CountDown"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Three:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Two:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.3, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("One:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.7, 0.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Fight:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(1.1, 1.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("FightAnnouncer")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.7, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}, {
+"args": [0.0],
+"method": &"play"
+}, {
+"args": [0.0],
+"method": &"play"
+}, {
+"args": [0.0],
+"method": &"play"
+}]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(1.4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"EndCountdown"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_2s72x"]
+resource_name = "Godzilla"
+
+[sub_resource type="Animation" id="Animation_r03oe"]
+resource_name = "Gorilla"
+
+[sub_resource type="Animation" id="Animation_v7d4b"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SquirrelKanji:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Squirrel:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Three:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Two:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("One:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Fight:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_fa2om"]
+resource_name = "Squirrel"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SquirrelKanji:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Squirrel:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_c2c17"]
+_data = {
+"CountDown": SubResource("Animation_67lc7"),
+"Godzilla": SubResource("Animation_2s72x"),
+"Gorilla": SubResource("Animation_r03oe"),
+"RESET": SubResource("Animation_v7d4b"),
+"Squirrel": SubResource("Animation_fa2om")
+}
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_3ejly"]
+playback_mode = 2
+streams_count = 4
+stream_0/stream = ExtResource("3_5acly")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("4_raoul")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("5_y4iqw")
+stream_2/weight = 1.0
+stream_3/stream = ExtResource("6_hlwnd")
+stream_3/weight = 1.0
 
 [node name="TitleAnimator" type="Node2D"]
 script = ExtResource("1_xp7ca")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_c2c17")
+}
+speed_scale = 0.5
 
 [node name="Kong" type="Sprite2D" parent="."]
 visible = false
@@ -57,15 +283,6 @@ texture = ExtResource("2_1ss42")
 region_enabled = true
 region_rect = Rect2(355, 197, 49, 81)
 
-[node name="Timer" type="Timer" parent="."]
-
-[node name="Announcer1" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3_g6q06")
-
-[node name="Announcer2" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("4_rkg1i")
-
-[node name="Announcer3" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("5_1lfxa")
-
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[node name="FightAnnouncer" type="AudioStreamPlayer2D" parent="."]
+visible = false
+stream = SubResource("AudioStreamRandomizer_3ejly")

@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://5c4vgkb0px60"]
+[gd_scene load_steps=13 format=3 uid="uid://5c4vgkb0px60"]
 
-[ext_resource type="Texture2D" uid="uid://06x3cxd605xx" path="res://Visual/Sprites/Backgrounds/bg3.png" id="1_0m8vh"]
 [ext_resource type="Script" path="res://Scripts/other/Title.gd" id="1_2nhra"]
+[ext_resource type="Texture2D" uid="uid://pfvgk8k5eakr" path="res://gmtk_title_screen.png" id="2_t820y"]
 [ext_resource type="FontFile" uid="uid://bawienkaqsabo" path="res://Visual/Super Carnival.ttf" id="2_wvyu7"]
+[ext_resource type="FontFile" uid="uid://bfcg3wlt2b25p" path="res://Martyric_PersonalUse.ttf" id="3_lhcro"]
 [ext_resource type="Shader" path="res://Visual/Shaders/LoaderShader.gdshader" id="5_hc86l"]
 [ext_resource type="AudioStream" uid="uid://u5k1y40e6tvc" path="res://Sound/Music/Scale_Fighter_track1_v1.wav" id="6_1ht6i"]
 [ext_resource type="Texture2D" uid="uid://bu5mt783frc2i" path="res://Visual/Sprites/Loader.png" id="6_t17ks"]
@@ -82,7 +83,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_0m8vh")
+texture = ExtResource("2_t820y")
 expand_mode = 2
 
 [node name="Title" type="RichTextLabel" parent="CanvasLayer/Control"]
@@ -91,19 +92,18 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 19.0
-offset_bottom = -118.0
+offset_bottom = -120.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(1, 0, 0, 0.396078)
+theme_override_colors/font_outline_color = Color(0.411765, 0, 0, 0.396078)
 theme_override_constants/shadow_outline_size = 0
 theme_override_constants/outline_size = 5
-theme_override_fonts/normal_font = ExtResource("2_wvyu7")
-theme_override_font_sizes/normal_font_size = 30
+theme_override_fonts/normal_font = ExtResource("3_lhcro")
+theme_override_font_sizes/normal_font_size = 35
 bbcode_enabled = true
 text = "[center][tornado radius=2
-.0 freq=8 connected=1]Scale Fighter"
+.0 freq=8 connected=1]Scaled Up!"
 
 [node name="PressSpace" type="RichTextLabel" parent="CanvasLayer/Control"]
 clip_contents = false
@@ -111,15 +111,15 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 112.0
-offset_bottom = -25.0
+offset_top = 151.0
+offset_bottom = 14.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(1, 0, 0, 0.396078)
 theme_override_constants/shadow_outline_size = 0
 theme_override_fonts/normal_font = ExtResource("2_wvyu7")
-theme_override_font_sizes/normal_font_size = 10
+theme_override_font_sizes/normal_font_size = 15
 bbcode_enabled = true
 text = "[pulse freq=1.0 color=#ffffff40 ease=-2.0][center]Press Space"
 

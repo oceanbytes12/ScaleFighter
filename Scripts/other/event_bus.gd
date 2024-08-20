@@ -3,7 +3,6 @@ extends Node
 signal on_slam_finish(strength)
 signal on_player_grow
 signal on_player_take_damage(amount)
-signal on_game_ready
 signal on_enemy_critical_damage(amount)
 signal on_enemy_minor_damage(amount)
 

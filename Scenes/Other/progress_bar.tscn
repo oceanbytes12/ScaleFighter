@@ -1,20 +1,50 @@
-[gd_scene load_steps=4 format=3 uid="uid://dlh2vlug8qltd"]
+[gd_scene load_steps=6 format=3 uid="uid://dlh2vlug8qltd"]
 
 [ext_resource type="Script" path="res://Scripts/other/ProgressBar.gd" id="1_etvib"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wwsup"]
-bg_color = Color(0.86531, 0.13123, 0.145332, 1)
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nmmsl"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5goay"]
 bg_color = Color(0, 0.627451, 0.152941, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nhtfe"]
+bg_color = Color(0.169245, 0.169245, 0.169245, 1)
+expand_margin_left = 1.0
+expand_margin_top = 1.0
+expand_margin_right = 1.0
+expand_margin_bottom = 1.0
+shadow_color = Color(0, 0, 0, 0.27451)
+shadow_offset = Vector2(0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_neqnb"]
+bg_color = Color(0.745098, 0.117647, 0.176471, 1)
+
 [node name="ProgressBar" type="ProgressBar"]
-offset_right = 170.0
-offset_bottom = 27.0
-theme_override_styles/background = SubResource("StyleBoxFlat_wwsup")
+z_index = 1
+offset_right = 140.0
+offset_bottom = 10.0
+theme_override_styles/background = SubResource("StyleBoxEmpty_nmmsl")
 theme_override_styles/fill = SubResource("StyleBoxFlat_5goay")
-step = 1.0
 value = 50.0
 rounded = true
 show_percentage = false
 script = ExtResource("1_etvib")
+
+[node name="DamageBar" type="ProgressBar" parent="."]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_nhtfe")
+theme_override_styles/fill = SubResource("StyleBoxFlat_neqnb")
+value = 80.0
+show_percentage = false
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

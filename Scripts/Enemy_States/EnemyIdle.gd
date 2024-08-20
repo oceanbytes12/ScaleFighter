@@ -13,6 +13,9 @@ func enter(_previous_state_path: String, _data := {}) -> void:
 	owner.velocity.y = 0
 
 func update(_delta: float) -> void:
+	if(!LevelBase.FightStarted):
+		return
+	
 	currenttime-= _delta
 	if(currenttime<=0):
 		finished.emit(nextState)
@@ -20,3 +23,6 @@ func update(_delta: float) -> void:
 func physics_update(_delta: float) -> void:
 	player.velocity.y += player.gravity * _delta
 	player.move_and_slide()
+	
+	if(!LevelBase.FightStarted):
+		return

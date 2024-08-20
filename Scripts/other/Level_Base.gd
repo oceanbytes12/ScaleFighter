@@ -11,15 +11,21 @@ const title_scene = "res://Scenes/Title.tscn"
 
 @onready var animator := $CanvasLayer/ColorRect/AnimationPlayer
 @onready var title_animator := $TitleAnimator
+@onready var bossNameSprite := $CanvasLayer/BossName
+@onready var bossKanjiSprite := $CanvasLayer/BossKanji
+
 @export var GrowBar : GameBar
 @export var BossBar : GameBar
 @export var PlayerBar : GameBar
 
+
 static var PlayerDefeated = false
 static var BossDefeated = false
+static var FightStarted = false
 static var can_grow = false
 
 func _ready():
+	FightStarted = false
 	PlayerDefeated = false
 	BossDefeated = false
 	can_grow = false
@@ -38,11 +44,10 @@ func _ready():
 	if(animator):
 		print("Playing FadeIn")
 		animator.play("FadeIn")
+		
 	await get_tree().create_timer(1).timeout
 	
 	ShowTitleAnim()
-	
-	EventBus.on_game_ready.emit()
 
 func HandleSlam(slamamount):
 	HitStop(0.5, 0.1)
@@ -51,6 +56,16 @@ func TurnOffUI():
 	grow_text.visible = false
 	
 func ShowTitleAnim():
+	# Show boss name
+	bossNameSprite.show()
+	$Sound/GongHigh.play()
+	await get_tree().create_timer(2).timeout
+	$Sound/GongLow.play()
+	bossNameSprite.hide()
+	bossKanjiSprite.show()
+	await get_tree().create_timer(2).timeout
+	bossKanjiSprite.hide()
+	
 	# Need to pass strings to title_animator
 	match title_toshow:
 		0: 
@@ -59,9 +74,7 @@ func ShowTitleAnim():
 			title_animator.DisplayEnemyTitle("Kong")
 		2:
 			title_animator.DisplayEnemyTitle("Godzilla")
-	get_tree().paused = true
-	await get_tree().create_timer(6.5).timeout # Change this value to match with title_animator
-	get_tree().paused = false
+			
 
 func HitStop(duration, scale):
 	Engine.time_scale = scale
@@ -69,7 +82,7 @@ func HitStop(duration, scale):
 	Engine.time_scale = 1
 	
 func _on_grow_bar_full():
-	# Text prompt on screen for player: "Press 'G' to Grow!"	
+	# Text prompt on screen for player: "Press 'G' to Grow!"
 	grow_text.visible = true
 	can_grow = true
 
@@ -160,5 +173,4 @@ func HandleEnemyCriticalDamage(amount):
 		HitStop(1.2, 0.05)
 	else:
 		GrowBar._on_damage_received(amount)
-		HitStop(1, 0.1)
-	
+		HitStop(0.6, 0.05)
