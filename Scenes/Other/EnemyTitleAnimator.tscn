@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://dojynfwd6nb5h"]
+[gd_scene load_steps=6 format=3 uid="uid://sockfkjnaotu"]
 
 [ext_resource type="Script" path="res://Scripts/other/EnemyTitleAnimator.gd" id="1_xp7ca"]
 [ext_resource type="Texture2D" uid="uid://bgtfmf5t0yc84" path="res://Visual/Sprites/Titles.png" id="2_1ss42"]
+[ext_resource type="AudioStream" uid="uid://drwo1pm0ec8sm" path="res://Sound/Sfx/Announcer/Announcer_v1.wav" id="3_33lyx"]
+[ext_resource type="AudioStream" uid="uid://fhnefdo70ip1" path="res://Sound/Sfx/Announcer/Announcer2_v1.wav" id="4_2nmro"]
+[ext_resource type="AudioStream" uid="uid://ukfxdq5l6wf4" path="res://Sound/Sfx/Announcer/Announcer3_v1.wav" id="5_akfdf"]
 
 [node name="TitleAnimator" type="Node2D"]
 script = ExtResource("1_xp7ca")
@@ -55,5 +58,14 @@ region_enabled = true
 region_rect = Rect2(355, 197, 49, 81)
 
 [node name="Timer" type="Timer" parent="."]
+
+[node name="Announcer1" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_33lyx")
+
+[node name="Announcer2" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_2nmro")
+
+[node name="Announcer3" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_akfdf")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

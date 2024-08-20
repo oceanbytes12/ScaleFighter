@@ -23,8 +23,7 @@ func TitleSquirrel():
 	
 	$SquirrelKanji.show()
 	await get_tree().create_timer(wordAnimTime).timeout
-	$SquirrelKanji.hide() 
-	
+	$SquirrelKanji.hide()
 	TitleCountdown()
 
 
@@ -56,7 +55,6 @@ func TitleCountdown():
 	$Three.show()
 	await get_tree().create_timer(countdownAnimTime).timeout
 	$Three.hide() 
-	
 	$Two.show()
 	await get_tree().create_timer(countdownAnimTime).timeout
 	$Two.hide() 
