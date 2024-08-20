@@ -74,7 +74,7 @@ size = Vector2(20, 19.4)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_se114"]
 size = Vector2(20, 162)
 
-[node name="Fight" type="Node2D" node_paths=PackedStringArray("grow_text", "gameover_text", "win_text", "right_wall_collider", "GrowBar", "BossBar", "PlayerBar")]
+[node name="FightDarkLizard" type="Node2D" node_paths=PackedStringArray("grow_text", "gameover_text", "win_text", "right_wall_collider", "GrowBar", "BossBar", "PlayerBar")]
 script = ExtResource("1_xaqio")
 is_last_level = true
 grow_text = NodePath("CanvasLayer/GrowText")
@@ -158,14 +158,14 @@ libraries = {
 
 [node name="BossName" type="Sprite2D" parent="CanvasLayer"]
 visible = false
-position = Vector2(156.5, 92.5)
+position = Vector2(156.5, 84.5)
 texture = ExtResource("7_bb4fc")
 region_enabled = true
 region_rect = Rect2(-1, 9, 255, 68)
 
 [node name="BossKanji" type="Sprite2D" parent="CanvasLayer"]
 visible = false
-position = Vector2(156.5, 92.5)
+position = Vector2(156.5, 84.5)
 texture = ExtResource("7_bb4fc")
 region_enabled = true
 region_rect = Rect2(2, 77, 252, 83)

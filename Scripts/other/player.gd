@@ -47,6 +47,10 @@ func Blink():
 	blinkAnimator.play("Blink")
 
 func _ready():
+	#print(get_tree().get_current_scene().get_name())
+	if get_tree().get_current_scene().get_name() == "FightDarkLizard":
+		jump_impulse = jump_impulse*.7
+		
 	mainPlayer = self
 	invincibility_timer.timeout.connect(EndInvincible)
 	EventBus.on_player_grow.connect(PlayerGrew)
