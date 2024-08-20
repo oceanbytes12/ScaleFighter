@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dqs5up6xt3yr2"]
+[gd_scene load_steps=24 format=3 uid="uid://dqs5up6xt3yr2"]
 
 [ext_resource type="Script" path="res://Scripts/other/Level_Base.gd" id="1_ud67y"]
 [ext_resource type="Texture2D" uid="uid://daon7f1gf8ss2" path="res://Visual/Sprites/Backgrounds/bg2.png" id="2_biu23"]
@@ -9,7 +9,7 @@
 [ext_resource type="Shader" path="res://Visual/Shaders/LoaderShader.gdshader" id="7_0hvrg"]
 [ext_resource type="Texture2D" uid="uid://bu5mt783frc2i" path="res://Visual/Sprites/Loader.png" id="8_bquj0"]
 [ext_resource type="PackedScene" uid="uid://cujkhawkt2egg" path="res://Scenes/Player/player.tscn" id="9_gmrbk"]
-[ext_resource type="PackedScene" uid="uid://05ukpwn07wnq" path="res://Scenes/Enemies/Squirrel.tscn" id="10_abi7g"]
+[ext_resource type="PackedScene" uid="uid://beh82u6kyw1bt" path="res://Scenes/Enemies/Gorilla.tscn" id="10_dc7cp"]
 [ext_resource type="Script" path="res://Scripts/other/PlayerCamera.gd" id="11_30gjy"]
 [ext_resource type="PackedScene" uid="uid://dojynfwd6nb5h" path="res://Scenes/Other/EnemyTitleAnimator.tscn" id="12_2w3it"]
 
@@ -17,6 +17,8 @@
 bg_color = Color(0.865675, 0.380193, 0.951176, 1)
 
 [sub_resource type="Theme" id="Theme_7k74m"]
+
+[sub_resource type="Theme" id="Theme_kv8w0"]
 
 [sub_resource type="Theme" id="Theme_4tts6"]
 
@@ -126,6 +128,7 @@ step = 1.0
 value = 50.0
 show_percentage = false
 script = ExtResource("4_1464u")
+maxHP = 10
 isHealedOnHit = true
 
 [node name="GrowText" type="RichTextLabel" parent="CanvasLayer"]
@@ -151,10 +154,14 @@ offset_top = 54.0
 offset_right = 312.0
 offset_bottom = 127.0
 size_flags_horizontal = 4
-theme = SubResource("Theme_4tts6")
-theme_override_font_sizes/normal_font_size = 50
+theme = SubResource("Theme_kv8w0")
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/normal_font_size = 20
 bbcode_enabled = true
-text = "[center]GAME OVER[/center]"
+text = "[center]KO...[/center]"
 
 [node name="WinText" type="RichTextLabel" parent="CanvasLayer"]
 visible = false
@@ -234,7 +241,7 @@ shape = SubResource("RectangleShape2D_ulv0b")
 position = Vector2(-100, 0)
 jump_impulse = 600.0
 
-[node name="Squirrel" parent="." instance=ExtResource("10_abi7g")]
+[node name="Gorilla" parent="." instance=ExtResource("10_dc7cp")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.9, 0.9)

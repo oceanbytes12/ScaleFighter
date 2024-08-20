@@ -10,6 +10,7 @@ func enter(_previous_state_path: String, _data := {}) -> void:
 	owner.animate("Fall") # Change to Jump
 	FindTarget()
 	hasReversed = false
+	owner.SetEnemyBodyDamages(true)
 	
 func FindTarget():
 	TARGET = Player.mainPlayer

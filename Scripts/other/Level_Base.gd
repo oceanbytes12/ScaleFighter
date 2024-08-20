@@ -1,4 +1,5 @@
 class_name LevelBase extends Node2D
+@export var is_last_level = false
 @export var grow_text : RichTextLabel
 @export var gameover_text : RichTextLabel
 @export var win_text : RichTextLabel
@@ -26,6 +27,7 @@ func _ready():
 	EventBus.on_enemy_minor_damage.connect(HandleEnemyMinorDamage)
 	#Handle armor breaking
 	EventBus.on_enemy_critical_damage.connect(HandleEnemyCriticalDamage)
+	EventBus.on_slam_finish.connect(HandleSlam)
 	
 	if(animator):
 		print("Playing FadeIn")
@@ -35,6 +37,10 @@ func _ready():
 	ShowTitleAnim()
 	
 	EventBus.on_game_ready.emit()
+
+func HandleSlam(slamamount):
+	HitStop(0.5, 0.1)
+	
 
 func TurnOffUI():
 	grow_text.visible = false
@@ -64,7 +70,6 @@ func HandleEnemyCriticalDamage(amount):
 	if(0 >= BossBar.value):
 		print("BOSS DEFEATED")
 		BossDefeated = true
-		EventBus.on_boss_defeat.emit()
 		HitStop(1.2, 0.05)
 	else:
 		GrowBar._on_damage_received(amount)
@@ -79,7 +84,6 @@ func HandleEnemyMinorDamage(amount):
 		print("BOSS DEFEATED")
 		BossDefeated = true
 		HitStop(1.2, 0.05)
-		EventBus.on_boss_defeat.emit()
 		
 	elif(amount > 10):
 		HitStop(0.4, 0.1)
@@ -92,13 +96,15 @@ func HitStop(duration, scale):
 	Engine.time_scale = 1
 	
 func _on_player_hp_bar_empty():
-	# Game Over text appears on screen
-	#gameover_text.visible = true
-	#get_tree().paused = true
+	# Reload current scene after brief pause
+	gameover_text.visible = true
+	await get_tree().create_timer(3).timeout
+	
 	if(animator):
 		animator.play("FadeOut")
 	await get_tree().create_timer(1).timeout
-	get_tree().call_deferred(&"change_scene_to_file", title_scene)
+	get_tree().call_deferred("reload_current_scene")
+	#get_tree().call_deferred("change_scene_to_file", title_scene)
 
 
 func _on_grow_bar_full():
@@ -108,17 +114,25 @@ func _on_grow_bar_full():
 
 func _on_boss_hp_bar_empty():
 	# Level Complete
-	# Disable right wall
-	right_wall_collider.set_deferred("disabled", true)
-	# Display new power text	
-	win_text.visible = true
-	
-	# Unlock player power
-	match power_unlocked:
-		1:
-			Player.canJump = true
-		2:
-			Player.canSlam = true
+	if is_last_level:
+		win_text.visible = true
+		await get_tree().create_timer(3).timeout
+		if(animator):
+			animator.play("FadeOut")
+			await get_tree().create_timer(1).timeout
+			get_tree().call_deferred(&"change_scene_to_file", title_scene)
+	else:
+		# Disable right wall
+		right_wall_collider.set_deferred("disabled", true)
+		# Display new power text	
+		win_text.visible = true
+		
+		# Unlock player power
+		match power_unlocked:
+			1:
+				Player.canJump = true
+			2:
+				Player.canSlam = true
 
 func _on_exit_level_trigger_body_entered(body):  
 	if body is Player:
