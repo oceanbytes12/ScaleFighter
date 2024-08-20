@@ -8,7 +8,9 @@ func enter(_previous_state_path: String, _data := {}) -> void:
 
 func start():
 	attacking = true
-	
+	$Enemy_punch_woosh.play()
+	#$Squirrel_punch_woosh.play()
+	#$Gorilla_punch_woosh.play()          
 func end():
 	attacking = false
 

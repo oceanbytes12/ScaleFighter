@@ -11,7 +11,7 @@ var hasReversed = false
 func enter(_previous_state_path: String, _data := {}) -> void:
 	owner.animate("Jump") # Change to Jump
 	FindTarget()
-	
+	$Enemy_jump.play()        
 	isJumping = false
 	hasReversed = false
 	#Jump towards target
@@ -35,6 +35,7 @@ func physics_update(delta: float) -> void:
 		return
 	
 	if owner.is_on_wall and not hasReversed:
+		$Enemy_wall.play()
 		owner.velocity.x = -owner.velocity.x  
 		hasReversed = true
 		if(owner.velocity.x > 0):

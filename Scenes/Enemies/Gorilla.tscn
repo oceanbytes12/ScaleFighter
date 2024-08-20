@@ -1,19 +1,22 @@
-[gd_scene load_steps=48 format=3 uid="uid://beh82u6kyw1bt"]
+[gd_scene load_steps=58 format=3 uid="uid://beh82u6kyw1bt"]
 
 [ext_resource type="Script" path="res://Scripts/other/StateEnemy.gd" id="1_hwthq"]
 [ext_resource type="PackedScene" uid="uid://dkreawyu7cx8i" path="res://Scenes/Other/ParticleGenerator.tscn" id="2_6w5qy"]
 [ext_resource type="Script" path="res://Scripts/other/HurtBox.gd" id="2_h6lxt"]
 [ext_resource type="Shader" path="res://Visual/Shaders/hitEffect.gdshader" id="3_8isn3"]
+[ext_resource type="AudioStream" uid="uid://05qcdktbc752" path="res://Sound/Sfx/Gorilla/Cries/Gorilla_cry_01_sfx_v1.wav" id="4_mgh5a"]
+[ext_resource type="AudioStream" uid="uid://d3wef8qufcyhv" path="res://Sound/Sfx/Gorilla/Cries/Gorilla_cry_06_sfx_v1.wav" id="5_8lpoy"]
 [ext_resource type="Texture2D" uid="uid://d06mj63g11ngf" path="res://Visual/Sprites/GorillaFighter-Sheet.png" id="5_bxjuq"]
 [ext_resource type="Animation" uid="uid://o4rsdts5xnsq" path="res://Visual/Animations/Punch.res" id="5_r0kur"]
 [ext_resource type="Script" path="res://Scripts/other/HitBox.gd" id="6_3sw47"]
+[ext_resource type="AudioStream" uid="uid://opsp2q6mxrjf" path="res://Sound/Sfx/Gorilla/Cries/Gorilla_cry_03_sfx_v1.wav" id="6_hki7o"]
 [ext_resource type="Script" path="res://Scripts/State/state_machine.gd" id="7_hlsep"]
-[ext_resource type="AudioStream" uid="uid://d2aesqbenvebj" path="res://Sound/Sfx/Gorilla/Punches/Gorilla_punch_hit_01_sfx_v1.wav" id="8_d5mn6"]
+[ext_resource type="AudioStream" uid="uid://d2aesqbenvebj" path="res://Sound/Sfx/Gorilla/Punches/Hit/Gorilla_punch_hit_01_sfx_v1.wav" id="8_d5mn6"]
 [ext_resource type="Script" path="res://Scripts/Enemy_States/EnemyIdle.gd" id="8_tueqv"]
 [ext_resource type="Script" path="res://Scripts/Enemy_States/EnemyJump.gd" id="9_jyime"]
-[ext_resource type="AudioStream" uid="uid://d162w82xywfl4" path="res://Sound/Sfx/Gorilla/Punches/Gorilla_punch_hit_02_sfx_v1.wav" id="9_t4n81"]
+[ext_resource type="AudioStream" uid="uid://d162w82xywfl4" path="res://Sound/Sfx/Gorilla/Punches/Hit/Gorilla_punch_hit_02_sfx_v1.wav" id="9_t4n81"]
 [ext_resource type="Script" path="res://Scripts/Enemy_States/EnemyChase.gd" id="10_3t3qp"]
-[ext_resource type="AudioStream" uid="uid://bof4xsp1c2ndg" path="res://Sound/Sfx/Gorilla/Punches/Gorilla_punch_hit_03_sfx_v1.wav" id="10_a6jus"]
+[ext_resource type="AudioStream" uid="uid://bof4xsp1c2ndg" path="res://Sound/Sfx/Gorilla/Punches/Hit/Gorilla_punch_hit_03_sfx_v1.wav" id="10_a6jus"]
 [ext_resource type="Script" path="res://Scripts/Enemy_States/EnemySlam.gd" id="10_mxjp7"]
 [ext_resource type="Script" path="res://Scripts/Enemy_States/EnemySlamJump.gd" id="11_ado4n"]
 [ext_resource type="Script" path="res://Scripts/Enemy_States/EnemySlamFinish.gd" id="11_q22ix"]
@@ -21,11 +24,28 @@
 [ext_resource type="Script" path="res://Scripts/Enemy_States/EnemyHurt.gd" id="12_3f7t2"]
 [ext_resource type="Script" path="res://Scripts/Enemy_States/EnemyRandom.gd" id="13_qs28p"]
 [ext_resource type="Script" path="res://Scripts/Enemy_States/EnemyFall.gd" id="14_js6yf"]
+[ext_resource type="AudioStream" uid="uid://xw3d2jy2rwsf" path="res://Sound/Sfx/Gorilla/Punches/Hit/Gorilla_slam1_sfx_v1.wav" id="16_ffp4p"]
+[ext_resource type="AudioStream" uid="uid://dbq47x4x4pijn" path="res://Sound/Sfx/Gorilla/Punches/Hit/Gorilla_side1_sfx_v1.wav" id="17_88bst"]
+[ext_resource type="AudioStream" uid="uid://b2o8uavqrj6p3" path="res://Sound/Sfx/Gorilla/Footsteps/Gorilla_jump1_sfx_v1.wav" id="17_deapn"]
 [ext_resource type="Script" path="res://Scripts/other/IntString.gd" id="18_gmb5o"]
 [ext_resource type="Script" path="res://Scripts/Enemy_States/EnemyDefeated.gd" id="19_jhsdk"]
+[ext_resource type="AudioStream" uid="uid://cgipcjhfvltre" path="res://Sound/Sfx/Gorilla/Punches/Woosh/Gorilla_punch_woosh1_sfx_v1.wav" id="20_v27ve"]
+[ext_resource type="AudioStream" uid="uid://b7xxgcjbbuaik" path="res://Sound/Sfx/Gorilla/Cries/Gorilla_cry_07_sfx_v1.wav" id="26_mssup"]
+[ext_resource type="AudioStream" uid="uid://c8ju0j73mequp" path="res://Sound/Sfx/Gorilla/Footsteps/Gorilla_fs_01_sfx_v1.wav" id="30_swlh6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ufdj5"]
 size = Vector2(8.33333, 9.00035)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_28fpf"]
+random_pitch = 1.3
+random_volume_offset_db = 0.8
+streams_count = 3
+stream_0/stream = ExtResource("4_mgh5a")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("5_8lpoy")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("6_hki7o")
+stream_2/weight = 1.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_eti4p"]
 radius = 4.16667
@@ -268,9 +288,9 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_unv2e"]
 radius = 17.4076
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_28fpf"]
-random_pitch = 1.3
-random_volume_offset_db = 0.8
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_vc2xc"]
+random_pitch = 1.28
+random_volume_offset_db = 0.74
 streams_count = 3
 stream_0/stream = ExtResource("8_d5mn6")
 stream_0/weight = 1.0
@@ -319,15 +339,20 @@ bodyhitbox = NodePath("Flipped/HitBoxes/EnemyBodyHitBox/EnemyBodyCollider")
 particle_gen = ExtResource("2_6w5qy")
 metadata/_edit_group_ = true
 
-[node name="EnemyHurtBox" type="Area2D" parent="."]
+[node name="EnemyHurtBox" type="Area2D" parent="." node_paths=PackedStringArray("sound")]
 visible = false
 collision_layer = 8
 collision_mask = 0
 script = ExtResource("2_h6lxt")
+sound = NodePath("Gorilla_cries")
 
 [node name="HurtBox" type="CollisionShape2D" parent="EnemyHurtBox"]
 position = Vector2(-3.17891e-07, 2.167)
 shape = SubResource("RectangleShape2D_ufdj5")
+
+[node name="Gorilla_cries" type="AudioStreamPlayer2D" parent="EnemyHurtBox"]
+stream = SubResource("AudioStreamRandomizer_28fpf")
+volume_db = -9.905
 
 [node name="EnemyCollision" type="CollisionShape2D" parent="."]
 position = Vector2(-3.17891e-07, 2.167)
@@ -372,8 +397,7 @@ scale = Vector2(0.4, 0.4)
 shape = SubResource("CircleShape2D_unv2e")
 
 [node name="Gorilla_punch" type="AudioStreamPlayer2D" parent="Flipped/HitBoxes/PunchHitBox"]
-stream = SubResource("AudioStreamRandomizer_28fpf")
-volume_db = -4.953
+stream = SubResource("AudioStreamRandomizer_vc2xc")
 
 [node name="EnemyBodyHitBox" type="Area2D" parent="Flipped/HitBoxes"]
 collision_layer = 0
@@ -428,11 +452,23 @@ nextState = "EnemyRandom"
 [node name="EnemyJump" type="Node" parent="StateMachine"]
 script = ExtResource("9_jyime")
 
+[node name="Enemy_jump" type="AudioStreamPlayer2D" parent="StateMachine/EnemyJump"]
+stream = ExtResource("17_deapn")
+
+[node name="Enemy_wall" type="AudioStreamPlayer2D" parent="StateMachine/EnemyJump"]
+stream = ExtResource("17_88bst")
+
 [node name="EnemySlamJump" type="Node" parent="StateMachine"]
 script = ExtResource("11_ado4n")
 
+[node name="Enemy_jump" type="AudioStreamPlayer2D" parent="StateMachine/EnemySlamJump"]
+stream = ExtResource("17_deapn")
+
 [node name="EnemySlam" type="Node" parent="StateMachine"]
 script = ExtResource("10_mxjp7")
+
+[node name="Enemy_slam" type="AudioStreamPlayer2D" parent="StateMachine/EnemySlam"]
+stream = ExtResource("16_ffp4p")
 
 [node name="EnemySlamFinish" type="Node" parent="StateMachine"]
 script = ExtResource("11_q22ix")
@@ -444,6 +480,9 @@ next_state = "EnemyPunch"
 [node name="EnemyPunch" type="Node" parent="StateMachine"]
 script = ExtResource("11_xa7co")
 
+[node name="Enemy_punch_woosh" type="AudioStreamPlayer2D" parent="StateMachine/EnemyPunch"]
+stream = ExtResource("20_v27ve")
+
 [node name="EnemyHurt" type="Node" parent="StateMachine"]
 script = ExtResource("12_3f7t2")
 
@@ -454,8 +493,14 @@ int_string_pairs = Array[ExtResource("18_gmb5o")]([SubResource("Resource_1ssx4")
 [node name="EnemyFall" type="Node" parent="StateMachine"]
 script = ExtResource("14_js6yf")
 
+[node name="Enemy_land" type="AudioStreamPlayer2D" parent="StateMachine/EnemyFall"]
+stream = ExtResource("30_swlh6")
+
 [node name="EnemyDefeated" type="Node" parent="StateMachine"]
 script = ExtResource("19_jhsdk")
+
+[node name="Enemy_die" type="AudioStreamPlayer2D" parent="StateMachine/EnemyDefeated"]
+stream = ExtResource("26_mssup")
 
 [node name="CooldownTimer" type="Timer" parent="."]
 wait_time = 3.0
@@ -469,10 +514,6 @@ offset_right = 8.0
 offset_bottom = -7.0
 size_flags_stretch_ratio = 0.5
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-
-[node name="Gorilla_cries" type="AudioStreamPlayer2D" parent="."]
-stream = SubResource("AudioStreamRandomizer_28fpf")
-volume_db = -9.905
 
 [connection signal="area_entered" from="Flipped/HitBoxes/PunchHitBox" to="Flipped/HitBoxes/PunchHitBox" method="_on_area_entered"]
 [connection signal="area_entered" from="Flipped/HitBoxes/EnemyBodyHitBox" to="Flipped/HitBoxes/EnemyBodyHitBox" method="_on_area_entered"]

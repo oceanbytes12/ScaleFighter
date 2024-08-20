@@ -24,5 +24,6 @@ func physics_update(delta: float) -> void:
 		#Create landing effect
 		if is_equal_approx(player.velocity.x, 0.0):
 			finished.emit(IDLE)
+			$Gecko_land.play()
 		else:
 			finished.emit(RUNNING)

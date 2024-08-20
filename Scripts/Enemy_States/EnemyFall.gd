@@ -30,5 +30,5 @@ func physics_update(delta: float) -> void:
 		owner.velocity.y = min(max_velocity, owner.velocity.y)
 	else:
 		finished.emit(IDLE)
-		
+		$Enemy_land.play()
 	owner.move_and_slide()

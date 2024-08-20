@@ -6,7 +6,7 @@ func enter(previous_state_path: String, _data := {}) -> void:
 		player.velocity.y = -player.glide_jump_impulse
 	else:
 		player.velocity.y = -player.jump_impulse
-
+		$Gecko_jump.play()
 
 func physics_update(delta: float) -> void:
 	var input_direction_x := Input.get_axis("Left", "Right")

@@ -8,7 +8,8 @@ func enter(previous_state_path: String, data := {}) -> void:
 
 func start():
 	attacking = true
-	
+	$Fire_breath.play()
+	$Godzilla_attack.play()
 func end():
 	attacking = false
 

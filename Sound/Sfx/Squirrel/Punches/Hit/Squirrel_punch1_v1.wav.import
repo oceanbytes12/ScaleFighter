@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://b4kfrynmreya4"
-path="res://.godot/imported/Squirrel_punch1_v1.wav-3e2885acb9e369f579b73e01f97ac485.sample"
+path="res://.godot/imported/Squirrel_punch1_v1.wav-b2fa40e95e86a71fed1813161e59ff59.sample"
 
 [deps]
 
-source_file="res://Sound/Sfx/Squirrel/Punches/Squirrel_punch1_v1.wav"
-dest_files=["res://.godot/imported/Squirrel_punch1_v1.wav-3e2885acb9e369f579b73e01f97ac485.sample"]
+source_file="res://Sound/Sfx/Squirrel/Punches/Hit/Squirrel_punch1_v1.wav"
+dest_files=["res://.godot/imported/Squirrel_punch1_v1.wav-b2fa40e95e86a71fed1813161e59ff59.sample"]
 
 [params]
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=3 uid="uid://cujkhawkt2egg"]
+[gd_scene load_steps=70 format=3 uid="uid://cujkhawkt2egg"]
 
 [ext_resource type="Script" path="res://Scripts/other/player.gd" id="1_vo1r3"]
 [ext_resource type="Shader" path="res://Visual/Shaders/hitEffect.gdshader" id="2_07hnp"]
@@ -22,6 +22,8 @@
 [ext_resource type="Script" path="res://Scripts/Player_States/slamming.gd" id="13_hyj6v"]
 [ext_resource type="Script" path="res://Scripts/Player_States/slamfinish.gd" id="14_n2k4j"]
 [ext_resource type="Script" path="res://Scripts/Player_States/playerhurt.gd" id="15_nb2ow"]
+[ext_resource type="AudioStream" uid="uid://cgsokbmq34nht" path="res://Sound/Sfx/Player/Footsteps/Gecko_fs03_v1.wav" id="17_s6icj"]
+[ext_resource type="AudioStream" uid="uid://dwku1cvx3m68f" path="res://Sound/Sfx/Player/Footsteps/Gecko_fs02_v1.wav" id="18_trj3y"]
 [ext_resource type="AudioStream" uid="uid://daxge4yrqs2a8" path="res://Sound/Sfx/Player/Punches/Punch_woosh/Punch_woosh_sfx_v1.wav" id="19_yaq0m"]
 [ext_resource type="AudioStream" uid="uid://ciom40c8sd5kw" path="res://Sound/Sfx/Player/Punches/Punch_woosh/Punch_woosh_sfx_v2.wav" id="20_ltpyx"]
 [ext_resource type="AudioStream" uid="uid://c4sevwe8yor7a" path="res://Sound/Sfx/Player/Punches/Punch_woosh/Punch_woosh_sfx_v3.wav" id="21_aliej"]
@@ -371,6 +373,13 @@ streams_count = 1
 stream_0/stream = ExtResource("12_j217l")
 stream_0/weight = 1.0
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_2g2qp"]
+streams_count = 2
+stream_0/stream = ExtResource("17_s6icj")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("18_trj3y")
+stream_1/weight = 1.0
+
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_2yfd8"]
 random_pitch = 1.1
 random_volume_offset_db = 0.4
@@ -523,8 +532,15 @@ script = ExtResource("8_qtf6m")
 [node name="Jumping" type="Node" parent="StateMachine"]
 script = ExtResource("9_22a62")
 
+[node name="Gecko_jump" type="AudioStreamPlayer2D" parent="StateMachine/Jumping"]
+stream = SubResource("AudioStreamRandomizer_2g2qp")
+
 [node name="Falling" type="Node" parent="StateMachine"]
 script = ExtResource("10_ajlu7")
+
+[node name="Gecko_land" type="AudioStreamPlayer2D" parent="StateMachine/Falling"]
+stream = SubResource("AudioStreamRandomizer_2g2qp")
+pitch_scale = 0.79
 
 [node name="Punching" type="Node" parent="StateMachine"]
 script = ExtResource("11_6cxed")

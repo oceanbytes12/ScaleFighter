@@ -22,7 +22,7 @@ func enter(_previous_state_path: String, _data := {}) -> void:
 	current_wall_pause_time = 0
 	owner.animate("Jump") # Change to Jump
 	FindTarget()
-	
+	$Enemy_jump.play()
 	isJumping = false
 	hasReversed = false
 	#Jump towards target

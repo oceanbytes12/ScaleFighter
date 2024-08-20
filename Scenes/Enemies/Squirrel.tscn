@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://05ukpwn07wnq"]
+[gd_scene load_steps=50 format=3 uid="uid://05ukpwn07wnq"]
 
 [ext_resource type="Script" path="res://Scripts/other/StateEnemy.gd" id="1_buy47"]
 [ext_resource type="Animation" uid="uid://o4rsdts5xnsq" path="res://Visual/Animations/Punch.res" id="2_p2nk6"]
@@ -16,12 +16,17 @@
 [ext_resource type="Script" path="res://Scripts/Enemy_States/EnemyPunch.gd" id="7_av5gr"]
 [ext_resource type="Script" path="res://Scripts/Enemy_States/EnemyJump.gd" id="8_aldih"]
 [ext_resource type="Script" path="res://Scripts/Enemy_States/EnemyHurt.gd" id="10_qq6i4"]
-[ext_resource type="AudioStream" uid="uid://b4kfrynmreya4" path="res://Sound/Sfx/Squirrel/Punches/Squirrel_punch1_v1.wav" id="11_bhvd3"]
-[ext_resource type="AudioStream" uid="uid://bkw0xgj8nbf8w" path="res://Sound/Sfx/Squirrel/Punches/Squirrel_punch2_v1.wav" id="12_aow4o"]
+[ext_resource type="AudioStream" uid="uid://b4kfrynmreya4" path="res://Sound/Sfx/Squirrel/Punches/Hit/Squirrel_punch1_v1.wav" id="11_c25k4"]
+[ext_resource type="AudioStream" uid="uid://bkw0xgj8nbf8w" path="res://Sound/Sfx/Squirrel/Punches/Hit/Squirrel_punch2_v1.wav" id="12_w74ov"]
 [ext_resource type="Script" path="res://Scripts/Enemy_States/EnemyRandom.gd" id="12_yiyxc"]
+[ext_resource type="AudioStream" uid="uid://dg16f6chqa6wg" path="res://Sound/Sfx/Squirrel/Footsteps/Squirrel_jump1_01_sfx_v1.wav" id="16_i8yyw"]
 [ext_resource type="Script" path="res://Scripts/Enemy_States/EnemyFall.gd" id="18_u7m3d"]
+[ext_resource type="AudioStream" uid="uid://ck06427v2jbus" path="res://Sound/Sfx/Squirrel/Punches/Woosh/Squirrel_punch_woosh1_sfx_v1.wav" id="19_ja46p"]
 [ext_resource type="Script" path="res://Scripts/Enemy_States/EnemyDefeated.gd" id="19_pcnyy"]
 [ext_resource type="Script" path="res://Scripts/other/IntString.gd" id="20_bcpnr"]
+[ext_resource type="AudioStream" uid="uid://pm1wrus64hvb" path="res://Sound/Sfx/Squirrel/Footsteps/Squirrel_fs01_v1.wav" id="24_3scjd"]
+[ext_resource type="AudioStream" uid="uid://b8bbr3fmg5nlj" path="res://Sound/Sfx/Squirrel/Cries/Squirrel_cry_wet15_v1.wav" id="24_e1i7t"]
+[ext_resource type="AudioStream" uid="uid://cbprtnm0nkko8" path="res://Sound/Sfx/Squirrel/Footsteps/Squirrel_fs02_v1.wav" id="25_vsore"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ufdj5"]
 size = Vector2(8.33333, 12.3332)
@@ -205,9 +210,9 @@ radius = 17.4076
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_sef5x"]
 streams_count = 2
-stream_0/stream = ExtResource("11_bhvd3")
+stream_0/stream = ExtResource("11_c25k4")
 stream_0/weight = 1.0
-stream_1/stream = ExtResource("12_aow4o")
+stream_1/stream = ExtResource("12_w74ov")
 stream_1/weight = 1.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lu0pc"]
@@ -219,6 +224,13 @@ radius = 14.3333
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_57ohj"]
 radius = 5.70575
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_xot7r"]
+random_pitch = 1.28
+random_volume_offset_db = 0.37
+streams_count = 1
+stream_0/stream = ExtResource("16_i8yyw")
+stream_0/weight = 1.0
 
 [sub_resource type="Resource" id="Resource_fqdqw"]
 script = ExtResource("20_bcpnr")
@@ -342,6 +354,16 @@ nextState = "EnemyRandom"
 [node name="EnemyJump" type="Node" parent="StateMachine"]
 script = ExtResource("8_aldih")
 
+[node name="Enemy_jump" type="AudioStreamPlayer2D" parent="StateMachine/EnemyJump"]
+stream = SubResource("AudioStreamRandomizer_xot7r")
+volume_db = -1.857
+pitch_scale = 0.82
+
+[node name="Enemy_wall" type="AudioStreamPlayer2D" parent="StateMachine/EnemyJump"]
+stream = ExtResource("25_vsore")
+volume_db = 0.929
+pitch_scale = 0.89
+
 [node name="EnemyChase" type="Node" parent="StateMachine"]
 script = ExtResource("6_oogn5")
 detection_range = 60
@@ -349,6 +371,9 @@ next_state = "EnemyPunch"
 
 [node name="EnemyPunch" type="Node" parent="StateMachine"]
 script = ExtResource("7_av5gr")
+
+[node name="Enemy_punch_woosh" type="AudioStreamPlayer2D" parent="StateMachine/EnemyPunch"]
+stream = ExtResource("19_ja46p")
 
 [node name="EnemyHurt" type="Node" parent="StateMachine"]
 script = ExtResource("10_qq6i4")
@@ -360,8 +385,16 @@ int_string_pairs = Array[ExtResource("20_bcpnr")]([SubResource("Resource_fqdqw")
 [node name="EnemyFall" type="Node" parent="StateMachine"]
 script = ExtResource("18_u7m3d")
 
+[node name="Enemy_land" type="AudioStreamPlayer2D" parent="StateMachine/EnemyFall"]
+stream = ExtResource("24_3scjd")
+volume_db = 0.929
+
 [node name="EnemyDefeated" type="Node" parent="StateMachine"]
 script = ExtResource("19_pcnyy")
+
+[node name="Enemy_die" type="AudioStreamPlayer2D" parent="StateMachine/EnemyDefeated"]
+stream = ExtResource("24_e1i7t")
+volume_db = 0.929
 
 [node name="CooldownTimer" type="Timer" parent="."]
 wait_time = 3.0
