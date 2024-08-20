@@ -400,11 +400,11 @@ radius = 17.4076
 radius = 9.67241
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xh8fq"]
-radius = 5.0111
+radius = 8.14634
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lu0pc"]
-radius = 11.6667
-height = 46.6667
+radius = 24.2857
+height = 48.5714
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xr2jt"]
 radius = 14.3333
@@ -525,7 +525,7 @@ shape = SubResource("CircleShape2D_rp3iw")
 disabled = true
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Flipped/HitBoxes/Fire"]
-position = Vector2(-1, 0.666667)
+position = Vector2(-5.73813, 0.571429)
 shape = SubResource("CircleShape2D_xh8fq")
 disabled = true
 

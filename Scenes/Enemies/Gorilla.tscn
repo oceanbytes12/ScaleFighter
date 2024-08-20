@@ -48,8 +48,8 @@ stream_2/stream = ExtResource("6_hki7o")
 stream_2/weight = 1.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_eti4p"]
-radius = 4.16667
-height = 19.666
+radius = 3.83333
+height = 20.3333
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_je0ey"]
 resource_local_to_scene = true
@@ -300,8 +300,8 @@ stream_2/stream = ExtResource("10_a6jus")
 stream_2/weight = 1.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lu0pc"]
-radius = 10.4167
-height = 41.6667
+radius = 25.4167
+height = 50.8333
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f613u"]
 size = Vector2(80, 22.5)
@@ -314,17 +314,17 @@ radius = 5.70575
 
 [sub_resource type="Resource" id="Resource_1ssx4"]
 script = ExtResource("18_gmb5o")
-weight = 20
+weight = 10
 name = "EnemySlamJump"
 
 [sub_resource type="Resource" id="Resource_jptjh"]
 script = ExtResource("18_gmb5o")
-weight = 10
+weight = 30
 name = "EnemyJump"
 
 [sub_resource type="Resource" id="Resource_yrm7a"]
 script = ExtResource("18_gmb5o")
-weight = 10
+weight = 30
 name = "EnemyChase"
 
 [node name="Gorilla" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox", "bodyhitbox")]
@@ -475,6 +475,7 @@ script = ExtResource("11_q22ix")
 
 [node name="EnemyChase" type="Node" parent="StateMachine"]
 script = ExtResource("10_3t3qp")
+detection_range = 55
 next_state = "EnemyPunch"
 
 [node name="EnemyPunch" type="Node" parent="StateMachine"]
