@@ -42,6 +42,8 @@ func physics_update(delta: float) -> void:
 		
 	if not owner.is_on_floor():
 		owner.velocity.y += owner.GRAVITY * delta
+	else:
+		owner.velocity.y = 0
 
 	owner.move_and_slide()
 
