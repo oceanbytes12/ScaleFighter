@@ -206,7 +206,7 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_unv2e"]
-radius = 17.4076
+radius = 20.85
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_sef5x"]
 streams_count = 2
@@ -294,10 +294,8 @@ libraries = {
 }
 
 [node name="HitBoxes" type="Node2D" parent="Flipped"]
-visible = false
 
 [node name="PunchHitBox" type="Area2D" parent="Flipped/HitBoxes" node_paths=PackedStringArray("sound")]
-visible = false
 collision_layer = 0
 collision_mask = 16
 script = ExtResource("5_jjw23")
@@ -306,7 +304,7 @@ knockback = 300
 sound = NodePath("Squirrel_punch")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Flipped/HitBoxes/PunchHitBox"]
-position = Vector2(9.81818, 3)
+position = Vector2(10.8333, 3)
 scale = Vector2(0.4, 0.4)
 shape = SubResource("CircleShape2D_unv2e")
 disabled = true
@@ -315,6 +313,7 @@ disabled = true
 stream = SubResource("AudioStreamRandomizer_sef5x")
 
 [node name="EnemyBodyHitBox" type="Area2D" parent="Flipped/HitBoxes"]
+visible = false
 collision_layer = 0
 collision_mask = 16
 script = ExtResource("5_jjw23")
