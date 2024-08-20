@@ -15,6 +15,9 @@ func FindTarget():
 	TARGET = Player.mainPlayer
 
 func physics_update(delta: float) -> void:
+	if(!TARGET):
+		return
+		
 	var target_vector = Vector2.ZERO
 	if(TARGET):
 		target_vector = TARGET.global_position - owner.global_position

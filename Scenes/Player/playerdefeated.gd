@@ -13,7 +13,6 @@ func enter(_previous_state_path: String, _data := {}) -> void:
 	check_for_downed = true
 
 func physics_update(_delta: float) -> void:
-	print(player.velocity, "When Defeated")
 	if is_downed:
 		player.velocity = Vector2.ZERO
 	else:

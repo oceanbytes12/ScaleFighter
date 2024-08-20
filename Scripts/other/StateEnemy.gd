@@ -76,7 +76,7 @@ func hit(hit_position, damage, knockback):
 	#If us being hit caused us to die.
 	if(LevelBase.BossDefeated == true):
 		var knockback_velocity = (self.global_position-hit_position).normalized() * 1200
-		knockback_velocity.y = min(knockback_velocity.y, -800)
+		knockback_velocity.y = min(knockback_velocity.y, -500)
 		velocity = knockback_velocity
 		fsm.state.finished.emit("EnemyDefeated")
 	#If us being hit caused us to lose all our armor.
