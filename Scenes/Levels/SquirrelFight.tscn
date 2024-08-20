@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cpw72g2clnklq"]
+[gd_scene load_steps=24 format=3 uid="uid://cpw72g2clnklq"]
 
 [ext_resource type="Script" path="res://Scripts/other/Level_Base.gd" id="1_bnkg8"]
 [ext_resource type="Texture2D" uid="uid://dt2t7dakyscjp" path="res://Visual/Sprites/Backgrounds/bg1.png" id="2_redwd"]
@@ -13,6 +13,8 @@
 [ext_resource type="PackedScene" uid="uid://05ukpwn07wnq" path="res://Scenes/Enemies/Squirrel.tscn" id="10_bxw3c"]
 [ext_resource type="Script" path="res://Scripts/other/PlayerCamera.gd" id="11_ntscg"]
 [ext_resource type="PackedScene" uid="uid://wc8v1447wt3t" path="res://Scenes/Other/EnemyTitleAnimator.tscn" id="12_2gnqg"]
+[ext_resource type="AudioStream" uid="uid://cg5a1hfydakum" path="res://Sound/Sfx/Announcer/Gong/Gong_low2_v1.wav" id="14_8rntb"]
+[ext_resource type="AudioStream" uid="uid://crw2200houb4c" path="res://Sound/Sfx/Announcer/Gong/Gong_high1_v1.wav" id="15_kfx4w"]
 
 [sub_resource type="Theme" id="Theme_4tts6"]
 
@@ -261,6 +263,16 @@ position = Vector2(214, -18)
 shape = SubResource("RectangleShape2D_se114")
 
 [node name="TitleAnimator" parent="." instance=ExtResource("12_2gnqg")]
+
+[node name="Sound" type="Node2D" parent="."]
+
+[node name="GongLow" type="AudioStreamPlayer2D" parent="Sound"]
+visible = false
+stream = ExtResource("14_8rntb")
+
+[node name="GongHigh" type="AudioStreamPlayer2D" parent="Sound"]
+visible = false
+stream = ExtResource("15_kfx4w")
 
 [connection signal="BarEmpty" from="CanvasLayer/Player_HPBar" to="." method="_on_player_hp_bar_empty"]
 [connection signal="BarEmpty" from="CanvasLayer/Boss_HPBar" to="." method="_on_boss_hp_bar_empty"]

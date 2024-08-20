@@ -58,7 +58,9 @@ func TurnOffUI():
 func ShowTitleAnim():
 	# Show boss name
 	bossNameSprite.show()
+	$Sound/GongHigh.play()
 	await get_tree().create_timer(2).timeout
+	$Sound/GongLow.play()
 	bossNameSprite.hide()
 	bossKanjiSprite.show()
 	await get_tree().create_timer(2).timeout
