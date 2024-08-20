@@ -1,8 +1,7 @@
 extends EnemyState
 
 func enter(previous_state_path: String, data := {}) -> void:
-	#owner.animate("AirSlam")
-	owner.animate("Slam") # Change to AirSlam
+	owner.animate("AirSlam") 
 	owner.velocity.y = 0
 	owner.SetEnemyBodyDamages(true)
 

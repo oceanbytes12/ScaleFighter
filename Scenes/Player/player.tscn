@@ -444,6 +444,10 @@ blinkAnimator = NodePath("Blink")
 hurtbox = NodePath("PlayerHurtBox")
 particle_gen = ExtResource("2_cnb4c")
 
+[node name="PlayerCollision" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3)
+shape = SubResource("CapsuleShape2D_n3n25")
+
 [node name="PlayerHurtBox" type="Area2D" parent="." node_paths=PackedStringArray("sound")]
 collision_layer = 16
 collision_mask = 0
@@ -451,10 +455,6 @@ script = ExtResource("3_4iq6g")
 sound = NodePath("../Gecko_little_cry")
 
 [node name="HurtBox" type="CollisionShape2D" parent="PlayerHurtBox"]
-position = Vector2(0, 3)
-shape = SubResource("CapsuleShape2D_n3n25")
-
-[node name="PlayerCollision" type="CollisionShape2D" parent="."]
 position = Vector2(0, 3)
 shape = SubResource("CapsuleShape2D_n3n25")
 
@@ -480,6 +480,7 @@ libraries = {
 }
 
 [node name="PunchHitbox" type="Area2D" parent="Flipped" node_paths=PackedStringArray("sound")]
+visible = false
 collision_layer = 0
 collision_mask = 8
 script = ExtResource("5_gdpkv")
