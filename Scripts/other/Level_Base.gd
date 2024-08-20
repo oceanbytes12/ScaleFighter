@@ -160,4 +160,3 @@ func HandleEnemyCriticalDamage(amount):
 	else:
 		GrowBar._on_damage_received(amount)
 		HitStop(0.6, 0.05)
-	

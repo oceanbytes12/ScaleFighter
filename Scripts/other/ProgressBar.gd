@@ -11,6 +11,8 @@ signal BarEmpty
 @export var isHealedOnHit = false # Power up bar will have this set to true
 #@export var parentObject := CharacterBody2D  # This did not work
 
+var reducing = false
+
 var health = 0 
 
 func init_health(_health):
@@ -19,6 +21,18 @@ func init_health(_health):
 	value = health
 	damage_bar.max_value = health
 	damage_bar.value = health
+
+func _process(delta):
+	
+	if(!reducing and health<=0):
+		reducing = true
+		
+	if(reducing):
+		if damage_bar.value > health:
+			damage_bar.value= max(damage_bar.value - 3,health)
+			
+		if(damage_bar.value == health):
+			reducing = false
 	
 func _set_health(new_health):
 	var prev_health = health
@@ -77,7 +91,5 @@ func _on_damage_received(amount : int):
 					_set_health(result)
 					#value = result
 
-
-
 func _on_timer_timeout():
-	damage_bar.value = health
+	reducing = true
