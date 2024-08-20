@@ -5,6 +5,14 @@ extends PlayerState
 var is_downed = false
 var check_for_downed = false
 func enter(_previous_state_path: String, _data := {}) -> void:
+
+	if player.growct == 1:
+		$Gecko_med_die.play()
+	elif player.growct > 1:
+		$Gecko_big_die.play()
+	else: 
+		$Gecko_little_die.play()
+
 	owner.animate("Hurt")
 	is_downed = false
 	owner.Blink()

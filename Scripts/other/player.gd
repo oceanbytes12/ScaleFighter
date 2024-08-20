@@ -29,6 +29,7 @@ var invincible = false
 @export var hurtbox : HurtBox
 @export var particle_gen : PackedScene
 
+static var growct = 0
 signal on_take_damage(damageamount)
 
 var tween
@@ -96,7 +97,12 @@ func hit(hit_position, damage, knockback):
 	#Show damage effect
 	show_particles()
 	#Take damage sound
-	$Gecko_cry.play()
+	if growct == 1:
+		$Gecko_med_cry.play()
+	elif growct > 1:
+		$Gecko_big_cry.play()
+	else: 
+		$Gecko_little_cry.play()
 	#If us being hit killed us.
 	if(LevelBase.PlayerDefeated == true):
 		var knockback_velocity = (self.global_position-hit_position).normalized() * 1500
@@ -114,7 +120,6 @@ func hit(hit_position, damage, knockback):
 func grow():
 	var grow_audio : AudioStreamPlayer2D
 	grow_audio = $Grow
-	
 	if(tween and tween.is_running()):
 		tween.kill()
 		
@@ -137,3 +142,5 @@ func grow():
 	await tween.finished
 	
 	power = scale.x*10
+	growct += 1
+	
