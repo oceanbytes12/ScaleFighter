@@ -1,4 +1,5 @@
 class_name LevelBase extends Node2D
+@export var is_last_level = false
 @export var grow_text : RichTextLabel
 @export var gameover_text : RichTextLabel
 @export var win_text : RichTextLabel
@@ -111,17 +112,25 @@ func _on_grow_bar_full():
 
 func _on_boss_hp_bar_empty():
 	# Level Complete
-	# Disable right wall
-	right_wall_collider.set_deferred("disabled", true)
-	# Display new power text	
-	win_text.visible = true
-	
-	# Unlock player power
-	match power_unlocked:
-		1:
-			Player.canJump = true
-		2:
-			Player.canSlam = true
+	if is_last_level:
+		win_text.visible = true
+		await get_tree().create_timer(3).timeout
+		if(animator):
+			animator.play("FadeOut")
+			await get_tree().create_timer(1).timeout
+			get_tree().call_deferred(&"change_scene_to_file", title_scene)
+	else:
+		# Disable right wall
+		right_wall_collider.set_deferred("disabled", true)
+		# Display new power text	
+		win_text.visible = true
+		
+		# Unlock player power
+		match power_unlocked:
+			1:
+				Player.canJump = true
+			2:
+				Player.canSlam = true
 
 func _on_exit_level_trigger_body_entered(body):  
 	if body is Player:
