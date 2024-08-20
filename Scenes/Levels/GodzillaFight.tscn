@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://tmj8273tqhjq"]
+[gd_scene load_steps=23 format=3 uid="uid://tmj8273tqhjq"]
 
 [ext_resource type="Script" path="res://Scripts/other/Level_Base.gd" id="1_xaqio"]
 [ext_resource type="Texture2D" uid="uid://06x3cxd605xx" path="res://Visual/Sprites/Backgrounds/bg3.png" id="2_ynsbm"]
@@ -10,9 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://cujkhawkt2egg" path="res://Scenes/Player/player.tscn" id="9_sph5s"]
 [ext_resource type="PackedScene" uid="uid://05ukpwn07wnq" path="res://Scenes/Enemies/Squirrel.tscn" id="10_ef312"]
 [ext_resource type="Script" path="res://Scripts/other/PlayerCamera.gd" id="11_f5tk5"]
+[ext_resource type="PackedScene" uid="uid://ucd2petm8ie1" path="res://Scenes/sound.tscn" id="12_2widh"]
 [ext_resource type="PackedScene" uid="uid://wc8v1447wt3t" path="res://Scenes/Other/EnemyTitleAnimator.tscn" id="12_agfln"]
-[ext_resource type="AudioStream" uid="uid://cg5a1hfydakum" path="res://Sound/Sfx/Announcer/Gong/Gong_low2_v1.wav" id="12_hefv8"]
-[ext_resource type="AudioStream" uid="uid://crw2200houb4c" path="res://Sound/Sfx/Announcer/Gong/Gong_high1_v1.wav" id="13_u7lm0"]
 
 [sub_resource type="Theme" id="Theme_0ru5m"]
 
@@ -106,6 +105,7 @@ offset_left = 10.0
 offset_top = 10.0
 offset_right = 150.0
 offset_bottom = 20.0
+maxHP = 50
 
 [node name="Boss_HPBar" parent="CanvasLayer" instance=ExtResource("3_badop")]
 anchors_preset = 1
@@ -116,13 +116,14 @@ offset_top = 10.0
 offset_right = -10.0
 offset_bottom = 20.0
 grow_horizontal = 0
+maxHP = 400
 
 [node name="GrowBar" parent="CanvasLayer" instance=ExtResource("4_ht6xc")]
 offset_left = 12.0
 offset_top = 27.0
 offset_right = 309.0
 offset_bottom = 37.0
-maxHP = 5
+maxHP = 50
 
 [node name="GrowText" type="RichTextLabel" parent="CanvasLayer"]
 visible = false
@@ -254,16 +255,7 @@ shape = SubResource("RectangleShape2D_se114")
 
 [node name="TitleAnimator" parent="." instance=ExtResource("12_agfln")]
 
-[node name="Sound" type="Node2D" parent="."]
-
-[node name="GongLow" type="AudioStreamPlayer2D" parent="Sound"]
-visible = false
-stream = ExtResource("12_hefv8")
-volume_db = -5.0
-
-[node name="GongHigh" type="AudioStreamPlayer2D" parent="Sound"]
-visible = false
-stream = ExtResource("13_u7lm0")
+[node name="Sound" parent="." instance=ExtResource("12_2widh")]
 
 [connection signal="BarEmpty" from="CanvasLayer/Player_HPBar" to="." method="_on_player_hp_bar_empty"]
 [connection signal="BarEmpty" from="CanvasLayer/Boss_HPBar" to="." method="_on_boss_hp_bar_empty"]

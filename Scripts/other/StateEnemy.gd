@@ -81,7 +81,8 @@ func hit(hit_position, damage, knockback):
 		fsm.state.finished.emit("EnemyDefeated")
 	#If us being hit caused us to lose all our armor.
 	elif(current_armor <= 0):
-		current_armor = max_armor+10
+		max_armor = max_armor+10
+		current_armor = max_armor
 		var knockback_velocity = (self.global_position-hit_position).normalized() * 600
 		knockback_velocity.y = min(knockback_velocity.y, -400)
 		velocity = knockback_velocity

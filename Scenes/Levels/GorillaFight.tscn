@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dqs5up6xt3yr2"]
+[gd_scene load_steps=25 format=3 uid="uid://dqs5up6xt3yr2"]
 
 [ext_resource type="Script" path="res://Scripts/other/Level_Base.gd" id="1_ud67y"]
 [ext_resource type="Texture2D" uid="uid://daon7f1gf8ss2" path="res://Visual/Sprites/Backgrounds/bg2.png" id="2_biu23"]
@@ -13,8 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://beh82u6kyw1bt" path="res://Scenes/Enemies/Gorilla.tscn" id="10_dc7cp"]
 [ext_resource type="Script" path="res://Scripts/other/PlayerCamera.gd" id="11_30gjy"]
 [ext_resource type="PackedScene" uid="uid://wc8v1447wt3t" path="res://Scenes/Other/EnemyTitleAnimator.tscn" id="12_2w3it"]
-[ext_resource type="AudioStream" uid="uid://cg5a1hfydakum" path="res://Sound/Sfx/Announcer/Gong/Gong_low2_v1.wav" id="14_x4213"]
-[ext_resource type="AudioStream" uid="uid://crw2200houb4c" path="res://Sound/Sfx/Announcer/Gong/Gong_high1_v1.wav" id="15_v7h4m"]
+[ext_resource type="PackedScene" uid="uid://ucd2petm8ie1" path="res://Scenes/sound.tscn" id="14_r1lug"]
 
 [sub_resource type="Theme" id="Theme_7k74m"]
 
@@ -107,6 +106,7 @@ offset_left = 10.0
 offset_top = 10.0
 offset_right = 150.0
 offset_bottom = 20.0
+maxHP = 50
 
 [node name="Boss_HPBar" parent="CanvasLayer" instance=ExtResource("3_cact6")]
 anchors_preset = 1
@@ -124,7 +124,7 @@ offset_left = 12.0
 offset_top = 27.0
 offset_right = 309.0
 offset_bottom = 37.0
-maxHP = 5
+maxHP = 50
 
 [node name="GrowText" type="RichTextLabel" parent="CanvasLayer"]
 visible = false
@@ -268,16 +268,7 @@ shape = SubResource("RectangleShape2D_se114")
 
 [node name="TitleAnimator" parent="." instance=ExtResource("12_2w3it")]
 
-[node name="Sound" type="Node2D" parent="."]
-
-[node name="GongLow" type="AudioStreamPlayer2D" parent="Sound"]
-visible = false
-stream = ExtResource("14_x4213")
-volume_db = -5.0
-
-[node name="GongHigh" type="AudioStreamPlayer2D" parent="Sound"]
-visible = false
-stream = ExtResource("15_v7h4m")
+[node name="Sound" parent="." instance=ExtResource("14_r1lug")]
 
 [connection signal="BarEmpty" from="CanvasLayer/Player_HPBar" to="." method="_on_player_hp_bar_empty"]
 [connection signal="BarEmpty" from="CanvasLayer/Boss_HPBar" to="." method="_on_boss_hp_bar_empty"]
