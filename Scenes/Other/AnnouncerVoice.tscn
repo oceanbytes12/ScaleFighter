@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://c7w11ufdifhcd"]
 
 [ext_resource type="Script" path="res://Scripts/Other/AnnouncerVoice.gd" id="1_3bboe"]
-[ext_resource type="AudioStream" uid="uid://drwo1pm0ec8sm" path="res://Sound/Sfx/Announcer/Announcer_v1.wav" id="1_qxhs3"]
-[ext_resource type="AudioStream" uid="uid://fhnefdo70ip1" path="res://Sound/Sfx/Announcer/Announcer2_v1.wav" id="2_bgael"]
-[ext_resource type="AudioStream" uid="uid://ukfxdq5l6wf4" path="res://Sound/Sfx/Announcer/Announcer3_v1.wav" id="3_qkoqv"]
+[ext_resource type="AudioStream" uid="uid://drwo1pm0ec8sm" path="res://Sound/Sfx/Announcer/Announcer1/Announcer_v1.wav" id="1_qxhs3"]
+[ext_resource type="AudioStream" uid="uid://fhnefdo70ip1" path="res://Sound/Sfx/Announcer/Announcer2/Announcer2_v1.wav" id="2_bgael"]
+[ext_resource type="AudioStream" uid="uid://ukfxdq5l6wf4" path="res://Sound/Sfx/Announcer/Announcer3/Announcer3_v1.wav" id="3_qkoqv"]
 
 [node name="AnnouncerVoice" type="Node2D"]
 script = ExtResource("1_3bboe")

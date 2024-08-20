@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://05ukpwn07wnq"]
+[gd_scene load_steps=44 format=3 uid="uid://05ukpwn07wnq"]
 
 [ext_resource type="Script" path="res://Scripts/other/StateEnemy.gd" id="1_buy47"]
 [ext_resource type="Animation" uid="uid://o4rsdts5xnsq" path="res://Visual/Animations/Punch.res" id="2_p2nk6"]
@@ -16,6 +16,8 @@
 [ext_resource type="Script" path="res://Scripts/Enemy_States/EnemyPunch.gd" id="7_av5gr"]
 [ext_resource type="Script" path="res://Scripts/Enemy_States/EnemyJump.gd" id="8_aldih"]
 [ext_resource type="Script" path="res://Scripts/Enemy_States/EnemyHurt.gd" id="10_qq6i4"]
+[ext_resource type="AudioStream" uid="uid://b4kfrynmreya4" path="res://Sound/Sfx/Squirrel/Punches/Squirrel_punch1_v1.wav" id="11_bhvd3"]
+[ext_resource type="AudioStream" uid="uid://bkw0xgj8nbf8w" path="res://Sound/Sfx/Squirrel/Punches/Squirrel_punch2_v1.wav" id="12_aow4o"]
 [ext_resource type="Script" path="res://Scripts/Enemy_States/EnemyRandom.gd" id="12_yiyxc"]
 [ext_resource type="Script" path="res://Scripts/IntString.gd" id="18_rp5at"]
 [ext_resource type="Script" path="res://Scripts/Enemy_States/EnemyFall.gd" id="18_u7m3d"]
@@ -213,6 +215,13 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_unv2e"]
 radius = 17.4076
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_sef5x"]
+streams_count = 2
+stream_0/stream = ExtResource("11_bhvd3")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("12_aow4o")
+stream_1/weight = 1.0
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lu0pc"]
 radius = 11.6667
 height = 46.6667
@@ -287,19 +296,23 @@ libraries = {
 [node name="HitBoxes" type="Node2D" parent="Flipped"]
 visible = false
 
-[node name="PunchHitBox" type="Area2D" parent="Flipped/HitBoxes"]
+[node name="PunchHitBox" type="Area2D" parent="Flipped/HitBoxes" node_paths=PackedStringArray("sound")]
 visible = false
 collision_layer = 0
 collision_mask = 16
 script = ExtResource("5_jjw23")
 damage = 15
 knockback = 300
+sound = NodePath("Squirrel_punch")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Flipped/HitBoxes/PunchHitBox"]
 position = Vector2(12.0848, 3)
 scale = Vector2(0.4, 0.4)
 shape = SubResource("CircleShape2D_unv2e")
 disabled = true
+
+[node name="Squirrel_punch" type="AudioStreamPlayer2D" parent="Flipped/HitBoxes/PunchHitBox"]
+stream = SubResource("AudioStreamRandomizer_sef5x")
 
 [node name="EnemyBodyHitBox" type="Area2D" parent="Flipped/HitBoxes"]
 collision_layer = 0
