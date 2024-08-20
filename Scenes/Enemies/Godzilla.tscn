@@ -169,58 +169,46 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("EnemyCollision:position")
+tracks/2/path = NodePath("Flipped/Fire:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-3.17891e-07, 2.167)]
+"update": 1,
+"values": [0]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Flipped/Fire:frame")
+tracks/3/path = NodePath("Flipped/Fire:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [0]
+"values": [false]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Flipped/Fire:visible")
+tracks/4/path = NodePath("Flipped/HitBoxes/Fire/CollisionShape2D:disabled")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [true]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Flipped/HitBoxes/Fire/CollisionShape2D:disabled")
+tracks/5/path = NodePath("Flipped/HitBoxes/Fire/CollisionShape2D2:disabled")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("Flipped/HitBoxes/Fire/CollisionShape2D2:disabled")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -308,22 +296,6 @@ tracks/5/keys = {
 "values": [false, true]
 }
 
-[sub_resource type="Animation" id="Animation_ecvlw"]
-resource_name = "Slam"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Flipped/Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [16, 17]
-}
-
 [sub_resource type="Animation" id="Animation_l6slk"]
 resource_name = "SlamFinish"
 length = 0.2
@@ -373,15 +345,31 @@ tracks/0/keys = {
 "values": [8, 9, 10, 11]
 }
 
+[sub_resource type="Animation" id="Animation_ecvlw"]
+resource_name = "AirSlam"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Flipped/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [16, 17]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vwa3k"]
 _data = {
+"AirSlam": SubResource("Animation_ecvlw"),
 "Fall": SubResource("Animation_k8qwc"),
 "Idle": SubResource("Animation_33kg0"),
 "Jump": SubResource("Animation_cy3iv"),
 "Punch": ExtResource("6_1hgof"),
 "RESET": SubResource("Animation_hj0kt"),
 "Shoot": SubResource("Animation_ke4kh"),
-"Slam": SubResource("Animation_ecvlw"),
 "SlamFinish": SubResource("Animation_l6slk"),
 "Stun": SubResource("Animation_2q1ib"),
 "Walk": SubResource("Animation_p4wan")
@@ -470,6 +458,7 @@ position = Vector2(-3.17891e-07, 2.167)
 shape = SubResource("CapsuleShape2D_kxmhh")
 
 [node name="Flipped" type="Node2D" parent="."]
+scale = Vector2(-1, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="Flipped"]
 material = SubResource("ShaderMaterial_je0ey")
@@ -588,7 +577,7 @@ script = ExtResource("16_rlk1r")
 
 [node name="EnemyChase" type="Node" parent="StateMachine"]
 script = ExtResource("17_6m4y7")
-detection_range = 50
+detection_range = 55
 next_state = "EnemyMelee"
 
 [node name="EnemyPunch" type="Node" parent="StateMachine"]
@@ -618,6 +607,7 @@ int_string_pairs = Array[ExtResource("21_2o3yv")]([SubResource("Resource_qcsj3")
 wait_time = 3.0
 
 [node name="Label" type="Label" parent="."]
+visible = false
 custom_minimum_size = Vector2(10, 10)
 offset_left = -8.0
 offset_top = -30.0
