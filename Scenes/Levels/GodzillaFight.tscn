@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cujkhawkt2egg" path="res://Scenes/Player/player.tscn" id="9_sph5s"]
 [ext_resource type="PackedScene" uid="uid://05ukpwn07wnq" path="res://Scenes/Enemies/Squirrel.tscn" id="10_ef312"]
 [ext_resource type="Script" path="res://Scripts/other/PlayerCamera.gd" id="11_f5tk5"]
-[ext_resource type="PackedScene" uid="uid://sockfkjnaotu" path="res://Scenes/Other/EnemyTitleAnimator.tscn" id="12_agfln"]
+[ext_resource type="PackedScene" uid="uid://wc8v1447wt3t" path="res://Scenes/Other/EnemyTitleAnimator.tscn" id="12_agfln"]
 
 [sub_resource type="Theme" id="Theme_0ru5m"]
 

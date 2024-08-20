@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://cujkhawkt2egg" path="res://Scenes/Player/player.tscn" id="9_i2pr3"]
 [ext_resource type="PackedScene" uid="uid://05ukpwn07wnq" path="res://Scenes/Enemies/Squirrel.tscn" id="10_bxw3c"]
 [ext_resource type="Script" path="res://Scripts/other/PlayerCamera.gd" id="11_ntscg"]
-[ext_resource type="PackedScene" uid="uid://sockfkjnaotu" path="res://Scenes/Other/EnemyTitleAnimator.tscn" id="12_2gnqg"]
+[ext_resource type="PackedScene" uid="uid://wc8v1447wt3t" path="res://Scenes/Other/EnemyTitleAnimator.tscn" id="12_2gnqg"]
 
 [sub_resource type="Theme" id="Theme_4tts6"]
 
