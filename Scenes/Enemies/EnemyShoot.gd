@@ -15,6 +15,7 @@ func end():
 
 func physics_update(delta: float) -> void:
 	player.velocity.x = 0
+	player.velocity.y = 0
 	owner.move_and_slide()
 	if attacking:
 		return

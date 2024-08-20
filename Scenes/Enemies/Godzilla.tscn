@@ -462,7 +462,6 @@ position = Vector2(-3.17891e-07, 2.167)
 shape = SubResource("RectangleShape2D_ufdj5")
 
 [node name="Godzilla_cries" type="AudioStreamPlayer2D" parent="EnemyHurtBox"]
-scale = Vector2(1, 1)
 stream = SubResource("AudioStreamRandomizer_28fpf")
 volume_db = -9.905
 
