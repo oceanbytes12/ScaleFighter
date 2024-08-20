@@ -25,7 +25,7 @@ var invincible = false
 @onready var Flipped := $Flipped
 @onready var Feet := $Feet
 @onready var invincibility_timer := $InvincibilityTimer
-#@onready var hurtbox := $HurtBox/HurtBox
+@export var blinkAnimator : AnimationPlayer
 @export var hurtbox : HurtBox
 @export var particle_gen : PackedScene
 
@@ -39,11 +39,17 @@ var isPlayerLarge = false # Used to track how large the hit_effects should be
 
 static var mainPlayer : Player
 
+func ToggleHurtBox(isOn):
+	hurtbox.toggle(isOn)
+
+func Blink():
+	blinkAnimator.play("Blink")
+
 func _ready():
 	mainPlayer = self
 	invincibility_timer.timeout.connect(EndInvincible)
-	hurtbox.take_damage.connect(hit)
 	EventBus.on_player_grow.connect(PlayerGrew)
+	hurtbox.take_damage.connect(hit)
 
 func PlayerGrew():
 	isPlayerLarge = true;
@@ -54,7 +60,6 @@ func EndInvincible():
 
 func StartInvincible():
 	invincible = true
-	#hurtbox.disabled = true
 	invincibility_timer.start(1)
 	
 func _process(_delta: float) -> void:
@@ -63,7 +68,10 @@ func _process(_delta: float) -> void:
 		EventBus.on_player_grow.emit()
 		LevelBase.can_grow = false
 		grow()
-		
+	
+	if(LevelBase.PlayerDefeated):
+		return
+	
 	var input_direction_x = Input.get_axis("Left", "Right")
 	if input_direction_x < 0:
 		Flipped.scale.x = -1
@@ -73,7 +81,7 @@ func _process(_delta: float) -> void:
 func animate(animationname):
 	animator.play(animationname)
 
-func hit(hit_position, damage, knockback):
+func show_particles():
 	# Generate hit effect 
 	var particleNode = particle_gen.instantiate()
 	particleNode.global_position = global_position
@@ -82,15 +90,27 @@ func hit(hit_position, damage, knockback):
 		#particleNode.scale = particleNode.scale*0.5 
 	get_parent().add_child(particleNode)
 
-	var knockback_velocity = (self.global_position-hit_position).normalized() * knockback
-	knockback_velocity.y = min(knockback_velocity.y, -200)
-	velocity = knockback_velocity
-	on_take_damage.emit(damage)
-	fsm.state.finished.emit("Hurt")
+func hit(hit_position, damage, knockback):
+	#Inform other classes we took damage.
 	EventBus.on_player_take_damage.emit(damage)
+	#Show damage effect
+	show_particles()
+	#Take damage sound
 	$Gecko_cry.play()
-	StartInvincible()
-
+	#If us being hit killed us.
+	if(LevelBase.PlayerDefeated == true):
+		var knockback_velocity = (self.global_position-hit_position).normalized() * 1500
+		knockback_velocity.y = min(knockback_velocity.y, -600)
+		velocity = knockback_velocity
+		fsm.state.finished.emit("Defeated")
+	#If us being hit didn't kill us.
+	else:
+		var knockback_velocity = (self.global_position-hit_position).normalized() * knockback
+		knockback_velocity.y = min(knockback_velocity.y, -200)
+		velocity = knockback_velocity
+		fsm.state.finished.emit("Hurt")
+		StartInvincible()
+	
 func grow():
 	var grow_audio : AudioStreamPlayer2D
 	grow_audio = $Grow

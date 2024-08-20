@@ -13,20 +13,26 @@ const title_scene = "res://Scenes/Title.tscn"
 @onready var title_animator := $TitleAnimator
 @export var GrowBar : GameBar
 @export var BossBar : GameBar
+@export var PlayerBar : GameBar
 
+static var PlayerDefeated = false
 static var BossDefeated = false
 static var can_grow = false
 
 func _ready():
+	PlayerDefeated = false
 	BossDefeated = false
 	can_grow = false
 	
-	EventBus.on_player_grow.connect(TurnOffUI)
-	EventBus.on_player_take_damage.connect(HandlePlayerTakeDamage)
+	#The player informs the game about this damage
+	EventBus.on_player_take_damage.connect(HandlePlayerDamage)
 	#Handle lethal and nonlethal damage
 	EventBus.on_enemy_minor_damage.connect(HandleEnemyMinorDamage)
 	#Handle armor breaking
 	EventBus.on_enemy_critical_damage.connect(HandleEnemyCriticalDamage)
+	#Turn off UI when we are big.
+	EventBus.on_player_grow.connect(TurnOffUI)
+	#Shake the screen and stuff when slams happen.
 	EventBus.on_slam_finish.connect(HandleSlam)
 	
 	if(animator):
@@ -41,7 +47,6 @@ func _ready():
 func HandleSlam(slamamount):
 	HitStop(0.5, 0.1)
 	
-
 func TurnOffUI():
 	grow_text.visible = false
 	
@@ -58,55 +63,11 @@ func ShowTitleAnim():
 	await get_tree().create_timer(6.5).timeout # Change this value to match with title_animator
 	get_tree().paused = false
 
-func HandlePlayerTakeDamage(amount):
-	if(amount > 10):
-		HitStop(0.4, 0.1)
-
-func HandleEnemyCriticalDamage(amount):
-	if(BossDefeated):
-		return
-		
-	BossBar._on_damage_received(amount)
-	if(0 >= BossBar.value):
-		print("BOSS DEFEATED")
-		BossDefeated = true
-		HitStop(1.2, 0.05)
-	else:
-		GrowBar._on_damage_received(amount)
-		HitStop(1, 0.1)
-	
-func HandleEnemyMinorDamage(amount):
-	if(BossDefeated):
-		return
-		
-	BossBar._on_damage_received(amount)
-	if(0 >= BossBar.value):
-		print("BOSS DEFEATED")
-		BossDefeated = true
-		HitStop(1.2, 0.05)
-		
-	elif(amount > 10):
-		HitStop(0.4, 0.1)
-	
-	GrowBar._on_damage_received(amount)
-
 func HitStop(duration, scale):
 	Engine.time_scale = scale
 	await get_tree().create_timer(duration*scale).timeout
 	Engine.time_scale = 1
 	
-func _on_player_hp_bar_empty():
-	# Reload current scene after brief pause
-	gameover_text.visible = true
-	await get_tree().create_timer(3).timeout
-	
-	if(animator):
-		animator.play("FadeOut")
-	await get_tree().create_timer(1).timeout
-	get_tree().call_deferred("reload_current_scene")
-	#get_tree().call_deferred("change_scene_to_file", title_scene)
-
-
 func _on_grow_bar_full():
 	# Text prompt on screen for player: "Press 'G' to Grow!"	
 	grow_text.visible = true
@@ -143,3 +104,61 @@ func _on_exit_level_trigger_body_entered(body):
 			animator.play("FadeOut")
 		await get_tree().create_timer(1).timeout
 		get_tree().call_deferred(&"change_scene_to_file", next_scene)
+
+func HandlePlayerDamage(damageamount):
+	#Inform UI
+	PlayerBar._on_damage_received(damageamount)
+	
+	#Handle Game Over
+	if(PlayerBar.value <= 0):
+		#Inform the game we lost.
+		PlayerDefeated = true
+		
+		#HitStop
+		Engine.time_scale = 0.05
+		await get_tree().create_timer(1.2*0.05).timeout
+		Engine.time_scale = 1
+		
+		#Show them the game over text for 3 seconds.
+		gameover_text.visible = true
+		await get_tree().create_timer(3).timeout
+		
+		#Fadeout
+		if(animator):
+			animator.play("FadeOut")
+		
+		#Fade technically happens in current scene.
+		await get_tree().create_timer(1).timeout
+		get_tree().call_deferred("reload_current_scene")
+		
+	elif(damageamount > 10):
+		HitStop(0.4, 0.1)
+
+func HandleEnemyMinorDamage(amount):
+	if(BossDefeated):
+		return
+		
+	BossBar._on_damage_received(amount)
+	if(0 >= BossBar.value):
+		print("BOSS DEFEATED")
+		BossDefeated = true
+		HitStop(1.2, 0.05)
+		
+	elif(amount > 10):
+		HitStop(0.4, 0.1)
+	
+	GrowBar._on_damage_received(amount)
+
+func HandleEnemyCriticalDamage(amount):
+	if(BossDefeated):
+		return
+		
+	BossBar._on_damage_received(amount)
+	if(0 >= BossBar.value):
+		print("BOSS DEFEATED")
+		BossDefeated = true
+		HitStop(1.2, 0.05)
+	else:
+		GrowBar._on_damage_received(amount)
+		HitStop(1, 0.1)
+	

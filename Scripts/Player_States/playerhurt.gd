@@ -1,10 +1,8 @@
 extends PlayerState
 
-@export var blinkAnimator : AnimationPlayer
-
 func enter(_previous_state_path: String, _data := {}) -> void:
-	player.animate("Idle")
-	blinkAnimator.play("Blink")
+	player.animate("Hurt")
+	player.Blink()
 	await get_tree().create_timer(0.5).timeout
 	finished.emit(IDLE)
 

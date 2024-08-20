@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://cujkhawkt2egg" path="res://Scenes/Player/player.tscn" id="9_i2pr3"]
 [ext_resource type="PackedScene" uid="uid://05ukpwn07wnq" path="res://Scenes/Enemies/Squirrel.tscn" id="10_bxw3c"]
 [ext_resource type="Script" path="res://Scripts/other/PlayerCamera.gd" id="11_ntscg"]
-[ext_resource type="PackedScene" uid="uid://dojynfwd6nb5h" path="res://Scenes/Other/EnemyTitleAnimator.tscn" id="12_2gnqg"]
+[ext_resource type="PackedScene" path="res://Scenes/Other/EnemyTitleAnimator.tscn" id="12_2gnqg"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rd2u5"]
 bg_color = Color(0.866667, 0.380392, 0.952941, 1)
@@ -79,7 +79,7 @@ size = Vector2(20, 19.4)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_se114"]
 size = Vector2(20, 162)
 
-[node name="Fight" type="Node2D" node_paths=PackedStringArray("grow_text", "gameover_text", "win_text", "right_wall_collider", "GrowBar", "BossBar")]
+[node name="Fight" type="Node2D" node_paths=PackedStringArray("grow_text", "gameover_text", "win_text", "right_wall_collider", "GrowBar", "BossBar", "PlayerBar")]
 script = ExtResource("1_bnkg8")
 grow_text = NodePath("CanvasLayer/GrowText")
 gameover_text = NodePath("CanvasLayer/GameOverText")
@@ -90,6 +90,7 @@ title_toshow = 0
 next_scene = "res://Scenes/Levels/GorillaFight.tscn"
 GrowBar = NodePath("CanvasLayer/GrowBar")
 BossBar = NodePath("CanvasLayer/Boss_HPBar")
+PlayerBar = NodePath("CanvasLayer/Player_HPBar")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(1.15, 1.15)
@@ -151,13 +152,9 @@ offset_right = 312.0
 offset_bottom = 127.0
 size_flags_horizontal = 4
 theme = SubResource("Theme_4tts6")
-theme_override_colors/default_color = Color(1, 1, 1, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 2
-theme_override_font_sizes/normal_font_size = 20
+theme_override_font_sizes/normal_font_size = 50
 bbcode_enabled = true
-text = "[center]KO...[/center]"
+text = "[center]GAME OVER[/center]"
 
 [node name="WinText" type="RichTextLabel" parent="CanvasLayer"]
 visible = false
@@ -238,6 +235,7 @@ position = Vector2(-100, 0)
 jump_impulse = 600.0
 
 [node name="Squirrel" parent="." instance=ExtResource("10_bxw3c")]
+position = Vector2(100, 0)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.9, 0.9)
@@ -258,5 +256,5 @@ shape = SubResource("RectangleShape2D_se114")
 [connection signal="BarEmpty" from="CanvasLayer/Boss_HPBar" to="CanvasLayer/Arrow" method="toggle_visibility"]
 [connection signal="BarFull" from="CanvasLayer/GrowBar" to="." method="_on_grow_bar_full"]
 [connection signal="timeout" from="CanvasLayer/Arrow/Timer" to="CanvasLayer/Arrow" method="toggle_visibility"]
-[connection signal="on_take_damage" from="Player" to="CanvasLayer/Player_HPBar" method="_on_damage_received"]
+[connection signal="on_take_damage" from="Player" to="." method="_on_player_on_take_damage"]
 [connection signal="body_entered" from="ExitLevelTrigger" to="." method="_on_exit_level_trigger_body_entered"]

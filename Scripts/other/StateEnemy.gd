@@ -29,29 +29,29 @@ func _ready():
 
 func PlayerGrew():
 	isPlayerLarge = true;
-	
+#Blink on damage
+func Blink():
+	hit_animator.play("hit")
+#Inform if the enemies body should hurt the player.
 func SetEnemyBodyDamages(isOn):
-	#bodyhitbox.disabled = !isOn
 	bodyhitbox.set_deferred("disabled", !isOn)
-
+#Inform if the enemies body should be damageable.
 func ToggleHurtBox(isOn):
 	hurtbox.toggle(isOn)
-
+#Debug
 func _process(_delta: float) -> void:
 	label.text = fsm.state.name
-		
+#Show the right state to the player.
 func animate(animationname):
 	animator.play(animationname)
-
+#Flip visual and important collision.
 func Flip(isFlipped):
 	if isFlipped:
 		Flipped.scale.x = -1
 	else:
 		Flipped.scale.x = 1
-
-func hit(hit_position, damage, knockback):
-	
-	hit_animator.play("hit")
+#Show damage via effects
+func generate_effect():
 	# Generate hit effect 
 	var particleNode = particle_gen.instantiate()
 	particleNode.global_position = global_position
@@ -59,37 +59,35 @@ func hit(hit_position, damage, knockback):
 		# hit_effects from players should be doubled in size
 		particleNode.scale = particleNode.scale*2
 	get_parent().add_child(particleNode)
-	
-	print("hit")
-	hit_animator.play("hit")
+#Handling incoming damage.
+func hit(hit_position, damage, knockback):
+	#Flash White
+	Blink()
+	#Show punch particles
+	generate_effect()
+	#Reduce Armor
 	current_armor-=damage
-	
-	#Inform the game about damage
+	#Inform of the hit.
 	if(current_armor <= 0):
 		EventBus.on_enemy_critical_damage.emit(damage)
 	else:
 		EventBus.on_enemy_minor_damage.emit(damage)
-	
-	#Handle Big hits
+		
+	#If us being hit caused us to die.
 	if(LevelBase.BossDefeated == true):
 		var knockback_velocity = (self.global_position-hit_position).normalized() * 1200
 		knockback_velocity.y = min(knockback_velocity.y, -800)
 		velocity = knockback_velocity
-		
 		fsm.state.finished.emit("EnemyDefeated")
-		
+	#If us being hit caused us to lose all our armor.
 	elif(current_armor <= 0):
 		current_armor = max_armor+10
-		
 		var knockback_velocity = (self.global_position-hit_position).normalized() * 600
 		knockback_velocity.y = min(knockback_velocity.y, -400)
 		velocity = knockback_velocity
-		
 		fsm.state.finished.emit("EnemyHurt")
-
-
+#Sensing how close we are to a wall.
 func hit_wall(_body):
 	is_on_wall = true
-
 func exit_wall(_body):
 	is_on_wall = false
