@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://d1n8xycy34w5"]
+
+[ext_resource type="PackedScene" uid="uid://dlh2vlug8qltd" path="res://Scenes/Other/progress_bar.tscn" id="1_uc7iv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vdvyb"]
+bg_color = Color(0.866667, 0.380392, 0.952941, 1)
+
+[node name="GrowProgressBar" instance=ExtResource("1_uc7iv")]
+theme_override_styles/fill = SubResource("StyleBoxFlat_vdvyb")
+isHealedOnHit = true
