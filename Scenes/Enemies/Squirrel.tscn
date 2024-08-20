@@ -6,12 +6,12 @@
 [ext_resource type="Script" path="res://Scenes/Enemies/HurtBox.gd" id="2_pu8xq"]
 [ext_resource type="Shader" path="res://Visual/Shaders/hitEffect.gdshader" id="2_rit0p"]
 [ext_resource type="Texture2D" uid="uid://bs8aginxbhwpj" path="res://Visual/Sprites/SquirrelFighter-Sheet.png" id="3_22wam"]
-[ext_resource type="AudioStream" uid="uid://bgcgi3yy7k685" path="res://Sound/Sfx/Squirrel/Squirrel_cry_wet01_v1.wav" id="3_oqkpn"]
-[ext_resource type="AudioStream" uid="uid://d2sh0lmu1kf8q" path="res://Sound/Sfx/Squirrel/Squirrel_cry_wet02_v1.wav" id="4_fen6k"]
+[ext_resource type="AudioStream" uid="uid://bgcgi3yy7k685" path="res://Sound/Sfx/Squirrel/Cries/Squirrel_cry_wet01_v1.wav" id="4_ffonl"]
+[ext_resource type="AudioStream" uid="uid://d2sh0lmu1kf8q" path="res://Sound/Sfx/Squirrel/Cries/Squirrel_cry_wet02_v1.wav" id="5_fnnc4"]
 [ext_resource type="Script" path="res://Scripts/other/HitBox.gd" id="5_jjw23"]
 [ext_resource type="Script" path="res://Scripts/Enemy_States/EnemyIdle.gd" id="5_rva3f"]
-[ext_resource type="AudioStream" uid="uid://bal734bcpwvep" path="res://Sound/Sfx/Squirrel/Squirrel_cry_wet03_v1.wav" id="5_wp3hs"]
 [ext_resource type="Script" path="res://Scripts/State/state_machine.gd" id="6_56f0l"]
+[ext_resource type="AudioStream" uid="uid://bal734bcpwvep" path="res://Sound/Sfx/Squirrel/Cries/Squirrel_cry_wet03_v1.wav" id="6_bla66"]
 [ext_resource type="Script" path="res://Scripts/Enemy_States/EnemyChase.gd" id="6_oogn5"]
 [ext_resource type="Script" path="res://Scripts/Enemy_States/EnemyPunch.gd" id="7_av5gr"]
 [ext_resource type="Script" path="res://Scripts/Enemy_States/EnemyJump.gd" id="8_aldih"]
@@ -25,11 +25,11 @@ size = Vector2(8.33333, 12.3332)
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_6umqw"]
 streams_count = 3
-stream_0/stream = ExtResource("3_oqkpn")
+stream_0/stream = ExtResource("4_ffonl")
 stream_0/weight = 1.0
-stream_1/stream = ExtResource("4_fen6k")
+stream_1/stream = ExtResource("5_fnnc4")
 stream_1/weight = 1.0
-stream_2/stream = ExtResource("5_wp3hs")
+stream_2/stream = ExtResource("6_bla66")
 stream_2/weight = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_je0ey"]

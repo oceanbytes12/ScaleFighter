@@ -1,6 +1,7 @@
 extends PlayerState
 
-
+#func enter(_previous_state_path: String, _data := {}) -> void:
+	#$FS.play()
 func physics_update(delta: float) -> void:
 	var input_direction_x := Input.get_axis("Left", "Right")
 	player.velocity.x = player.speed * input_direction_x
