@@ -11,9 +11,13 @@ const title_scene = "res://Scenes/Title.tscn"
 
 @onready var animator := $CanvasLayer/ColorRect/AnimationPlayer
 @onready var title_animator := $TitleAnimator
+@onready var bossNameSprite := $CanvasLayer/BossName
+@onready var bossKanjiSprite := $CanvasLayer/BossKanji
+
 @export var GrowBar : GameBar
 @export var BossBar : GameBar
 @export var PlayerBar : GameBar
+
 
 static var PlayerDefeated = false
 static var BossDefeated = false
@@ -52,6 +56,14 @@ func TurnOffUI():
 	grow_text.visible = false
 	
 func ShowTitleAnim():
+	# Show boss name
+	bossNameSprite.show()
+	await get_tree().create_timer(2).timeout
+	bossNameSprite.hide()
+	bossKanjiSprite.show()
+	await get_tree().create_timer(2).timeout
+	bossKanjiSprite.hide()
+	
 	# Need to pass strings to title_animator
 	match title_toshow:
 		0: 
