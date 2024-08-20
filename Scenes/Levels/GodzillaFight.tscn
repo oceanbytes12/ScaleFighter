@@ -1,7 +1,8 @@
-[gd_scene load_steps=20 format=3 uid="uid://tmj8273tqhjq"]
+[gd_scene load_steps=21 format=3 uid="uid://tmj8273tqhjq"]
 
 [ext_resource type="Script" path="res://Scripts/other/Level_Base.gd" id="1_xaqio"]
 [ext_resource type="Texture2D" uid="uid://06x3cxd605xx" path="res://Visual/Sprites/Backgrounds/bg3.png" id="2_ynsbm"]
+[ext_resource type="Texture2D" uid="uid://dhoewbqfo07di" path="res://Visual/Portraits.png" id="3_1gh52"]
 [ext_resource type="PackedScene" uid="uid://dlh2vlug8qltd" path="res://Scenes/Other/progress_bar.tscn" id="3_badop"]
 [ext_resource type="PackedScene" uid="uid://d1n8xycy34w5" path="res://Scenes/Other/grow_progress_bar.tscn" id="4_ht6xc"]
 [ext_resource type="Texture2D" uid="uid://b4qdwe8jnrg7g" path="res://Visual/Level_Text_Sheet.png" id="7_bb4fc"]
@@ -94,10 +95,26 @@ texture = ExtResource("2_ynsbm")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
+[node name="Portraits" type="Node2D" parent="CanvasLayer"]
+
+[node name="Player" type="Sprite2D" parent="CanvasLayer/Portraits"]
+position = Vector2(149.5, 15)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("3_1gh52")
+region_enabled = true
+region_rect = Rect2(90.0659, 110.748, 25.8234, 24.0216)
+
+[node name="DarkLizard" type="Sprite2D" parent="CanvasLayer/Portraits"]
+position = Vector2(170, 15)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("3_1gh52")
+region_enabled = true
+region_rect = Rect2(128.898, 75.4103, 31.0461, 26.709)
+
 [node name="Player_HPBar" parent="CanvasLayer" instance=ExtResource("3_badop")]
-offset_left = 10.0
+offset_left = 8.0
 offset_top = 10.0
-offset_right = 150.0
+offset_right = 138.0
 offset_bottom = 20.0
 maxHP = 50
 
@@ -105,9 +122,9 @@ maxHP = 50
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -150.0
+offset_left = -138.0
 offset_top = 10.0
-offset_right = -10.0
+offset_right = -8.0
 offset_bottom = 20.0
 grow_horizontal = 0
 maxHP = 400
